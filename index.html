@@ -3,63 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to MAS Consultores</title>
+    <title>MAS Consultores</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: white;
-            color: #0c1c91;
+            background: linear-gradient(to right, #0072ff, #00c6ff);
+            animation: fadeIn 1s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         header {
-            background-color: #75238b;
-            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             padding: 20px;
-            text-align: center;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s;
         }
-        section {
-            padding: 20px;
-            margin: 20px;
-            border-radius: 8px;
+        @keyframes slideIn {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
-        .founder {
-            background-color: #e8a500;
+        .logo {
+            height: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #0072ff;
             color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        .ebmetrics {
-            background-color: #208927;
-            color: white;
-        }
-        .alliances {
-            background-color: #0c1c91;
-            color: white;
-        }
-        @media (max-width: 600px) {
-            section {
-                margin: 10px;
-                padding: 10px;
-            }
+        button:hover {
+            background-color: #005bb5;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>MAS Consultores</h1>
-        <p>Your partner in success</p>
+        <img src="path/to/MAS-logo.png" alt="MAS Logo" class="logo">
+        <h1>Welcome to MAS Consultores</h1>
+        <button>Get Started</button>
     </header>
     <main>
-        <section class="founder">
-            <h2>About the Founder</h2>
-            <p>Rodrigo Lara Fernández is the visionary behind MAS Consultores. With years of experience in consulting, he leads our team toward excellence.</p>
-        </section>
-        <section class="ebmetrics">
-            <h2>eBmetrics Division</h2>
-            <p>Our eBmetrics division specializes in data analytics, providing insights that drive results for your business.</p>
-        </section>
-        <section class="alliances">
-            <h2>Alliances</h2>
-            <p>We are proud to partner with organizations like LinkedIn and the ROI Institute to bring you the best resources available.</p>
+        <section>
+            <h2>Our Services</h2>
+            <p>We offer the best consulting services.</p>
         </section>
     </main>
 </body>
