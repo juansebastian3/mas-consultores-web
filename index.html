@@ -74,7 +74,7 @@
   nav.scrolled { border-bottom-color:var(--border); box-shadow:0 1px 3px rgba(0,0,0,0.04); }
   .nav-inner { max-width:1180px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:72px; }
   .mas-logo { display:flex; align-items:center; text-decoration:none; }
-  .mas-logo img { height:58px; width:auto; }
+  .mas-logo img { height:50px; width:auto; }
   .nav-links { display:flex; gap:32px; list-style:none; }
   .nav-links a { color:var(--navy); text-decoration:none; font-size:13.5px; font-weight:600; transition:color 0.2s; letter-spacing:0.01em; }
   .nav-links a:hover { color:var(--red); }
@@ -90,24 +90,33 @@
   
   .hero-animated-wrapper { display: flex; justify-content: center; align-items: center; position: relative; }
   
-  /* ANIMACIÓN ROTATORIA GLOBAL PARA EL LOGO */
-  .mas-animated-logo { width: 100%; max-width: 560px; height: auto; overflow: visible; animation: float-logo 4.5s ease-in-out infinite; filter: drop-shadow(0 20px 40px rgba(26,46,74,0.15)); }
-  @keyframes float-logo { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-  
-  /* ANIMACIÓN DE EXPANSIÓN (Mantiene el efecto del video) */
-  .mas-animated-logo line { stroke-linecap: round; stroke-width: 34; animation-duration: 4.5s; animation-iteration-count: infinite; animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55); }
-  
-  .anim-l { animation-name: exp-l; } .anim-r { animation-name: exp-r; } .anim-t { animation-name: exp-t; } .anim-b { animation-name: exp-b; }
-  .anim-tl { animation-name: exp-tl; } .anim-tr { animation-name: exp-tr; } .anim-bl { animation-name: exp-bl; } .anim-br { animation-name: exp-br; }
+  .mas-animated-logo { width:100%; max-width:420px; height:auto; filter:drop-shadow(0 20px 40px rgba(26,46,74,0.15)); animation:float-logo 5s ease-in-out infinite; }
+  @keyframes float-logo { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-  @keyframes exp-l { 0%, 20%, 80%, 100% { stroke: #7a3f98; transform: translate(0, 0); } 40%, 60% { stroke: #000000; transform: translate(-30px, 0); } }
-  @keyframes exp-r { 0%, 20%, 80%, 100% { stroke: #7a3f98; transform: translate(0, 0); } 40%, 60% { stroke: #000000; transform: translate(30px, 0); } }
-  @keyframes exp-t { 0%, 20%, 80%, 100% { stroke: #7a3f98; transform: translate(0, 0); } 40%, 60% { stroke: #ebb520; transform: translate(0, -30px); } }
-  @keyframes exp-b { 0%, 20%, 80%, 100% { stroke: #7a3f98; transform: translate(0, 0); } 40%, 60% { stroke: #ebb520; transform: translate(0, 30px); } }
-  @keyframes exp-tl { 0%, 20%, 80%, 100% { stroke: #7a3f98; transform: translate(0, 0); } 40%, 60% { stroke: #7a3f98; transform: translate(-20px, -20px); } }
-  @keyframes exp-tr { 0%, 20%, 80%, 100% { stroke: #7a3f98; transform: translate(0, 0); } 40%, 60% { stroke: #1ea043; transform: translate(20px, -20px); } }
-  @keyframes exp-bl { 0%, 20%, 80%, 100% { stroke: #7a3f98; transform: translate(0, 0); } 40%, 60% { stroke: #e52420; transform: translate(-20px, 20px); } }
-  @keyframes exp-br { 0%, 20%, 80%, 100% { stroke: #7a3f98; transform: translate(0, 0); } 40%, 60% { stroke: #2e45a0; transform: translate(20px, 20px); } }
+  .logo-piece {
+    transform-origin:center;
+    animation:logo-assemble 4.8s cubic-bezier(0.16,1,0.3,1) infinite;
+  }
+  .delay-a { animation-delay:0.08s; }
+  .delay-b { animation-delay:0.16s; }
+  .delay-c { animation-delay:0.24s; }
+  .delay-d { animation-delay:0.32s; }
+  .delay-e { animation-delay:0.4s; }
+  .delay-f { animation-delay:0.48s; }
+  .piece-top { --tx:0px; --ty:80px; }
+  .piece-left { --tx:86px; --ty:0px; }
+  .piece-right { --tx:-86px; --ty:0px; }
+  .piece-tl { --tx:58px; --ty:58px; }
+  .piece-tr { --tx:-58px; --ty:58px; }
+  .piece-bl { --tx:58px; --ty:-58px; }
+  .piece-br { --tx:-58px; --ty:-58px; }
+
+  @keyframes logo-assemble {
+    0%, 14% { transform: translate(var(--tx,0),var(--ty,0)) scale(0.1); opacity:0; }
+    30% { transform: translate(0,0) scale(1); opacity:1; }
+    58%, 82% { transform: translate(0,0) scale(1); opacity:1; }
+    100% { transform: translate(var(--tx,0),var(--ty,0)) scale(0.1); opacity:0; }
+  }
 
   /* FLOATING PILLS BACKGROUND */
   .floating-pill { position: absolute; border: 5px solid; border-radius: 50px; opacity: 0.6; animation: float-y 5s infinite ease-in-out alternate; z-index: 0; }
@@ -276,8 +285,8 @@
     .stat-group { gap:20px; }
     .hero-animated-wrapper { grid-row: 1; }
     .hero-content { padding-left: 0 !important; text-align: center; }
-    .mas-logo img { height:52px; }
-    .mas-animated-logo { max-width:420px; }
+    .mas-logo img { height:46px; }
+    .mas-animated-logo { max-width:330px; }
   }
 </style>
 </head>
@@ -310,7 +319,15 @@
 
   <div class="container hero-grid">
     <div class="hero-animated-wrapper animate-scale d-100">
-      <img src="assets/mas-logo.svg" alt="MAS Consultores" class="mas-animated-logo">
+      <svg class="mas-animated-logo" viewBox="0 0 340 340" role="img" aria-label="Logotipo MAS animado">
+        <path class="logo-piece piece-top" fill="#edb321" d="M170.02 11.05c-13.88 0-25.13 11.25-25.13 25.13v267.7h0c.01 13.86 11.26 25.1 25.12 25.1s25.11-11.24 25.13-25.1V36.18c0-13.88-11.25-25.13-25.13-25.13"/>
+        <path class="logo-piece piece-right delay-a" fill="#1f2937" d="M303.86 144.91h-83.6c-6.43 0-12.85-2.46-17.76-7.36-4.9-4.9-7.35-11.32-7.36-17.74h0v50.22h0v50.26h0c0-6.43 2.45-12.86 7.36-17.77 4.9-4.9 11.33-7.36 17.76-7.36h83.6c13.88 0 25.13-11.25 25.13-25.13s-11.25-25.13-25.13-25.13"/>
+        <path class="logo-piece piece-tr delay-b" fill="#009739" d="M332.67 7.38c-9.81-9.81-25.72-9.81-35.53 0l-94.66 94.65h0c-4.9 4.91-7.35 11.34-7.34 17.77 0 6.42 2.46 12.84 7.36 17.74 4.9 4.9 11.33 7.36 17.76 7.36 6.42 0 12.85-2.45 17.76-7.34h0s7.38-7.38 7.38-7.38l87.28-87.28c9.81-9.81 9.81-25.72 0-35.53"/>
+        <path class="logo-piece piece-br delay-c" fill="#23398d" d="M332.67 297.15l-87.28-87.28-7.38-7.38h0c-4.91-4.9-11.34-7.34-17.76-7.34-6.43 0-12.85 2.46-17.76 7.36-4.91 4.91-7.36 11.34-7.36 17.77s2.45 12.85 7.34 17.75h0s94.66 94.66 94.66 94.66c9.81 9.81 25.72 9.81 35.53 0 9.81-9.81 9.81-25.72 0-35.53"/>
+        <path class="logo-piece piece-left delay-d" fill="#1f2937" d="M36.18 144.89h83.6c6.43 0 12.85-2.46 17.76-7.36 4.9-4.9 7.35-11.32 7.36-17.74h0v50.22h0v50.26h0c0-6.43-2.45-12.86-7.36-17.77-4.9-4.9-11.33-7.36-17.76-7.36H36.18c-13.88 0-25.13-11.25-25.13-25.13s11.25-25.13 25.13-25.13"/>
+        <path class="logo-piece piece-tl delay-e" fill="#833d8e" d="M7.36 7.36c9.81-9.81 25.72-9.81 35.53 0l94.66 94.66h0c4.9 4.91 7.35 11.34 7.34 17.77 0 6.42-2.46 12.84-7.36 17.74-4.9 4.9-11.33 7.36-17.76 7.36-6.43 0-12.85-2.45-17.76-7.34h0l-7.38-7.38L7.36 42.89C-2.45 33.08-2.45 17.17 7.36 7.36"/>
+        <path class="logo-piece piece-bl delay-f" fill="#d62216" d="M7.36 297.14l87.28-87.28 7.38-7.38h0c4.91-4.9 11.33-7.35 17.76-7.34 6.43 0 12.85 2.46 17.76 7.36 4.91 4.91 7.36 11.34 7.36 17.77 0 6.42-2.45 12.85-7.34 17.75l-94.66 94.66c-9.81 9.81-25.72 9.81-35.53 0-9.81-9.81-9.81-25.72 0-35.53"/>
+      </svg>
     </div>
 
     <div class="hero-content" style="padding-left: 10px;">
