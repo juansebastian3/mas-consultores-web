@@ -89,7 +89,12 @@
   .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; padding:60px 0; position:relative; z-index:1; }
   
   .hero-animated-wrapper { display: flex; justify-content: center; align-items: center; position: relative; }
-  .mas-animated-logo { width: 100%; max-width: 420px; height: auto; overflow: visible; }
+  
+  /* ANIMACIÓN ROTATORIA GLOBAL PARA EL LOGO */
+  @keyframes spin-logo { 100% { transform: rotate(360deg); } }
+  .mas-animated-logo { width: 100%; max-width: 420px; height: auto; overflow: visible; animation: spin-logo 24s linear infinite; }
+  
+  /* ANIMACIÓN DE EXPANSIÓN (Mantiene el efecto del video) */
   .mas-animated-logo line { stroke-linecap: round; stroke-width: 34; animation-duration: 4.5s; animation-iteration-count: infinite; animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55); }
   
   .anim-l { animation-name: exp-l; } .anim-r { animation-name: exp-r; } .anim-t { animation-name: exp-t; } .anim-b { animation-name: exp-b; }
@@ -112,8 +117,9 @@
   .fp-3 { width: 30px; height: 90px; top: 15%; right: 20%; transform: rotate(50deg); border-color: #bbf7d0; animation-delay: -3.5s; }
   .fp-4 { width: 35px; height: 100px; bottom: 15%; left: 35%; transform: rotate(-40deg); border-color: #fecaca; animation-delay: -1.5s; }
 
-  .hero-content h1 { font-size:clamp(42px,5vw,64px); font-weight:800; margin-bottom:22px; color:var(--navy3); }
-  .hero-content p { color:var(--text); font-size:19px; margin-bottom:36px; max-width:90%; line-height:1.7; font-weight:500; }
+  .hero-content h1 { font-size:clamp(40px,5vw,60px); font-weight:800; margin-bottom:20px; color:var(--navy3); line-height: 1.1; }
+  .hero-content p.hero-lead { color:var(--text); font-size:18px; margin-bottom:16px; max-width:92%; line-height:1.7; font-weight:500; }
+  .hero-content p.hero-sub { color:var(--muted); font-size:16px; margin-bottom:38px; max-width:90%; line-height:1.6; }
 
   /* PARTNERS */
   .partners-sec { background:linear-gradient(145deg, var(--navy3) 0%, var(--navy) 60%, var(--navy2) 100%); color:#fff; padding:90px 0; text-align:center; position:relative; overflow:hidden; }
@@ -312,10 +318,14 @@
     </div>
 
     <div class="hero-content" style="padding-left: 10px;">
-      <h1 class="animate-up d-200">Somos <span class="text-red">MAS</span></h1>
-      <p class="animate-up d-300">En MAS desarrollamos las capacidades para que tanto personas como organizaciones, puedan cumplir sus desafíos y propósitos.</p>
-      <div class="nav-cta animate-up d-400">
-        <a class="btn-solid" href="#nosotros" style="padding:16px 32px; font-size:15px; background:var(--red);">Lee más sobre nosotros</a>
+      <h1 class="animate-up d-200">Expertos en <span class="text-red">Talento</span> y Desarrollo</h1>
+      <p class="hero-lead animate-up d-300">
+        Con <strong>más de 30 años en el mercado</strong> trabajando junto a grandes clientes, nuestro propósito es claro: 
+        <strong style="color:var(--navy);">impactar en la educación de las personas a través de las organizaciones.</strong>
+      </p>
+      <p class="hero-sub animate-up d-400">Construimos relaciones de largo plazo basadas en la experiencia y una confianza genuina.</p>
+      <div class="nav-cta animate-up d-500">
+        <a class="btn-solid" href="#nosotros" style="padding:16px 32px; font-size:15px; background:var(--red);">Conoce nuestro impacto</a>
       </div>
     </div>
   </div>
@@ -422,7 +432,7 @@
       <div class="service-card reveal delay-1">
         <div class="service-icon" aria-hidden="true">📚</div>
         <h3>MAS Formación</h3>
-        <p style="color:var(--muted); font-size:14px;">Actividades formativas con foco en lograr los objetivos estratégicos y generar impacto real.</p>
+        <p style="color:var(--muted); font-size:14px;">Actividades formativas con foco en lograr los objetivos estratégicos y generar impacto real. Diseñamos programas a la medida y contamos con cursos codificados <strong>Sence</strong>.</p>
       </div>
       <div class="service-card reveal delay-2">
         <div class="service-icon" aria-hidden="true">💻</div>
