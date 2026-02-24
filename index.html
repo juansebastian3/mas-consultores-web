@@ -3,307 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="MAS Consultores - Soluciones integrales de gestión del talento, consultoría, formación y plataformas LMS para tu organización.">
-<title>MAS Consultores - Gestión del Talento</title>
+<meta name="description" content="MAS Consultores - Grupo líder en gestión del talento. Partners de LinkedIn y ROI Institute. Desarrollo organizacional, formación y selección con eb|metrics.">
+<title>MAS Consultores | Ecosistema de Gestión del Talento</title>
 <style>
   :root {
+    --bg-main: #ffffff;
+    --bg-light: #f8fafc;
     --navy: #1a2e4a;
     --navy2: #243d61;
     --navy3: #0f1f33;
     --red: #e84b2a;
     --red2: #f26344;
-    --white: #ffffff;
-    --gray: #f4f6f9;
-    --text: #2d3748;
-    --muted: #6b7a92;
+    --text: #334155;
+    --muted: #64748b;
+    --border: #e2e8f0;
     --green-wa: #25D366;
-    --border: #dde3ed;
+    --shadow-sm: 0 4px 6px -1px rgba(26, 46, 74, 0.05);
+    --shadow-md: 0 10px 25px -3px rgba(26, 46, 74, 0.1);
+    --shadow-lg: 0 20px 40px -5px rgba(26, 46, 74, 0.15);
   }
+
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; }
-  body { font-family:'Segoe UI',system-ui,sans-serif; color:var(--text); overflow-x:hidden; }
-
-  /* MEJORA A11Y: Estado focus visible para navegación por teclado */
+  body { font-family:'Segoe UI', system-ui, sans-serif; background-color:var(--bg-main); color:var(--text); overflow-x:hidden; line-height: 1.6; }
   *:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
-  /* LOGO SVG inline */
-  .mas-logo { display:flex; align-items:center; gap:0; cursor:pointer; text-decoration:none; }
-  .mas-logo svg { height:40px; width:auto; }
+  /* TIPOGRAFÍAS Y UTILIDADES */
+  h1, h2, h3, h4 { color: var(--navy); line-height: 1.2; }
+  .text-red { color: var(--red); }
+  .container { max-width: 1200px; margin: auto; padding: 0 24px; }
+  .section-pad { padding: 90px 0; }
+  .section-label { color:var(--red); font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; display:inline-block; }
+  .section-title { font-size:clamp(28px, 4vw, 42px); font-weight:900; margin-bottom:20px; }
+  .section-sub { color:var(--muted); font-size:17px; max-width:640px; }
+
+  /* ANIMACIONES */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
 
   /* NAVBAR */
-  nav {
-    position:fixed; top:0; width:100%; z-index:1000;
-    background:rgba(26,46,74,0.97);
-    backdrop-filter:blur(14px);
-    border-bottom:1px solid rgba(232,75,42,0.25);
-    transition:all 0.3s;
-  }
-  .nav-inner { max-width:1200px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:72px; }
-  .nav-links { display:flex; gap:26px; list-style:none; }
-  .nav-links a { color:rgba(255,255,255,0.82); text-decoration:none; font-size:14px; font-weight:500; transition:color 0.2s; }
-  .nav-links a:hover { color:var(--red2); }
-  .nav-cta { display:flex; gap:10px; align-items:center; }
-  .btn-wa-nav {
-    background:var(--green-wa); color:#fff; padding:9px 16px; border-radius:50px;
-    text-decoration:none; font-size:13px; font-weight:700; display:flex; align-items:center; gap:6px;
-    transition:transform 0.2s,box-shadow 0.2s;
-  }
-  .btn-wa-nav:hover { transform:scale(1.05); box-shadow:0 4px 15px rgba(37,211,102,0.4); }
-  .btn-contact-nav {
-    background:var(--red); color:#fff; padding:9px 18px; border-radius:50px;
-    text-decoration:none; font-size:13px; font-weight:700; transition:all 0.2s;
-  }
-  .btn-contact-nav:hover { background:var(--red2); transform:scale(1.05); }
+  nav { position:fixed; top:0; width:100%; z-index:1000; background:rgba(255,255,255,0.95); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); transition:all 0.3s; }
+  nav.scrolled { box-shadow: var(--shadow-sm); }
+  .nav-inner { max-width:1200px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:76px; }
+  .mas-logo { display:flex; align-items:center; text-decoration:none; }
+  .mas-logo svg { height:40px; width:auto; }
+  .nav-links { display:flex; gap:30px; list-style:none; }
+  .nav-links a { color:var(--navy); text-decoration:none; font-size:14px; font-weight:600; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--red); }
+  .nav-cta { display:flex; gap:12px; align-items:center; }
+  .btn-outline { border: 2px solid var(--navy); color: var(--navy); padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700; text-decoration: none; transition: all 0.3s; }
+  .btn-outline:hover { background: var(--navy); color: #fff; }
+  .btn-solid { background: var(--red); color: #fff; padding: 10px 22px; border-radius: 50px; font-size: 13px; font-weight: 700; text-decoration: none; transition: all 0.3s; box-shadow: 0 4px 15px rgba(232,75,42,0.3); border:none; cursor:pointer;}
+  .btn-solid:hover { background: var(--red2); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,75,42,0.4); }
 
   /* HERO */
-  .hero {
-    min-height:100vh;
-    background:linear-gradient(135deg, var(--navy3) 0%, var(--navy) 55%, var(--navy2) 100%);
-    display:flex; align-items:center; justify-content:center;
-    position:relative; overflow:hidden;
-    padding:110px 24px 70px;
-  }
-  .hero-decor { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
-  .hero-decor::before {
-    content:''; position:absolute;
-    width:600px; height:600px; border-radius:50%;
-    background:radial-gradient(circle, rgba(232,75,42,0.08) 0%, transparent 70%);
-    top:-150px; right:-150px;
-  }
-  .hero-decor::after {
-    content:''; position:absolute;
-    width:400px; height:400px; border-radius:50%;
-    background:radial-gradient(circle, rgba(232,75,42,0.06) 0%, transparent 70%);
-    bottom:-100px; left:-100px;
-  }
-  .hero-line {
-    position:absolute; top:0; left:0; width:4px; height:100%;
-    background:linear-gradient(180deg, transparent, var(--red), transparent);
-  }
+  .hero { min-height:100vh; background: radial-gradient(circle at top right, var(--bg-light) 0%, var(--bg-main) 100%); display:flex; align-items:center; position:relative; overflow:hidden; padding-top: 80px; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
+  .hero-content h1 { font-size:clamp(36px, 5vw, 58px); font-weight:900; margin-bottom:24px; letter-spacing: -1px; }
+  .hero-content p { color:var(--muted); font-size:18px; margin-bottom:40px; max-width: 90%; }
+  .hero-card { background: #fff; padding: 40px; border-radius: 30px; box-shadow: var(--shadow-lg); position: relative; z-index: 1; border: 1px solid var(--border); }
+  .stat-group { display: flex; gap: 30px; margin-top: 30px; border-top: 1px solid var(--border); padding-top: 30px; }
+  .stat-item h4 { font-size: 36px; font-weight: 900; color: var(--red); line-height: 1; }
+  .stat-item p { font-size: 13px; color: var(--muted); margin-top: 8px; font-weight: 600; }
 
-  .hero-content { max-width:1100px; margin:auto; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; position:relative; z-index:2; }
-  .hero-badge {
-    display:inline-flex; align-items:center; gap:8px;
-    background:rgba(232,75,42,0.12); border:1px solid rgba(232,75,42,0.35);
-    color:var(--red2); padding:6px 16px; border-radius:50px;
-    font-size:12px; font-weight:700; margin-bottom:22px; letter-spacing:1px; text-transform:uppercase;
-  }
-  .hero h1 { font-size:clamp(34px,4.5vw,56px); font-weight:900; color:#fff; line-height:1.1; margin-bottom:20px; }
-  .hero h1 em { color:var(--red2); font-style:normal; }
-  .hero p { color:rgba(255,255,255,0.72); font-size:17px; line-height:1.75; margin-bottom:36px; }
-  .hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
-  .btn-primary { background:var(--red); color:#fff; padding:14px 28px; border-radius:50px; font-weight:700; font-size:15px; text-decoration:none; transition:all 0.2s; display:inline-flex; align-items:center; gap:8px; }
-  .btn-primary:hover { background:var(--red2); transform:translateY(-2px); box-shadow:0 8px 28px rgba(232,75,42,0.45); }
-  .btn-secondary { background:rgba(255,255,255,0.08); color:#fff; padding:14px 28px; border-radius:50px; font-weight:600; font-size:15px; text-decoration:none; border:1.5px solid rgba(255,255,255,0.22); transition:all 0.2s; display:inline-flex; align-items:center; gap:8px; }
-  .btn-secondary:hover { background:rgba(255,255,255,0.18); transform:translateY(-2px); }
+  /* PARTNERS */
+  .partners-sec { background: var(--navy); color: #fff; padding: 80px 0; text-align: center; position: relative; }
+  .partners-sec .section-label { color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 50px; }
+  .partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+  .partner-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 32px; border-radius: 20px; transition: transform 0.3s; text-align: left; }
+  .partner-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.08); }
+  .p-logo { font-size: 28px; font-weight: 900; margin-bottom: 16px; color: #fff; }
+  .p-logo.li { color: #0077b5; background: #fff; display: inline-block; padding: 4px 12px; border-radius: 6px; }
+  .p-logo.roi { color: var(--red); }
+  .partner-card h3 { color: #fff; font-size: 20px; margin-bottom: 12px; }
+  .partner-card p { color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.7; }
+  .p-badge { display: inline-block; background: rgba(232,75,42,0.2); color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 50px; margin-top: 16px; font-weight: 700; }
 
-  .hero-stats { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-  .stat-card {
-    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:26px; text-align:center;
-    backdrop-filter:blur(10px); transition:all 0.3s;
-  }
-  .stat-card:hover { border-color:rgba(232,75,42,0.4); transform:translateY(-4px); }
-  .stat-num { font-size:44px; font-weight:900; color:var(--red2); line-height:1; }
-  .stat-label { color:rgba(255,255,255,0.65); font-size:13px; margin-top:6px; line-height:1.4; }
-  .stat-industries { grid-column:1/-1; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:18px; padding:22px; text-align:center; }
-  .stat-industries p { color:rgba(255,255,255,0.45); font-size:11px; margin-bottom:12px; text-transform:uppercase; letter-spacing:1.5px; }
-  .industries-list { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
-  .ind-tag { background:rgba(232,75,42,0.12); color:var(--red2); border:1px solid rgba(232,75,42,0.25); padding:4px 13px; border-radius:50px; font-size:12px; font-weight:500; }
+  /* GRUPO MAS (eb|metrics) */
+  .grupo-sec { background: var(--bg-light); border-bottom: 1px solid var(--border); }
+  .eb-card { display: flex; align-items: center; gap: 40px; background: #fff; padding: 40px; border-radius: 24px; box-shadow: var(--shadow-md); border: 1px solid var(--border); }
+  .eb-logo { flex: 0 0 200px; text-align: center; }
+  .eb-logo h3 { font-size: 32px; color: var(--navy); letter-spacing: -1px; }
+  .eb-logo h3 span { color: var(--red); }
+  .eb-content h4 { font-size: 24px; margin-bottom: 12px; }
+  .eb-content p { color: var(--muted); margin-bottom: 20px; }
 
-  /* SECTIONS */
-  section { padding:90px 24px; }
-  .section-label { color:var(--red); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
-  .section-title { font-size:clamp(28px,3.5vw,42px); font-weight:900; color:var(--navy); line-height:1.2; margin-bottom:16px; }
-  .section-sub { color:var(--muted); font-size:17px; line-height:1.7; max-width:580px; }
-  .section-header { margin-bottom:56px; }
-  .container { max-width:1200px; margin:auto; }
+  /* LIDERAZGO */
+  .bio-sec { background: var(--bg-main); }
+  .bio-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; }
+  .bio-img-wrapper { position: relative; }
+  .bio-img-wrapper::after { content:''; position:absolute; top:20px; left:20px; width:100%; height:100%; background:var(--red); border-radius: 24px; z-index: 0; opacity: 0.1; }
+  .bio-img { width: 100%; aspect-ratio: 4/5; background: var(--navy2); border-radius: 24px; position: relative; z-index: 1; display:flex; align-items:center; justify-content:center; color:#fff; font-size: 64px; }
+  .bio-content h2 { font-size: 36px; margin-bottom: 8px; }
+  .bio-content h3 { font-size: 16px; color: var(--red); margin-bottom: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .book-card { display: flex; align-items: center; gap: 20px; background: var(--bg-light); border: 1px solid var(--border); padding: 20px; border-radius: 16px; margin-top: 30px; }
+  .book-icon { font-size: 40px; }
+  .book-info h4 { font-size: 16px; margin-bottom: 4px; }
+  .book-info span { font-size: 13px; color: var(--red); font-weight: 700; background: rgba(232,75,42,0.1); padding: 4px 10px; border-radius: 50px; }
 
-  /* SERVICES */
-  .services { background:var(--gray); }
-  .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
-  .service-card {
-    background:#fff; border-radius:20px; padding:32px; border:1.5px solid var(--border);
-    transition:all 0.3s; position:relative; overflow:hidden;
-  }
-  .service-card::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:4px;
-    background:linear-gradient(90deg, var(--red), var(--red2));
-    transform:scaleX(0); transition:transform 0.3s; transform-origin:left;
-  }
-  .service-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(26,46,74,0.1); border-color:rgba(232,75,42,0.25); }
-  .service-card:hover::before { transform:scaleX(1); }
-  .service-icon { width:54px; height:54px; background:linear-gradient(135deg,var(--navy),var(--navy2)); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:20px; }
-  .service-card h3 { font-size:20px; font-weight:800; color:var(--navy); margin-bottom:12px; }
-  .service-card p { color:var(--muted); font-size:14px; line-height:1.7; margin-bottom:24px; }
-  .service-cta-row { display:flex; gap:10px; flex-wrap:wrap; }
-  .btn-wa-sm { background:var(--green-wa); color:#fff; padding:8px 14px; border-radius:50px; font-size:12px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:5px; transition:all 0.2s; }
-  .btn-wa-sm:hover { transform:scale(1.05); box-shadow:0 4px 12px rgba(37,211,102,0.35); }
-  .btn-info-sm { background:transparent; color:var(--navy); padding:8px 14px; border-radius:50px; font-size:12px; font-weight:700; text-decoration:none; border:1.5px solid var(--navy); transition:all 0.2s; }
-  .btn-info-sm:hover { background:var(--navy); color:#fff; }
+  /* SERVICIOS */
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; margin-top: 40px; }
+  .service-card { background:#fff; border-radius:20px; padding:32px; border:1px solid var(--border); transition:all 0.3s; box-shadow: var(--shadow-sm); }
+  .service-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--navy); }
+  .service-icon { width:54px; height:54px; background:var(--bg-light); color: var(--navy); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:20px; transition: all 0.3s; }
+  .service-card:hover .service-icon { background: var(--navy); color: #fff; }
+  .service-card h3 { font-size:20px; margin-bottom:12px; }
 
-  /* TESTIMONIALS */
-  .testimonials { background:linear-gradient(135deg, var(--navy3) 0%, var(--navy) 100%); }
+  /* TESTIMONIOS (Restaurados) */
+  .testimonials { background:linear-gradient(135deg, var(--navy3) 0%, var(--navy) 100%); padding: 90px 0; color:#fff; overflow:hidden;}
   .testimonials .section-title { color:#fff; }
   .test-track { display:flex; transition:transform 0.5s ease; }
-  .test-card { min-width:100%; padding:42px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; }
-  .test-quote { font-size:clamp(17px,2.5vw,22px); color:#fff; line-height:1.65; font-style:italic; margin-bottom:28px; }
-  .test-quote::before { content:'"'; font-size:64px; color:var(--red2); line-height:0; vertical-align:-22px; margin-right:6px; }
+  .test-card { min-width:100%; padding:40px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; }
+  .test-quote { font-size:clamp(17px,2.5vw,22px); line-height:1.65; font-style:italic; margin-bottom:28px; }
+  .test-quote::before { content:'"'; font-size:60px; color:var(--red2); line-height:0; vertical-align:-20px; margin-right:6px; }
   .test-author { display:flex; align-items:center; gap:16px; }
-  .test-avatar { width:50px; height:50px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:18px; flex-shrink:0; }
-  .test-name { color:#fff; font-weight:700; }
-  .test-role { color:rgba(255,255,255,0.55); font-size:13px; }
+  .test-avatar { width:50px; height:50px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px; flex-shrink:0; }
+  .test-role { color:rgba(255,255,255,0.6); font-size:13px; }
   .test-dots { display:flex; gap:8px; justify-content:center; margin-top:32px; }
-  .test-dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.25); cursor:pointer; transition:all 0.25s; }
+  .test-dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.25); cursor:pointer; transition:all 0.25s; border:none; padding:0; }
   .test-dot.active { background:var(--red2); width:26px; border-radius:4px; }
 
-  /* CASES */
-  .cases-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px; }
-  .case-card { border-radius:20px; overflow:hidden; border:1.5px solid var(--border); transition:all 0.3s; background:#fff; }
-  .case-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(26,46,74,0.1); }
-  .case-img { height:160px; background:linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%); display:flex; align-items:center; justify-content:center; font-size:46px; }
+  /* CASOS DE ÉXITO (Restaurados) */
+  .cases-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px; margin-top:40px;}
+  .case-card { border-radius:20px; overflow:hidden; border:1px solid var(--border); transition:all 0.3s; background:#fff; box-shadow: var(--shadow-sm);}
+  .case-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+  .case-img { height:160px; background:var(--bg-light); display:flex; align-items:center; justify-content:center; font-size:46px; }
   .case-body { padding:26px; }
   .case-company { font-size:11px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
-  .case-body h3 { font-size:18px; font-weight:800; color:var(--navy); margin-bottom:10px; }
-  .case-body p { color:var(--muted); font-size:14px; line-height:1.65; margin-bottom:20px; }
+  .case-body h3 { font-size:18px; margin-bottom:10px; }
   .btn-link { color:var(--navy); font-size:13px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:5px; transition:all 0.2s; }
   .btn-link:hover { color:var(--red); gap:10px; }
 
-  /* LEAD FORM */
-  .lead-section { background:var(--gray); }
+  /* LEAD FORM MULTI-PASO (Restaurado y adaptado) */
   .lead-wrap { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; }
-  .lead-info h2 { font-size:clamp(26px,3vw,38px); font-weight:900; color:var(--navy); margin-bottom:16px; }
-  .lead-info p { color:var(--muted); line-height:1.75; margin-bottom:28px; }
-  .lead-wa-big {
-    display:flex; align-items:center; gap:14px;
-    background:var(--green-wa); color:#fff; padding:16px 24px; border-radius:16px;
-    text-decoration:none; font-weight:700; font-size:16px;
-    transition:all 0.2s; box-shadow:0 8px 25px rgba(37,211,102,0.3); margin-bottom:14px;
-  }
-  .lead-wa-big:hover { transform:translateY(-2px); box-shadow:0 12px 35px rgba(37,211,102,0.4); }
-  .wa-icon { font-size:30px; }
-  .lead-wa-sub { color:var(--muted); font-size:13px; margin-bottom:22px; }
+  .lead-wa-big { display:flex; align-items:center; gap:14px; background:var(--green-wa); color:#fff; padding:16px 24px; border-radius:16px; text-decoration:none; font-weight:700; font-size:16px; transition:all 0.2s; box-shadow:0 4px 15px rgba(37,211,102,0.2); margin-bottom:14px; }
+  .lead-wa-big:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(37,211,102,0.3); }
   .divider-or { display:flex; align-items:center; gap:12px; color:var(--muted); font-size:13px; margin:18px 0; }
   .divider-or::before,.divider-or::after { content:''; flex:1; height:1px; background:var(--border); }
   .trust-item { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:14px; margin-bottom:10px; }
-  .trust-item span { color:var(--red); font-size:16px; }
-
-  .form-card { background:#fff; border-radius:24px; padding:36px; box-shadow:0 12px 40px rgba(26,46,74,0.08); border:1.5px solid var(--border); }
-  .form-card h3 { font-size:20px; font-weight:800; color:var(--navy); margin-bottom:6px; }
-  .form-sub { color:var(--muted); font-size:14px; margin-bottom:26px; }
+  
+  .form-card { background:#fff; border-radius:24px; padding:36px; box-shadow:var(--shadow-lg); border:1px solid var(--border); }
   .form-step { display:none; }
   .form-step.active { display:block; }
   .form-progress { display:flex; gap:6px; margin-bottom:26px; }
-  .form-progress-bar { height:4px; flex:1; border-radius:2px; background:#e8edf5; transition:background 0.3s; }
+  .form-progress-bar { height:4px; flex:1; border-radius:2px; background:var(--border); transition:background 0.3s; }
   .form-progress-bar.done { background:var(--red); }
   .form-label { display:block; font-size:13px; font-weight:600; color:var(--navy); margin-bottom:8px; }
-  .form-input,.form-select,.form-textarea {
-    width:100%; padding:12px 16px; border:1.5px solid var(--border); border-radius:10px;
-    font-size:14px; color:var(--text); transition:border-color 0.2s; outline:none; font-family:inherit; background:#fff;
-  }
-  .form-input:focus,.form-select:focus,.form-textarea:focus { border-color:var(--red); }
-  /* MEJORA: Clase para mostrar errores en inputs */
+  .form-input,.form-select,.form-textarea { width:100%; padding:12px 16px; border:1px solid var(--border); border-radius:10px; font-size:14px; background:var(--bg-light); transition:border-color 0.2s; outline:none; font-family:inherit; }
+  .form-input:focus,.form-select:focus,.form-textarea:focus { border-color:var(--navy); background:#fff; box-shadow: 0 0 0 3px rgba(26,46,74,0.05);}
   .form-input.error, .form-select.error { border-color: var(--red2); background-color: #fff5f5; }
-  
-  .form-textarea { resize:vertical; min-height:80px; }
   .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   .form-group { margin-bottom:18px; }
   .form-chips { display:flex; flex-wrap:wrap; gap:8px; }
-  .chip-option { padding:8px 14px; border-radius:50px; border:1.5px solid var(--border); font-size:13px; cursor:pointer; transition:all 0.2s; }
+  .chip-option { padding:8px 14px; border-radius:50px; border:1px solid var(--border); background:#fff; font-size:13px; cursor:pointer; transition:all 0.2s; color:var(--text); }
   .chip-option:hover,.chip-option.selected { background:var(--navy); color:#fff; border-color:var(--navy); }
-  .btn-next { background:var(--navy); color:#fff; padding:12px 24px; border-radius:10px; border:none; font-size:14px; font-weight:700; cursor:pointer; transition:all 0.2s; width:100%; margin-top:6px; }
-  .btn-next:hover { background:var(--red); }
-  .btn-submit { background:var(--red); color:#fff; padding:14px 28px; border-radius:10px; border:none; font-size:15px; font-weight:800; cursor:pointer; transition:all 0.2s; width:100%; }
-  .btn-submit:hover { background:var(--red2); transform:translateY(-1px); box-shadow:0 8px 24px rgba(232,75,42,0.35); }
-  .step-nav { display:flex; gap:10px; }
-  .btn-back { background:transparent; color:var(--muted); padding:12px 20px; border-radius:10px; border:1.5px solid var(--border); font-size:14px; font-weight:600; cursor:pointer; }
-  .form-success { text-align:center; padding:24px 0; }
-  .form-success .check { font-size:60px; margin-bottom:16px; }
-  .form-success h3 { color:var(--navy); font-size:22px; font-weight:800; margin-bottom:10px; }
-  .form-success p { color:var(--muted); font-size:14px; line-height:1.65; }
-  .success-wa { display:flex; align-items:center; gap:10px; justify-content:center; background:var(--green-wa); color:#fff; padding:14px 20px; border-radius:12px; font-weight:700; text-decoration:none; margin-top:20px; }
+  .step-nav { display:flex; gap:10px; margin-top:10px;}
+  .btn-next { background:var(--navy); color:#fff; padding:12px 24px; border-radius:10px; border:none; font-size:14px; font-weight:700; cursor:pointer; transition:all 0.2s; width:100%; }
+  .btn-next:hover { background:var(--navy2); }
+  .btn-back { background:transparent; color:var(--muted); padding:12px 20px; border-radius:10px; border:1px solid var(--border); font-size:14px; font-weight:600; cursor:pointer; }
   .error-text { color: var(--red2); font-size: 12px; margin-top: 4px; display: none; }
+  .form-success { text-align:center; padding:24px 0; }
 
-  /* CHATBOT */
-  #chatbot-btn {
-    position:fixed; bottom:28px; right:28px; z-index:9999;
-    width:62px; height:62px; border-radius:50%;
-    background:linear-gradient(135deg, var(--navy), var(--navy2));
-    border:2px solid var(--red); color:#fff; font-size:26px;
-    cursor:pointer; display:flex; align-items:center; justify-content:center;
-    box-shadow:0 8px 28px rgba(26,46,74,0.45);
-    transition:transform 0.3s; animation:pulse-bot 2.5s ease-in-out infinite;
-  }
+  /* FLOATING & CHATBOT (Restaurados) */
+  #wa-float { position:fixed; bottom:104px; right:28px; z-index:9999; background:var(--green-wa); color:#fff; width:58px; height:58px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:26px; text-decoration:none; box-shadow:0 8px 25px rgba(37,211,102,0.4); transition:transform 0.2s; }
+  #wa-float:hover { transform:scale(1.1); }
+  #chatbot-btn { position:fixed; bottom:28px; right:28px; z-index:9999; width:62px; height:62px; border-radius:50%; background:linear-gradient(135deg, var(--navy), var(--navy2)); border:2px solid var(--red); color:#fff; font-size:26px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 28px rgba(26,46,74,0.45); transition:transform 0.3s; animation:pulse-bot 2.5s ease-in-out infinite; padding:0; }
   #chatbot-btn:hover { transform:scale(1.1); }
   @keyframes pulse-bot { 0%,100%{box-shadow:0 8px 28px rgba(26,46,74,0.45)} 50%{box-shadow:0 8px 36px rgba(232,75,42,0.5)} }
   .bot-badge { position:absolute; top:-4px; right:-4px; background:var(--red); color:#fff; font-size:9px; font-weight:800; padding:2px 6px; border-radius:10px; }
-
-  #wa-float {
-    position:fixed; bottom:104px; right:28px; z-index:9999;
-    background:var(--green-wa); color:#fff; width:58px; height:58px;
-    border-radius:50%; display:flex; align-items:center; justify-content:center;
-    font-size:26px; text-decoration:none; box-shadow:0 8px 25px rgba(37,211,102,0.4);
-    transition:transform 0.2s;
-  }
-  #wa-float:hover { transform:scale(1.1); }
-
-  #chatbot-window {
-    position:fixed; bottom:108px; right:28px; z-index:9998;
-    width:360px; max-height:520px; background:#fff;
-    border-radius:22px; box-shadow:0 24px 64px rgba(26,46,74,0.2);
-    display:none; flex-direction:column; overflow:hidden;
-    border:1.5px solid rgba(232,75,42,0.15);
-  }
+  #chatbot-window { position:fixed; bottom:108px; right:28px; z-index:9998; width:360px; max-height:520px; background:#fff; border-radius:22px; box-shadow:var(--shadow-lg); display:none; flex-direction:column; overflow:hidden; border:1px solid var(--border); }
   #chatbot-window.open { display:flex; }
   .chat-header { background:linear-gradient(135deg, var(--navy3), var(--navy)); padding:18px 20px; display:flex; align-items:center; gap:12px; }
-  .chat-avatar { width:40px; height:40px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+  .chat-avatar { width:40px; height:40px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; font-size:18px; color:#fff;}
   .chat-header-info { flex:1; }
   .chat-header-info strong { color:#fff; font-size:15px; display:block; }
-  .chat-header-info span { color:rgba(255,255,255,0.55); font-size:12px; }
-  .chat-close { color:rgba(255,255,255,0.55); cursor:pointer; font-size:18px; line-height:1; padding:4px; }
-  .chat-messages { flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px; max-height:310px; }
+  .chat-header-info span { color:rgba(255,255,255,0.6); font-size:12px; }
+  .chat-close { color:rgba(255,255,255,0.6); cursor:pointer; font-size:18px; padding:4px; background:none; border:none;}
+  .chat-messages { flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px; max-height:310px; background:var(--bg-main);}
   .msg { max-width:82%; }
   .msg-bot { align-self:flex-start; }
   .msg-user { align-self:flex-end; }
   .msg-bubble { padding:10px 14px; border-radius:14px; font-size:13px; line-height:1.55; }
-  .msg-bot .msg-bubble { background:#f4f6f9; color:var(--text); border-bottom-left-radius:4px; }
+  .msg-bot .msg-bubble { background:var(--bg-light); border:1px solid var(--border); border-bottom-left-radius:4px; }
   .msg-user .msg-bubble { background:var(--navy); color:#fff; border-bottom-right-radius:4px; }
   .msg-options { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
-  .msg-opt { padding:6px 12px; border:1.5px solid var(--navy); border-radius:50px; font-size:12px; cursor:pointer; transition:all 0.2s; color:var(--navy); font-weight:600; background:#fff; }
+  .msg-opt { padding:6px 12px; border:1px solid var(--navy); border-radius:50px; font-size:12px; cursor:pointer; background:#fff; color:var(--navy); }
   .msg-opt:hover { background:var(--navy); color:#fff; }
-  .chat-input-row { display:flex; gap:8px; padding:14px 16px; border-top:1px solid #f0f0f0; }
-  .chat-input { flex:1; border:1.5px solid var(--border); border-radius:50px; padding:9px 16px; font-size:13px; outline:none; font-family:inherit; }
-  .chat-input:focus { border-color:var(--red); }
-  .chat-send { background:var(--red); color:#fff; border:none; border-radius:50px; padding:9px 16px; cursor:pointer; font-size:13px; font-weight:700; transition:background 0.2s; }
-  .chat-send:hover { background:var(--navy); }
-  .typing { display:flex; gap:4px; align-items:center; padding:10px 14px; background:#f4f6f9; border-radius:14px; border-bottom-left-radius:4px; width:fit-content; }
-  .typing span { width:6px; height:6px; border-radius:50%; background:var(--muted); animation:blink 1s infinite; }
-  .typing span:nth-child(2){animation-delay:0.2s} .typing span:nth-child(3){animation-delay:0.4s}
-  @keyframes blink{0%,80%,100%{opacity:0.2}40%{opacity:1}}
+  .chat-input-row { display:flex; gap:8px; padding:14px 16px; border-top:1px solid var(--border); background:#fff;}
+  .chat-input { flex:1; border:1px solid var(--border); border-radius:50px; padding:9px 16px; font-size:13px; outline:none; background:var(--bg-light);}
+  .chat-send { background:var(--red); color:#fff; border:none; border-radius:50px; padding:9px 16px; cursor:pointer; font-size:13px; font-weight:700; }
 
   /* FOOTER */
-  footer { background:var(--navy3); padding:60px 24px 30px; }
-  .footer-grid { max-width:1200px; margin:auto; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:48px; }
-  .footer-brand p { color:rgba(255,255,255,0.5); font-size:14px; line-height:1.7; margin:16px 0 20px; }
-  .footer-social { display:flex; gap:10px; }
-  .social-btn { width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:center; color:#fff; text-decoration:none; font-size:13px; transition:background 0.2s; font-weight:700; }
-  .social-btn:hover { background:var(--red); }
-  .footer-col h4 { color:#fff; font-size:14px; font-weight:700; margin-bottom:16px; }
+  footer { background:var(--navy); color: #fff; padding:80px 0 30px; }
+  .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:50px; margin-bottom:60px; }
+  .footer-col h4 { color:#fff; margin-bottom:20px; }
   .footer-col ul { list-style:none; }
-  .footer-col ul li { margin-bottom:10px; }
-  .footer-col ul li a { color:rgba(255,255,255,0.45); text-decoration:none; font-size:13px; transition:color 0.2s; }
-  .footer-col ul li a:hover { color:var(--red2); }
-  .footer-contact-item { display:flex; gap:8px; color:rgba(255,255,255,0.45); font-size:13px; margin-bottom:12px; align-items:flex-start; }
-  .footer-contact-item .ic { color:var(--red); margin-top:1px; }
-  .footer-bottom { max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.07); padding-top:24px; }
-  .footer-bottom p { color:rgba(255,255,255,0.3); font-size:12px; }
+  .footer-col ul li { margin-bottom:12px; }
+  .footer-col ul li a { color:rgba(255,255,255,0.6); text-decoration:none; transition:color 0.2s; }
+  .footer-col ul li a:hover { color:var(--red); }
+  .footer-bottom { border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; display: flex; justify-content: space-between; color: rgba(255,255,255,0.4); font-size: 13px; }
 
-  /* REVEAL */
-  .reveal { opacity:0; transform:translateY(28px); transition:all 0.65s ease; }
-  .reveal.visible { opacity:1; transform:translateY(0); }
-
-  @media(max-width:768px){
-    .hero-content,.lead-wrap,.footer-grid { grid-template-columns:1fr; }
+  @media(max-width:992px){
+    .hero-grid, .eb-card, .bio-grid, .lead-wrap, .footer-grid { grid-template-columns:1fr; }
     .nav-links { display:none; }
+    .eb-card { flex-direction: column; text-align: center; gap: 20px; }
     .form-row { grid-template-columns:1fr; }
     #chatbot-window { width:calc(100vw - 32px); right:16px; bottom:96px; }
   }
@@ -317,103 +223,176 @@
       <svg viewBox="0 0 160 50" xmlns="http://www.w3.org/2000/svg" aria-label="MAS Consultores Logo">
         <polygon points="0,40 14,10 28,40" fill="#e84b2a"/>
         <polygon points="7,40 14,25 21,40" fill="#1a2e4a"/>
-        <text x="34" y="38" font-family="'Segoe UI',sans-serif" font-weight="900" font-size="30" fill="#ffffff" letter-spacing="-1">M</text>
+        <text x="34" y="38" font-family="'Segoe UI',sans-serif" font-weight="900" font-size="30" fill="#1a2e4a" letter-spacing="-1">M</text>
         <text x="58" y="38" font-family="'Segoe UI',sans-serif" font-weight="900" font-size="30" fill="#e84b2a" letter-spacing="-1">A</text>
-        <text x="78" y="38" font-family="'Segoe UI',sans-serif" font-weight="900" font-size="30" fill="#ffffff" letter-spacing="-1">S</text>
-        <text x="34" y="48" font-family="'Segoe UI',sans-serif" font-size="8" fill="rgba(255,255,255,0.5)" letter-spacing="2">CONSULTORES</text>
+        <text x="78" y="38" font-family="'Segoe UI',sans-serif" font-weight="900" font-size="30" fill="#1a2e4a" letter-spacing="-1">S</text>
+        <text x="34" y="48" font-family="'Segoe UI',sans-serif" font-weight="600" font-size="8" fill="#64748b" letter-spacing="2">CONSULTORES</text>
       </svg>
     </a>
     <ul class="nav-links">
-      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#alianzas">Alianzas</a></li>
+      <li><a href="#grupo">Grupo MAS</a></li>
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#casos">Casos</a></li>
-      <li><a href="#testimonios">Testimonios</a></li>
-      <li><a href="#contacto">Contacto</a></li>
     </ul>
     <div class="nav-cta">
-      <a class="btn-wa-nav" href="https://wa.me/56997416972?text=Hola%20MAS%20Consultores%2C%20quiero%20conocer%20sus%20soluciones." target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
-      <a class="btn-contact-nav" href="#contacto">Solicitar reunión</a>
+      <a class="btn-outline" href="https://wa.me/56997416972" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a class="btn-solid" href="#contacto">Hablemos</a>
     </div>
   </div>
 </nav>
 
 <section class="hero" id="inicio">
-  <div class="hero-decor"></div>
-  <div class="hero-line"></div>
-  <div class="hero-content">
-    <div>
-      <div class="hero-badge">🏆 Más de 30 años desarrollando talento</div>
-      <h1>Desarrollamos el <em>Talento</em> de tu organización</h1>
-      <p>En MAS Consultores acompañamos a personas y organizaciones a cumplir sus desafíos estratégicos con soluciones integrales y medibles de gestión del talento.</p>
-      <div class="hero-btns">
-        <a class="btn-primary" href="#contacto">📋 Diagnóstico gratuito</a>
-        <a class="btn-secondary" href="https://wa.me/56997416972?text=Hola%2C%20me%20interesa%20conocer%20las%20soluciones%20de%20MAS%20Consultores." target="_blank" rel="noopener noreferrer">💬 Hablar ahora</a>
+  <div class="container hero-grid">
+    <div class="hero-content reveal">
+      <div class="section-label">Transformando Organizaciones</div>
+      <h1>Desarrollamos el <span class="text-red">Talento</span> de tu organización</h1>
+      <p>Acompañamos a personas y empresas a cumplir sus desafíos estratégicos con soluciones integrales, medibles y basadas en evidencia.</p>
+      <div class="nav-cta">
+        <a class="btn-solid" href="#contacto" style="padding: 14px 28px; font-size: 15px;">📋 Solicitar Diagnóstico</a>
       </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat-card">
-        <div class="stat-num" data-count="500">+0</div>
-        <div class="stat-label">Clientes en<br>15 países</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num" data-count="30">+0</div>
-        <div class="stat-label">Años de<br>experiencia</div>
-      </div>
-      <div class="stat-industries">
-        <p>Industrias que atendemos</p>
-        <div class="industries-list">
-          <span class="ind-tag">Energía</span><span class="ind-tag">Banca</span>
-          <span class="ind-tag">Retail</span><span class="ind-tag">Minería</span>
-          <span class="ind-tag">Educación</span><span class="ind-tag">Telecomunicaciones</span>
-          <span class="ind-tag">Sector Público</span><span class="ind-tag">Alimentación</span>
+    <div class="hero-visual reveal delay-1">
+      <div class="hero-card">
+        <h3 style="margin-bottom: 15px; font-size: 22px;">El impacto de MAS</h3>
+        <p style="color: var(--muted); font-size: 14px;">Más de tres décadas impulsando el crecimiento del capital humano en Latinoamérica.</p>
+        <div class="stat-group">
+          <div class="stat-item">
+            <h4 data-count="30">0</h4>
+            <p>Años de experiencia</p>
+          </div>
+          <div class="stat-item">
+            <h4 data-count="500">0</h4>
+            <p>Clientes globales</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="services" id="servicios">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Nuestros servicios</div>
-      <div class="section-title">Soluciones integrales<br>de Gestión del Talento</div>
-      <p class="section-sub">Acompañamos a tu organización en cada etapa del desarrollo de sus colaboradores con metodologías basadas en evidencia.</p>
+<section class="partners-sec" id="alianzas">
+  <div class="container reveal">
+    <span class="section-label" style="color:#fff;">Avalados por los mejores</span>
+    <h2 style="color:#fff; font-size: 36px; margin-bottom: 20px;">Nuestras Alianzas Estratégicas</h2>
+    <p style="color: rgba(255,255,255,0.7); max-width: 600px; margin: auto;">Nos asociamos con líderes mundiales para entregar metodologías de clase mundial.</p>
+    <div class="partners-grid">
+      <div class="partner-card reveal delay-1">
+        <div class="p-logo li">in</div>
+        <h3>LinkedIn Silver Partner</h3>
+        <p>Desde 2025, somos <strong>Silver Partners</strong> de LinkedIn, potenciando soluciones para los servicios de Hiring y Learning corporativo.</p>
+        <span class="p-badge">Talent & Learning</span>
+      </div>
+      <div class="partner-card reveal delay-2">
+        <div class="p-logo roi">ROI INSTITUTE™</div>
+        <h3>ROI Institute Partner</h3>
+        <p>Partners oficiales desde 2023 y los <strong>únicos en la región</strong>. Aplicamos y certificamos en la metodología líder global para medir el ROI en RRHH.</p>
+        <span class="p-badge">Medición & Certificación</span>
+      </div>
     </div>
+  </div>
+</section>
+
+<section class="section-pad grupo-sec" id="grupo">
+  <div class="container reveal">
+    <div class="section-label">Ecosistema Organizacional</div>
+    <h2 class="section-title">Parte de Grupo MAS</h2>
+    <div class="eb-card reveal delay-1" style="margin-top:40px;">
+      <div class="eb-logo">
+        <h3>eb<span>|</span>metrics</h3>
+      </div>
+      <div class="eb-content">
+        <h4>Especialistas en Selección Científica</h4>
+        <p>eb | metrics se especializa en el desarrollo propio de <strong>tests de selección con base científica</strong>. Entregamos resultados legítimos, predictivos y libres de sesgo para asegurar la mejor toma de decisiones en la atracción de talento.</p>
+        <a href="https://ebmetrics.cl" target="_blank" rel="noopener noreferrer" class="btn-outline" style="display: inline-block;">Visitar ebmetrics.cl →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad bio-sec" id="liderazgo">
+  <div class="container">
+    <div class="bio-grid">
+      <div class="bio-img-wrapper reveal">
+        <div class="bio-img">📸</div>
+      </div>
+      <div class="bio-content reveal delay-1">
+        <div class="section-label">Nuestro Liderazgo</div>
+        <h2>Rodrigo Lara Fernández</h2>
+        <h3>Fundador & Gerente de Cliente</h3>
+        <p>Con más de 30 años de experiencia transformando el desarrollo organizacional, Rodrigo fundó MAS Consultores con la visión de alinear el aprendizaje corporativo con los objetivos del negocio.</p>
+        <div class="book-card">
+          <div class="book-icon" aria-hidden="true">📘</div>
+          <div class="book-info">
+            <span>Autor Best Seller</span>
+            <h4 style="margin-top: 8px;">Capacitaciones</h4>
+            <p style="font-size: 13px; color: var(--muted); margin:0;">Guía esencial para transformar la formación corporativa en resultados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="servicios" style="background: var(--bg-light);">
+  <div class="container">
+    <div class="section-label">Lo que hacemos</div>
+    <h2 class="section-title">Soluciones de Talento</h2>
     <div class="services-grid">
       <div class="service-card reveal">
         <div class="service-icon" aria-hidden="true">🎯</div>
         <h3>MAS Consultoría</h3>
-        <p>Asesoramos para diseñar, calcular e implementar las mejores soluciones formativas y de talento adaptadas a los desafíos estratégicos de tu organización.</p>
-        <div class="service-cta-row">
-          <a class="btn-wa-sm" href="https://wa.me/56997416972?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Consultor%C3%ADa%20de%20MAS." target="_blank" rel="noopener noreferrer">💬 Consultar</a>
-          <a class="btn-info-sm" href="#contacto">Más info →</a>
-        </div>
+        <p style="color:var(--muted); font-size:14px;">Diseño e implementación de soluciones formativas y de talento adaptadas a los desafíos estratégicos.</p>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card reveal delay-1">
         <div class="service-icon" aria-hidden="true">📚</div>
         <h3>MAS Formación</h3>
-        <p>Diseñamos e implementamos actividades formativas con foco en lograr los objetivos estratégicos, generando impacto real y medible en las personas.</p>
-        <div class="service-cta-row">
-          <a class="btn-wa-sm" href="https://wa.me/56997416972?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Formaci%C3%B3n%20de%20MAS." target="_blank" rel="noopener noreferrer">💬 Consultar</a>
-          <a class="btn-info-sm" href="#contacto">Más info →</a>
-        </div>
+        <p style="color:var(--muted); font-size:14px;">Actividades formativas con foco en lograr los objetivos estratégicos y generar impacto real.</p>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card reveal delay-2">
         <div class="service-icon" aria-hidden="true">💻</div>
         <h3>MAS Plataformas</h3>
-        <p>Diseñamos e implementamos plataformas digitales que potencian el desarrollo de talentos, impactando en la cultura y crecimiento organizacional.</p>
-        <div class="service-cta-row">
-          <a class="btn-wa-sm" href="https://wa.me/56997416972?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Plataformas%20de%20MAS." target="_blank" rel="noopener noreferrer">💬 Consultar</a>
-          <a class="btn-info-sm" href="#contacto">Más info →</a>
-        </div>
+        <p style="color:var(--muted); font-size:14px;">Implementación de plataformas digitales que potencian el desarrollo continuo de talentos.</p>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card reveal delay-3">
         <div class="service-icon" aria-hidden="true">📊</div>
         <h3>MAS Medición</h3>
-        <p>Evaluamos el impacto y el retorno sobre la inversión en programas de capital humano con metodologías basadas en evidencia y datos confiables.</p>
-        <div class="service-cta-row">
-          <a class="btn-wa-sm" href="https://wa.me/56997416972?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Medici%C3%B3n%20de%20MAS." target="_blank" rel="noopener noreferrer">💬 Consultar</a>
-          <a class="btn-info-sm" href="#contacto">Más info →</a>
+        <p style="color:var(--muted); font-size:14px;">Evaluamos el impacto y el ROI en programas de capital humano con metodologías basadas en evidencia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="casos">
+  <div class="container">
+    <div class="section-label">Casos de éxito</div>
+    <h2 class="section-title">Historias reales, resultados reales</h2>
+    <div class="cases-grid">
+      <div class="case-card reveal">
+        <div class="case-img" aria-hidden="true">🏦</div>
+        <div class="case-body">
+          <div class="case-company">Banco Santander</div>
+          <h3>Programa de desarrollo de liderazgo</h3>
+          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">La División de Personas diseñó múltiples iniciativas de desarrollo con el apoyo estratégico de MAS.</p>
+          <a class="btn-link" href="#contacto">Hablemos de tu caso →</a>
+        </div>
+      </div>
+      <div class="case-card reveal delay-1">
+        <div class="case-img" aria-hidden="true">⛽</div>
+        <div class="case-body">
+          <div class="case-company">Copec</div>
+          <h3>Evaluación de competencias a escala</h3>
+          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Durante diez años, Copec utilizó un programa de evaluación de competencias implementado por MAS.</p>
+          <a class="btn-link" href="#contacto">Hablemos de tu caso →</a>
+        </div>
+      </div>
+      <div class="case-card reveal delay-2">
+        <div class="case-img" aria-hidden="true">🔥</div>
+        <div class="case-body">
+          <div class="case-company">Gasco</div>
+          <h3>Transformación cultural y formativa</h3>
+          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Apoyamos su transformación estratégica con programas de formación y cultura a medida.</p>
+          <a class="btn-link" href="#contacto">Hablemos de tu caso →</a>
         </div>
       </div>
     </div>
@@ -422,32 +401,30 @@
 
 <section class="testimonials" id="testimonios">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Lo que dicen de nosotros</div>
-      <div class="section-title">La experiencia de nuestros clientes</div>
-    </div>
+    <div class="section-label" style="color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.2); padding:4px 12px; border-radius:50px;">Lo que dicen de nosotros</div>
+    <h2 class="section-title">La experiencia de nuestros clientes</h2>
     <div class="reveal">
-      <div style="overflow:hidden;border-radius:20px;">
+      <div style="overflow:hidden;border-radius:20px; margin-top:30px;">
         <div class="test-track" id="testTrack">
           <div class="test-card">
             <div class="test-quote">El apoyo de MAS ha sido fundamental en el logro de nuestras metas de aprendizaje. La mejor disposición, el mejor servicio.</div>
             <div class="test-author">
               <div class="test-avatar" aria-hidden="true">G</div>
-              <div><div class="test-name">Gabriela Coll</div><div class="test-role">Learning & Leadership Development Lead Chile · ACCENTURE</div></div>
+              <div><strong style="display:block;">Gabriela Coll</strong><span class="test-role">Learning Lead Chile · ACCENTURE</span></div>
             </div>
           </div>
           <div class="test-card">
-            <div class="test-quote">MAS nos ayudó a transformar nuestra cultura de aprendizaje. Sus metodologías son prácticas, relevantes y generan resultados reales que el negocio valora.</div>
+            <div class="test-quote">MAS nos ayudó a transformar nuestra cultura de aprendizaje. Metodologías prácticas que el negocio valora.</div>
             <div class="test-author">
               <div class="test-avatar" aria-hidden="true">R</div>
-              <div><div class="test-name">Ricardo Fuentes</div><div class="test-role">Gerente de Personas · Banco Santander Chile</div></div>
+              <div><strong style="display:block;">Ricardo Fuentes</strong><span class="test-role">Gerente de Personas · Banco Santander</span></div>
             </div>
           </div>
           <div class="test-card">
-            <div class="test-quote">La alianza con MAS nos permitió implementar un programa de desarrollo que realmente conecta con los objetivos estratégicos del negocio.</div>
+            <div class="test-quote">La alianza nos permitió implementar un programa de desarrollo que conecta con los objetivos estratégicos del negocio.</div>
             <div class="test-author">
               <div class="test-avatar" aria-hidden="true">M</div>
-              <div><div class="test-name">María José Pérez</div><div class="test-role">Directora de Capital Humano · Copec</div></div>
+              <div><strong style="display:block;">María José Pérez</strong><span class="test-role">Directora de Capital Humano · Copec</span></div>
             </div>
           </div>
         </div>
@@ -461,188 +438,108 @@
   </div>
 </section>
 
-<section id="casos" style="background:#fff">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Casos de éxito</div>
-      <div class="section-title">Historias reales,<br>resultados reales</div>
+<section class="section-pad" id="contacto" style="background:var(--bg-light);">
+  <div class="container lead-wrap">
+    <div class="reveal">
+      <div class="section-label">Siguiente Paso</div>
+      <h2 class="section-title">Cuéntanos tu desafío y te ayudamos a resolverlo</h2>
+      <p class="section-sub" style="margin-bottom: 28px;">Nuestro equipo está listo para diseñar una solución a medida.</p>
+      
+      <a class="lead-wa-big" href="https://wa.me/56997416972?text=Hola%20MAS%20Consultores." target="_blank" rel="noopener noreferrer">
+        <span aria-hidden="true" style="font-size:24px;">💬</span>
+        <div>
+          <strong style="display:block;font-size:16px;">Escríbenos por WhatsApp</strong>
+          <span style="font-size:13px;font-weight:400;opacity:0.9;">Respuesta en menos de 1 hora hábil</span>
+        </div>
+      </a>
+      <p style="color:var(--muted); font-size:13px; margin-bottom:20px;">Dannett Ortiz · +56 9 9741 6972</p>
+      
+      <div class="divider-or">o completa el formulario interactivo</div>
+      <div class="trust-item"><span aria-hidden="true" style="color:var(--green-wa);">✓</span> Diagnóstico inicial gratuito</div>
+      <div class="trust-item"><span aria-hidden="true" style="color:var(--green-wa);">✓</span> Sin compromiso</div>
     </div>
-    <div class="cases-grid">
-      <div class="case-card reveal">
-        <div class="case-img" aria-hidden="true">🏦</div>
-        <div class="case-body">
-          <div class="case-company">Banco Santander</div>
-          <h3>Programa de desarrollo de liderazgo</h3>
-          <p>La División de Personas de Banco Santander diseñó e implementó múltiples iniciativas de desarrollo con el apoyo estratégico de MAS Consultores.</p>
-          <a class="btn-link" href="#contacto">Ver caso completo →</a>
-        </div>
-      </div>
-      <div class="case-card reveal">
-        <div class="case-img" aria-hidden="true">⛽</div>
-        <div class="case-body">
-          <div class="case-company">Copec</div>
-          <h3>Evaluación de competencias a escala</h3>
-          <p>Durante diez años, Copec utilizó exitosamente un programa de evaluación de competencias diseñado e implementado por MAS Consultores.</p>
-          <a class="btn-link" href="#contacto">Ver caso completo →</a>
-        </div>
-      </div>
-      <div class="case-card reveal">
-        <div class="case-img" aria-hidden="true">🔥</div>
-        <div class="case-body">
-          <div class="case-company">Gasco</div>
-          <h3>Transformación cultural y formativa</h3>
-          <p>Gasco, empresa más que centenaria, apoyó su transformación estratégica con programas de formación y cultura diseñados por MAS Consultores.</p>
-          <a class="btn-link" href="#contacto">Ver caso completo →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="lead-section" id="contacto">
-  <div class="container">
-    <div class="lead-wrap">
-      <div class="lead-info reveal">
-        <div class="section-label">¿Listo para el siguiente paso?</div>
-        <h2>Cuéntanos tu desafío y te ayudamos a resolverlo</h2>
-        <p>Hablemos de los retos de tu organización. Nuestro equipo está listo para diseñar una solución a medida para ti.</p>
-        <a class="lead-wa-big" href="https://wa.me/56997416972?text=Hola%20MAS%20Consultores%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20sus%20soluciones%20de%20gesti%C3%B3n%20del%20talento." target="_blank" rel="noopener noreferrer">
-          <span class="wa-icon" aria-hidden="true">💬</span>
-          <div>
-            <strong style="display:block;font-size:17px">Escríbenos por WhatsApp</strong>
-            <span style="font-size:13px;font-weight:400;opacity:0.9">Respuesta en menos de 1 hora hábil</span>
-          </div>
-        </a>
-        <div class="lead-wa-sub">Dannett Ortiz · +56 9 9741 6972</div>
-        <div class="divider-or">o completa el formulario</div>
-        <div class="trust-item"><span>✅</span> Diagnóstico inicial gratuito</div>
-        <div class="trust-item"><span>✅</span> Respuesta en 24 horas hábiles</div>
-        <div class="trust-item"><span>✅</span> Sin compromiso</div>
+    <div class="form-card reveal delay-1">
+      <h3 style="margin-bottom:6px;">Solicitar diagnóstico gratuito</h3>
+      <p style="color:var(--muted); font-size:14px; margin-bottom:26px;">Te contactaremos con una propuesta personalizada.</p>
+      
+      <div class="form-progress">
+        <div class="form-progress-bar done" id="p1"></div>
+        <div class="form-progress-bar" id="p2"></div>
+        <div class="form-progress-bar" id="p3"></div>
       </div>
 
-      <div class="form-card reveal">
-        <h3>Solicitar diagnóstico gratuito</h3>
-        <p class="form-sub">Completa el formulario y te contactaremos con una propuesta personalizada.</p>
-        <div class="form-progress">
-          <div class="form-progress-bar done" id="p1"></div>
-          <div class="form-progress-bar" id="p2"></div>
-          <div class="form-progress-bar" id="p3"></div>
+      <form id="leadForm" onsubmit="event.preventDefault();">
+        <div class="form-step active" id="step1">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="f_nombre">Nombre *</label>
+              <input class="form-input" id="f_nombre" type="text" placeholder="Tu nombre" required>
+              <div class="error-text">Este campo es obligatorio</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f_empresa">Empresa *</label>
+              <input class="form-input" id="f_empresa" type="text" placeholder="Tu empresa" required>
+              <div class="error-text">Este campo es obligatorio</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">¿Cuántos colaboradores tiene tu organización?</label>
+            <div class="form-chips" id="chips_tamaño">
+              <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">1–50</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">51–200</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">201–1.000</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">+1.000</button>
+            </div>
+          </div>
+          <button type="button" class="btn-next" onclick="validateAndGo(1, 2)">Siguiente →</button>
         </div>
 
-        <form id="leadForm" onsubmit="event.preventDefault();">
-          <div class="form-step active" id="step1">
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="f_nombre">Nombre *</label>
-                <input class="form-input" id="f_nombre" type="text" placeholder="Tu nombre completo" required>
-                <div class="error-text">Este campo es obligatorio</div>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="f_empresa">Empresa *</label>
-                <input class="form-input" id="f_empresa" type="text" placeholder="Nombre de la empresa" required>
-                <div class="error-text">Este campo es obligatorio</div>
-              </div>
+        <div class="form-step" id="step2">
+          <div class="form-group">
+            <label class="form-label">¿Qué solución estás buscando?</label>
+            <div class="form-chips" id="chips_servicio">
+              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">LinkedIn Hiring/Learning</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Medición ROI</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Tests eb|metrics</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Consultoría/Formación</button>
             </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="f_cargo">Cargo *</label>
-                <input class="form-input" id="f_cargo" type="text" placeholder="Tu cargo actual" required>
-                <div class="error-text">Este campo es obligatorio</div>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="f_industria">Industria</label>
-                <select class="form-select" id="f_industria">
-                  <option value="">Selecciona...</option>
-                  <option>Banca y Finanzas</option><option>Energía y Minería</option>
-                  <option>Retail</option><option>Telecomunicaciones</option>
-                  <option>Educación</option><option>Sector Público</option>
-                  <option>Salud</option><option>Tecnología</option><option>Otra</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">¿Cuántos colaboradores tiene tu organización?</label>
-              <div class="form-chips" id="chips_tamaño">
-                <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">1–50</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">51–200</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">201–1.000</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">+1.000</button>
-              </div>
-            </div>
-            <button type="button" class="btn-next" onclick="validateAndGo(1, 2)">Siguiente →</button>
           </div>
+          <div class="form-group">
+            <label class="form-label" for="f_desafio">Principal desafío *</label>
+            <textarea class="form-textarea" id="f_desafio" placeholder="Ej: necesitamos medir el retorno de nuestra formación..." required></textarea>
+            <div class="error-text">Por favor describe tu desafío</div>
+          </div>
+          <div class="step-nav">
+            <button type="button" class="btn-back" onclick="goStep(1)">← Volver</button>
+            <button type="button" class="btn-next" style="flex:1" onclick="validateAndGo(2, 3)">Siguiente →</button>
+          </div>
+        </div>
 
-          <div class="form-step" id="step2">
+        <div class="form-step" id="step3">
+          <div class="form-row">
             <div class="form-group">
-              <label class="form-label">¿Qué solución de RRHH estás buscando?</label>
-              <div class="form-chips" id="chips_servicio">
-                <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Consultoría estratégica</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Programas de formación</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Plataforma LMS</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Medición de impacto</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Desarrollo de liderazgo</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Aún no lo tengo claro</button>
-              </div>
+              <label class="form-label" for="f_email">Email Corporativo *</label>
+              <input class="form-input" id="f_email" type="email" placeholder="tu@empresa.cl" required>
+              <div class="error-text">Email inválido</div>
             </div>
             <div class="form-group">
-              <label class="form-label" for="f_desafio">¿Cuál es el principal desafío de tu organización en gestión de personas?</label>
-              <textarea class="form-textarea" id="f_desafio" placeholder="Ej: necesitamos capacitar a nuestros líderes, mejorar el engagement..."></textarea>
-            </div>
-            <div class="form-group">
-              <label class="form-label">¿Con qué urgencia necesitas implementar la solución?</label>
-              <div class="form-chips" id="chips_urgencia">
-                <button type="button" class="chip-option" onclick="selectChip(this,'urgencia')">Este mes</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'urgencia')">1–3 meses</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'urgencia')">3–6 meses</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'urgencia')">Solo explorando</button>
-              </div>
-            </div>
-            <div class="step-nav">
-              <button type="button" class="btn-back" onclick="goStep(1)">← Volver</button>
-              <button type="button" class="btn-next" style="flex:1" onclick="validateAndGo(2, 3)">Siguiente →</button>
+              <label class="form-label" for="f_telefono">Teléfono</label>
+              <input class="form-input" id="f_telefono" type="tel" placeholder="+56 9 XXXX XXXX">
             </div>
           </div>
+          <div class="step-nav" style="margin-top:20px;">
+            <button type="button" class="btn-back" onclick="goStep(2)">← Volver</button>
+            <button type="button" class="btn-solid" style="flex:1; padding:12px; font-size:14px;" onclick="submitForm()">🚀 Enviar Solicitud</button>
+          </div>
+        </div>
+      </form>
 
-          <div class="form-step" id="step3">
-            <div class="form-group">
-              <label class="form-label">¿Cuál es el presupuesto aproximado para este proyecto?</label>
-              <div class="form-chips" id="chips_presupuesto">
-                <button type="button" class="chip-option" onclick="selectChip(this,'presupuesto')">Hasta $5M CLP</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'presupuesto')">$5M – $20M CLP</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'presupuesto')">$20M – $50M CLP</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'presupuesto')">+$50M CLP</button>
-                <button type="button" class="chip-option" onclick="selectChip(this,'presupuesto')">Por definir</button>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="f_email">Email *</label>
-                <input class="form-input" id="f_email" type="email" placeholder="tu@empresa.cl" required>
-                <div class="error-text">Email inválido o vacío</div>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="f_telefono">Teléfono</label>
-                <input class="form-input" id="f_telefono" type="tel" placeholder="+56 9 XXXX XXXX">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="f_extra">¿Algo más que quieras contarnos?</label>
-              <textarea class="form-textarea" id="f_extra" placeholder="Información adicional..." style="min-height:60px"></textarea>
-            </div>
-            <div class="step-nav">
-              <button type="button" class="btn-back" onclick="goStep(2)">← Volver</button>
-              <button type="button" class="btn-submit" onclick="submitForm()">🚀 Enviar y solicitar diagnóstico</button>
-            </div>
-          </div>
-        </form>
-
-        <div class="form-step" id="stepSuccess">
-          <div class="form-success">
-            <div class="check" aria-hidden="true">✅</div>
-            <h3>¡Mensaje recibido!</h3>
-            <p>Gracias por contactarnos. Nuestro equipo analizará tu información y te responderemos en las próximas <strong>24 horas hábiles</strong>.</p>
-            <a class="success-wa" href="https://wa.me/56997416972" target="_blank" rel="noopener noreferrer">💬 También puedes escribirnos por WhatsApp</a>
-          </div>
+      <div class="form-step" id="stepSuccess">
+        <div class="form-success">
+          <div style="font-size:50px; margin-bottom:10px;" aria-hidden="true">✅</div>
+          <h3 style="color:var(--navy); margin-bottom:10px;">¡Solicitud recibida!</h3>
+          <p style="color:var(--muted); font-size:14px;">Te responderemos en las próximas <strong>24 horas hábiles</strong>.</p>
         </div>
       </div>
     </div>
@@ -650,74 +547,60 @@
 </section>
 
 <footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <a class="mas-logo" href="#inicio">
-        <svg viewBox="0 0 160 50" xmlns="http://www.w3.org/2000/svg">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <svg viewBox="0 0 160 50" style="height:40px; margin-bottom: 20px;" xmlns="http://www.w3.org/2000/svg">
           <polygon points="0,40 14,10 28,40" fill="#e84b2a"/>
-          <polygon points="7,40 14,25 21,40" fill="#0f1f33"/>
+          <polygon points="7,40 14,25 21,40" fill="#ffffff"/>
           <text x="34" y="38" font-family="'Segoe UI',sans-serif" font-weight="900" font-size="30" fill="#ffffff" letter-spacing="-1">M</text>
           <text x="58" y="38" font-family="'Segoe UI',sans-serif" font-weight="900" font-size="30" fill="#e84b2a" letter-spacing="-1">A</text>
           <text x="78" y="38" font-family="'Segoe UI',sans-serif" font-weight="900" font-size="30" fill="#ffffff" letter-spacing="-1">S</text>
-          <text x="34" y="48" font-family="'Segoe UI',sans-serif" font-size="8" fill="rgba(255,255,255,0.4)" letter-spacing="2">CONSULTORES</text>
         </svg>
-      </a>
-      <p>Desarrollamos las capacidades para que personas y organizaciones puedan cumplir sus desafíos y propósitos estratégicos.</p>
-      <div class="footer-social">
-        <a class="social-btn" href="#" aria-label="LinkedIn">in</a>
-        <a class="social-btn" href="#" aria-label="Instagram">ig</a>
-        <a class="social-btn" href="#" aria-label="YouTube">▶</a>
+        <p style="color: rgba(255,255,255,0.6); font-size: 14px;">Alineando el aprendizaje con los objetivos del negocio.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Ecosistema</h4>
+        <ul>
+          <li><a href="#alianzas">LinkedIn Partners</a></li>
+          <li><a href="#alianzas">ROI Institute</a></li>
+          <li><a href="https://ebmetrics.cl" target="_blank">eb | metrics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>MAS</h4>
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#liderazgo">Liderazgo</a></li>
+          <li><a href="#casos">Casos de Éxito</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li style="color:rgba(255,255,255,0.6); font-size: 14px;">Providencia, Santiago</li>
+          <li style="color:rgba(255,255,255,0.6); font-size: 14px;">+56 22 584 00 90</li>
+          <li style="color:rgba(255,255,255,0.6); font-size: 14px;">info@masconsultores.cl</li>
+        </ul>
       </div>
     </div>
-    <div class="footer-col">
-      <h4>Servicios</h4>
-      <ul>
-        <li><a href="#servicios">MAS Consultoría</a></li>
-        <li><a href="#servicios">MAS Formación</a></li>
-        <li><a href="#servicios">MAS Plataformas</a></li>
-        <li><a href="#servicios">MAS Medición</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <p>© 2026 Grupo MAS Consultores. Todos los derechos reservados.</p>
     </div>
-    <div class="footer-col">
-      <h4>Empresa</h4>
-      <ul>
-        <li><a href="#">Nosotros</a></li>
-        <li><a href="#casos">Casos de éxito</a></li>
-        <li><a href="#testimonios">Testimonios</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Trabaja con nosotros</a></li>
-        <li><a href="#">Canal de denuncia</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Contacto</h4>
-      <div class="footer-contact-item"><span class="ic" aria-hidden="true">📍</span>Hernando de Aguirre 268, Of. 101, Providencia, Santiago</div>
-      <div class="footer-contact-item"><span class="ic" aria-hidden="true">📞</span>+56 22 584 00 90</div>
-      <div class="footer-contact-item"><span class="ic" aria-hidden="true">✉️</span>info@masconsultores.cl</div>
-      <div class="footer-contact-item"><span class="ic" aria-hidden="true">💬</span>+56 9 9741 6972</div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>MAS Consultores © 2025 · Todos los derechos reservados</p>
-    <p style="color:rgba(255,255,255,0.25);font-size:12px">Santiago, Chile</p>
   </div>
 </footer>
 
-<a id="wa-float" href="https://wa.me/56997416972?text=Hola%20MAS%20Consultores%2C%20me%20interesa%20conocer%20sus%20soluciones." target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">💬</a>
+<a id="wa-float" href="https://wa.me/56997416972" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">💬</a>
 
-<button id="chatbot-btn" onclick="toggleChat()" aria-label="Abrir asistente virtual">
-  🤖
-  <span class="bot-badge">IA</span>
-</button>
-
+<button id="chatbot-btn" onclick="toggleChat()" aria-label="Abrir asistente virtual">🤖<span class="bot-badge">IA</span></button>
 <div id="chatbot-window">
   <div class="chat-header">
     <div class="chat-avatar" aria-hidden="true">🤖</div>
     <div class="chat-header-info">
-      <strong>Asistente MAS Consultores</strong>
+      <strong>Asistente Grupo MAS</strong>
       <span>🟢 En línea · Powered by IA</span>
     </div>
-    <button class="chat-close" onclick="toggleChat()" style="background:none;border:none;" aria-label="Cerrar chat">✕</button>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Cerrar chat">✕</button>
   </div>
   <div class="chat-messages" id="chatMessages"></div>
   <div class="chat-input-row">
@@ -727,29 +610,38 @@
 </div>
 
 <script>
-// --- COUNTERS ---
-function animateCounter(el) {
-  const target = +el.dataset.count;
-  let c = 0, step = target / 60;
-  const t = setInterval(() => {
-    c = Math.min(c + step, target);
-    el.textContent = '+' + Math.round(c);
-    if (c >= target) clearInterval(t);
-  }, 25);
-}
+// --- NAVBAR ---
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 20) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
 
-// --- SCROLL REVEAL ---
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      e.target.querySelectorAll('[data-count]').forEach(animateCounter);
+// --- SCROLL REVEAL & COUNTERS ---
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      entry.target.querySelectorAll('[data-count]').forEach(animateCounter);
+      observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+}, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// --- TESTIMONIALS ---
+function animateCounter(el) {
+  if(el.classList.contains('counted')) return;
+  el.classList.add('counted');
+  const target = +el.dataset.count;
+  let c = 0;
+  const timer = setInterval(() => {
+    c += Math.ceil(target / 40);
+    if (c >= target) { el.textContent = '+' + target; clearInterval(timer); } 
+    else el.textContent = '+' + c;
+  }, 35);
+}
+
+// --- TESTIMONIOS (Restaurado) ---
 let testIdx = 0;
 const testTrack = document.getElementById('testTrack');
 const testDots = document.querySelectorAll('.test-dot');
@@ -759,13 +651,11 @@ function goTest(i) {
   testIdx = i;
   testTrack.style.transform = `translateX(-${i * 100}%)`;
   testDots.forEach((d, j) => d.classList.toggle('active', j === i));
-  
-  // MEJORA: Reiniciar el intervalo al hacer clic manual para evitar transiciones bruscas
   clearInterval(testInterval);
   testInterval = setInterval(() => goTest((testIdx + 1) % 3), 5000);
 }
 
-// --- FORM ---
+// --- FORM MULTI-PASO (Restaurado) ---
 const chips = {};
 function selectChip(el, group) {
   document.querySelectorAll(`#chips_${group} .chip-option`).forEach(c => c.classList.remove('selected'));
@@ -773,23 +663,19 @@ function selectChip(el, group) {
   chips[group] = el.textContent;
 }
 
-// MEJORA: Validación de campos antes de avanzar
 function validateAndGo(currentStep, nextStep) {
   let isValid = true;
-  const currentStepEl = document.getElementById('step' + currentStep);
-  const requiredInputs = currentStepEl.querySelectorAll('input[required]');
-
-  requiredInputs.forEach(input => {
+  const stepEl = document.getElementById('step' + currentStep);
+  stepEl.querySelectorAll('input[required], textarea[required]').forEach(input => {
     if (!input.checkValidity()) {
       input.classList.add('error');
-      input.nextElementSibling.style.display = 'block';
+      if(input.nextElementSibling) input.nextElementSibling.style.display = 'block';
       isValid = false;
     } else {
       input.classList.remove('error');
-      input.nextElementSibling.style.display = 'none';
+      if(input.nextElementSibling) input.nextElementSibling.style.display = 'none';
     }
   });
-
   if (isValid) goStep(nextStep);
 }
 
@@ -800,48 +686,37 @@ function goStep(n) {
 }
 
 function submitForm() {
-  const emailInput = document.getElementById('f_email');
-  if (!emailInput.checkValidity()) {
-    emailInput.classList.add('error');
-    emailInput.nextElementSibling.style.display = 'block';
+  const email = document.getElementById('f_email');
+  if (!email.checkValidity()) {
+    email.classList.add('error');
+    email.nextElementSibling.style.display = 'block';
     return;
   }
-
   const data = {
     nombre: document.getElementById('f_nombre').value,
     empresa: document.getElementById('f_empresa').value,
-    cargo: document.getElementById('f_cargo').value,
-    industria: document.getElementById('f_industria').value,
-    tamaño: chips['tamaño'] || 'No indicado',
-    servicio: chips['servicio'] || 'No indicado',
+    tamaño: chips['tamaño'] || 'N/A',
+    servicio: chips['servicio'] || 'N/A',
     desafio: document.getElementById('f_desafio').value,
-    urgencia: chips['urgencia'] || 'No indicado',
-    presupuesto: chips['presupuesto'] || 'No indicado',
-    email: emailInput.value,
+    email: email.value,
     telefono: document.getElementById('f_telefono').value,
-    extra: document.getElementById('f_extra').value,
   };
-  
   console.log('Lead capturado:', data);
-  // → En producción: fetch('/api/lead', { method:'POST', body: JSON.stringify(data) })
-  
   document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
   document.getElementById('stepSuccess').classList.add('active');
   ['p1','p2','p3'].forEach(id => document.getElementById(id).classList.add('done'));
 }
 
-// --- CHATBOT ---
+// --- CHATBOT (Restaurado) ---
 let chatOpen = false, flowIdx = 0;
 const leadData = {};
 
 const flow = [
-  { key:'init',    msg:'¡Hola! 👋 Soy el asistente de MAS Consultores.\n\nEstoy aquí para entender qué necesitas y conectarte con el consultor indicado.\n\n¿Cuál es tu nombre?', type:'text' },
-  { key:'nombre',  msg:'¡Mucho gusto, {nombre}! 😊\n\n¿De qué empresa nos visitas?', type:'text' },
-  { key:'empresa', msg:'Excelente. ¿Cuál es el principal desafío de RRHH que enfrenta {empresa}?', type:'options', options:['Formación y capacitación','Desarrollo de liderazgo','Plataforma digital de aprendizaje','Medición del impacto en personas','Consultoría estratégica de RRHH','Otro desafío'] },
-  { key:'servicio',msg:'Entendido. ¿Cuántos colaboradores tiene {empresa}?', type:'options', options:['Menos de 100','100 – 500','500 – 2.000','Más de 2.000'] },
-  { key:'tamaño',  msg:'¿Con qué urgencia necesitan una solución?', type:'options', options:['Lo antes posible','En los próximos 3 meses','Planificando para el año','Solo explorando opciones'] },
-  { key:'urgencia',msg:'Perfecto. ¿Cuál es tu email o WhatsApp para que te contacte un consultor de MAS?', type:'text' },
-  { key:'contacto',msg:'¡Listo! 🎉 Tengo toda la información necesaria.\n\nUn consultor de MAS se pondrá en contacto contigo a la brevedad. También puedes escribirnos directamente:', type:'final' },
+  { key:'init',    msg:'¡Hola! 👋 Soy el asistente de Grupo MAS.\n\n¿Cuál es tu nombre?', type:'text' },
+  { key:'nombre',  msg:'¡Mucho gusto, {nombre}! 😊\n\n¿En qué podemos ayudarte hoy?', type:'options', options:['Soluciones LinkedIn','Medición ROI','Tests eb|metrics', 'Consultoría / Formación'] },
+  { key:'servicio',msg:'Excelente elección. ¿Cuál es el principal desafío de tu organización respecto a esto?', type:'text'},
+  { key:'desafio', msg:'Entendido. ¿Me compartes tu email o WhatsApp para que el especialista correcto te contacte?', type:'text' },
+  { key:'contacto',msg:'¡Listo! 🎉 Tengo la información.\n\nUn consultor se pondrá en contacto contigo a la brevedad. También puedes escribirnos directo:', type:'final' },
 ];
 
 function toggleChat() {
@@ -850,17 +725,13 @@ function toggleChat() {
   if (chatOpen && flowIdx === 0) setTimeout(() => addBotMsg(flow[0].msg, flow[0].type, flow[0].options), 400);
 }
 
-function escapeHTML(str) {
-  return str.replace(/[&<>'"]/g, tag => ({
-      '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-    }[tag]));
-}
+function escapeHTML(str) { return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag])); }
 
 function addBotMsg(msg, type='text', options=[]) {
   const msgs = document.getElementById('chatMessages');
   const typing = document.createElement('div');
   typing.className = 'msg msg-bot';
-  typing.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  typing.innerHTML = '<div style="padding:10px 14px; background:var(--bg-light); border-radius:14px; font-size:12px;">Escribiendo...</div>';
   msgs.appendChild(typing);
   msgs.scrollTop = msgs.scrollHeight;
   
@@ -868,20 +739,17 @@ function addBotMsg(msg, type='text', options=[]) {
     if (msgs.contains(typing)) msgs.removeChild(typing);
     const d = document.createElement('div');
     d.className = 'msg msg-bot';
-    
-    // Evitar inyección HTML básica
     const safeNombre = escapeHTML(leadData.nombre || '');
-    const safeEmpresa = escapeHTML(leadData.empresa || '');
-    const text = msg.replace('{nombre}', safeNombre).replace('{empresa}', safeEmpresa);
+    const text = msg.replace('{nombre}', safeNombre);
     
     let html = `<div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div>`;
     if (options?.length) html += '<div class="msg-options">' + options.map(o => `<button class="msg-opt" onclick="selectOpt(this,'${o}')">${o}</button>`).join('') + '</div>';
-    if (type==='final') html += `<div style="margin-top:12px"><a href="https://wa.me/56997416972" target="_blank" rel="noopener noreferrer" style="background:#25D366;color:#fff;padding:8px 16px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;display:inline-block">💬 Abrir WhatsApp</a></div>`;
+    if (type==='final') html += `<div style="margin-top:12px"><a href="https://wa.me/56997416972" target="_blank" style="background:#25D366;color:#fff;padding:8px 16px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;display:inline-block">💬 Abrir WhatsApp</a></div>`;
     
     d.innerHTML = html;
     msgs.appendChild(d);
     msgs.scrollTop = msgs.scrollHeight;
-  }, 1000);
+  }, 800);
 }
 
 function addUserMsg(text) {
@@ -894,10 +762,7 @@ function addUserMsg(text) {
 }
 
 function selectOpt(el, val) {
-  el.closest('.msg-options').querySelectorAll('.msg-opt').forEach(o => {
-    o.style.pointerEvents='none';
-    o.style.opacity='0.6';
-  });
+  el.closest('.msg-options').querySelectorAll('.msg-opt').forEach(o => { o.style.pointerEvents='none'; o.style.opacity='0.6'; });
   el.style.background='var(--navy)'; el.style.color='#fff'; el.style.opacity='1';
   addUserMsg(val); processAnswer(val);
 }
@@ -913,18 +778,15 @@ function sendMsg() {
 function processAnswer(val) {
   const cur = flow[flowIdx];
   if (cur.key==='init') leadData.nombre=val;
-  else if (cur.key==='nombre') leadData.empresa=val;
-  else if (cur.key==='empresa') leadData.servicio=val;
-  else if (cur.key==='servicio') leadData.tamaño=val;
-  else if (cur.key==='tamaño') leadData.urgencia=val;
-  else if (cur.key==='urgencia') leadData.contacto=val;
+  else if (cur.key==='nombre') leadData.servicio=val;
+  else if (cur.key==='servicio') leadData.desafio=val;
+  else if (cur.key==='desafio') leadData.contacto=val;
   
   flowIdx++;
   if (flowIdx < flow.length) {
     const next = flow[flowIdx];
-    setTimeout(() => addBotMsg(next.msg, next.type, next.options), 700);
+    setTimeout(() => addBotMsg(next.msg, next.type, next.options), 500);
   }
-  if (flowIdx === flow.length - 1) console.log('Bot lead:', leadData);
 }
 </script>
 </body>
