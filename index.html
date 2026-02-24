@@ -74,7 +74,7 @@
   nav.scrolled { border-bottom-color:var(--border); box-shadow:0 1px 3px rgba(0,0,0,0.04); }
   .nav-inner { max-width:1180px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:72px; }
   .mas-logo { display:flex; align-items:center; text-decoration:none; }
-  .mas-logo img { height:46px; width:auto; }
+  .mas-logo img { height:58px; width:auto; }
   .nav-links { display:flex; gap:32px; list-style:none; }
   .nav-links a { color:var(--navy); text-decoration:none; font-size:13.5px; font-weight:600; transition:color 0.2s; letter-spacing:0.01em; }
   .nav-links a:hover { color:var(--red); }
@@ -91,8 +91,8 @@
   .hero-animated-wrapper { display: flex; justify-content: center; align-items: center; position: relative; }
   
   /* ANIMACIÓN ROTATORIA GLOBAL PARA EL LOGO */
-  @keyframes spin-logo { 100% { transform: rotate(360deg); } }
-  .mas-animated-logo { width: 100%; max-width: 420px; height: auto; overflow: visible; animation: spin-logo 24s linear infinite; }
+  .mas-animated-logo { width: 100%; max-width: 560px; height: auto; overflow: visible; animation: float-logo 4.5s ease-in-out infinite; filter: drop-shadow(0 20px 40px rgba(26,46,74,0.15)); }
+  @keyframes float-logo { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
   
   /* ANIMACIÓN DE EXPANSIÓN (Mantiene el efecto del video) */
   .mas-animated-logo line { stroke-linecap: round; stroke-width: 34; animation-duration: 4.5s; animation-iteration-count: infinite; animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55); }
@@ -127,16 +127,18 @@
   .partners-sec .section-label { color:rgba(255,255,255,0.8); }
   .partners-sec .section-label::before { background:rgba(255,255,255,0.4); }
   .partners-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px; margin-top:40px; }
-  .partner-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:36px; border-radius:var(--radius-lg); transition:all 0.35s; text-align:left; position:relative; overflow:hidden; }
+  .partner-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:36px; border-radius:var(--radius-lg); transition:all 0.35s; text-align:left; position:relative; overflow:hidden; display:block; text-decoration:none; color:inherit; }
   .partner-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:transparent; transition:background 0.35s; }
   .partner-card:hover { transform:translateY(-4px); background:rgba(255,255,255,0.07); }
   .partner-card:hover::after { background:linear-gradient(90deg, var(--red), var(--red2)); }
   .p-logo { font-size:26px; font-weight:900; margin-bottom:18px; color:#fff; }
   .p-logo.li { color:#0077b5; background:#fff; display:inline-block; padding:5px 14px; border-radius:8px; font-size:24px; }
   .p-logo.roi { color:var(--red); }
-  .partner-logo { display:block; width:auto; height:34px; object-fit:contain; }
-  .partner-logo.roi-logo { height:36px; }
-  .partner-logo.eb-logo { height:28px; }
+  .partner-logo { display:block; width:auto; height:36px; object-fit:contain; }
+  .partner-logo.roi-logo { height:54px; }
+  .partner-logo.eb-logo { height:38px; }
+  .logo-pill { background:#fff; display:inline-flex; align-items:center; justify-content:center; padding:10px 18px; border-radius:12px; margin-bottom:18px; }
+  .logo-pill.roi-pill { background:rgba(255,255,255,0.97); }
   .partner-card h3 { color:#fff; font-size:20px; margin-bottom:10px; }
   .partner-card p { color:rgba(255,255,255,0.65); font-size:14px; line-height:1.7; }
   .p-badge { display:inline-block; background:rgba(117,35,139,0.2); color:rgba(255,255,255,0.9); font-size:11px; padding:4px 12px; border-radius:50px; margin-top:18px; font-weight:700; letter-spacing:0.3px; }
@@ -274,6 +276,8 @@
     .stat-group { gap:20px; }
     .hero-animated-wrapper { grid-row: 1; }
     .hero-content { padding-left: 0 !important; text-align: center; }
+    .mas-logo img { height:52px; }
+    .mas-animated-logo { max-width:420px; }
   }
 </style>
 </head>
@@ -306,18 +310,7 @@
 
   <div class="container hero-grid">
     <div class="hero-animated-wrapper animate-scale d-100">
-      <svg class="mas-animated-logo" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-        <g transform="translate(130, 130)">
-          <line class="anim-l" x1="0" y1="0" x2="-65" y2="0" />
-          <line class="anim-r" x1="0" y1="0" x2="65" y2="0" />
-          <line class="anim-t" x1="0" y1="0" x2="0" y2="-65" />
-          <line class="anim-b" x1="0" y1="0" x2="0" y2="65" />
-          <line class="anim-tl" x1="0" y1="0" x2="-46" y2="-46" />
-          <line class="anim-tr" x1="0" y1="0" x2="46" y2="-46" />
-          <line class="anim-bl" x1="0" y1="0" x2="-46" y2="46" />
-          <line class="anim-br" x1="0" y1="0" x2="46" y2="46" />
-        </g>
-      </svg>
+      <img src="assets/mas-logo.svg" alt="MAS Consultores" class="mas-animated-logo">
     </div>
 
     <div class="hero-content" style="padding-left: 10px;">
@@ -374,26 +367,28 @@
     <h2 style="color:#fff; font-size:36px; margin-bottom:18px;">Nuestras Alianzas y Ecosistema</h2>
     <p style="color:rgba(255,255,255,0.6); max-width:560px; margin:auto; font-size:16px;">Nos asociamos con líderes mundiales y sumamos capacidades técnicas para entregar metodologías de clase mundial.</p>
     <div class="partners-grid">
-      <div class="partner-card reveal delay-1">
+      <a class="partner-card reveal delay-1" href="https://business.linkedin.com/talent-solutions" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio corporativo de LinkedIn Talent Solutions">
         <div class="p-logo li">in</div>
         <h3>LinkedIn Silver Partner</h3>
         <p>Desde 2025, somos <strong style="color:rgba(255,255,255,0.9);">Silver Partners</strong> de LinkedIn, potenciando soluciones para los servicios de Hiring y Learning corporativo.</p>
         <span class="p-badge">Talent &amp; Learning</span>
-      </div>
-      <div class="partner-card reveal delay-2">
-        <img src="assets/roi-logo.svg" alt="ROI Institute" class="partner-logo roi-logo">
+      </a>
+      <a class="partner-card reveal delay-2" href="https://roiinstitute.net/" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio corporativo de ROI Institute">
+        <div class="logo-pill roi-pill">
+          <img src="assets/roi-logo.svg" alt="ROI Institute" class="partner-logo roi-logo">
+        </div>
         <h3>ROI Institute Partner</h3>
         <p>Partners oficiales desde 2003 y los <strong style="color:rgba(255,255,255,0.9);">únicos en la región</strong>. Aplicamos y certificamos en la metodología líder global para medir el ROI en RRHH.</p>
         <span class="p-badge">Medición &amp; Certificación</span>
-      </div>
-      <div class="partner-card reveal delay-3">
-        <div style="background:#fff; display:inline-block; padding:8px 16px; border-radius:12px; margin-bottom:18px;">
+      </a>
+      <a class="partner-card reveal delay-3" href="https://www.ebmetrics.cl/" target="_blank" rel="noopener noreferrer" aria-label="Ir al sitio corporativo de eb metrics">
+        <div class="logo-pill">
           <img src="assets/eb-metrics-logo.svg" alt="eb | metrics" class="partner-logo eb-logo">
         </div>
         <h3>eb | metrics</h3>
         <p>Especialistas en el desarrollo de <strong style="color:rgba(255,255,255,0.9);">tests de selección con base científica</strong>. Resultados legítimos y predictivos para la mejor toma de decisiones.</p>
         <span class="p-badge" style="background:rgba(255,255,255,0.2);">Pruebas de Selección</span>
-      </div>
+      </a>
     </div>
   </div>
 </section>
