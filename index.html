@@ -1,3 +1,6 @@
+Aquí tienes el código completo y actualizado. Puedes copiar todo este bloque y reemplazar el contenido de tu archivo `index.html`. Ya incluye todos los cambios de diseño en el Hero, la nueva animación CSS en bucle único (`forwards`) y la sustitución por la etiqueta `<img>` para tu asset de logo:
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -93,24 +96,23 @@
   .mas-animated-logo { width:100%; max-width:520px; aspect-ratio:802.75 / 340.05; position:relative; filter:drop-shadow(0 20px 40px rgba(26,46,74,0.15)); animation:float-logo 5s ease-in-out infinite; }
   @keyframes float-logo { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-  .mas-logo-burst { position:absolute; inset:0; width:100%; height:100%; animation:logo-burst-visibility 4.8s ease-in-out infinite; }
-  .mas-logo-final { position:absolute; top:50%; left:50%; width:min(44%,220px); height:auto; opacity:0; animation:logo-final-reveal 4.8s ease-in-out infinite; }
+  .mas-logo-burst { position:absolute; inset:0; width:100%; height:100%; animation:logo-burst-visibility 3.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+  .mas-logo-final { position:absolute; top:50%; left:50%; width:70%; max-width:300px; height:auto; opacity:0; animation:logo-final-reveal 3.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 
   @keyframes logo-burst-visibility {
-    0%, 44% { opacity:1; }
-    54%, 84% { opacity:0; }
-    100% { opacity:1; }
+    0%, 55% { opacity: 1; transform: scale(1); }
+    70%, 100% { opacity: 0; transform: scale(1.15); }
   }
 
   @keyframes logo-final-reveal {
-    0%, 40% { opacity:0; transform:translate(-50%,-50%) scale(0.9); }
-    58%, 84% { opacity:1; transform:translate(-50%,-50%) scale(1); }
-    100% { opacity:0; transform:translate(-50%,-50%) scale(0.94); }
+    0%, 50% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    70% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
   }
 
   .logo-piece {
-    transform-origin:center;
-    animation:logo-assemble 4.8s cubic-bezier(0.16,1,0.3,1) infinite;
+    transform-origin: center;
+    animation: logo-assemble 3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   .delay-a { animation-delay:0.08s; }
   .delay-b { animation-delay:0.16s; }
@@ -120,10 +122,9 @@
   .delay-f { animation-delay:0.48s; }
 
   @keyframes logo-assemble {
-    0%, 14% { transform: translate(0,0) scale(0.05); opacity:0; }
-    26% { transform: translate(0,0) scale(0.14); opacity:1; }
-    58%, 82% { transform: translate(0,0) scale(1); opacity:1; }
-    100% { transform: translate(0,0) scale(0.05); opacity:0; }
+    0% { transform: scale(0) translateY(40px); opacity: 0; }
+    40% { transform: scale(1.1) translateY(-5px); opacity: 1; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
   }
 
   /* FLOATING PILLS BACKGROUND */
@@ -337,20 +338,12 @@
           <rect class="logo-piece delay-e" x="40" y="208" width="140" height="52" rx="26" transform="rotate(-45 110 234)" fill="#d62216" />
           <rect class="logo-piece delay-f" x="160" y="208" width="140" height="52" rx="26" transform="rotate(45 230 234)" fill="#23398d" />
         </svg>
-        <svg class="mas-logo-final" viewBox="0 0 340.05 340.05" aria-label="Isologo oficial MAS Consultores">
-          <path fill="#edb321" d="M170.02,11.05c-13.88,0-25.13,11.25-25.13,25.13v267.7h0c.01,13.86,11.26,25.1,25.12,25.1s25.11-11.24,25.13-25.1V36.18c0-13.88-11.25-25.13-25.13-25.13"/>
-          <path fill="#1f2937" d="M303.86,144.91h-83.6c-6.43,0-12.85-2.46-17.76-7.36-4.9-4.9-7.35-11.32-7.36-17.74h0v50.22h0v50.26h0c0-6.43,2.45-12.86,7.36-17.77,4.9-4.9,11.33-7.36,17.76-7.36h83.6c13.88,0,25.13-11.25,25.13-25.13s-11.25-25.13-25.13-25.13"/>
-          <path fill="#009739" d="M332.67,7.38c-9.81-9.81-25.72-9.81-35.53,0l-94.66,94.65h0c-4.9,4.91-7.35,11.34-7.34,17.77,0,6.42,2.46,12.84,7.36,17.74,4.9,4.9,11.33,7.36,17.76,7.36,6.42,0,12.85-2.45,17.76-7.34h0s7.38-7.38,7.38-7.38l87.28-87.28c9.81-9.81,9.81-25.72,0-35.53"/>
-          <path fill="#23398d" d="M332.67,297.15l-87.28-87.28-7.38-7.38h0c-4.91-4.9-11.34-7.34-17.76-7.34-6.43,0-12.85,2.46-17.76,7.36-4.91,4.91-7.36,11.34-7.36,17.77s2.45,12.85,7.34,17.75h0s94.66,94.66,94.66,94.66c9.81,9.81,25.72,9.81,35.53,0,9.81-9.81,9.81-25.72,0-35.53"/>
-          <path fill="#1f2937" d="M36.18,144.89h83.6c6.43,0,12.85-2.46,17.76-7.36,4.9-4.9,7.35-11.32,7.36-17.74h0v50.22h0v50.26h0c0-6.43-2.45-12.86-7.36-17.77-4.9-4.9-11.33-7.36-17.76-7.36H36.18c-13.88,0-25.13-11.25-25.13-25.13s11.25-25.13,25.13-25.13"/>
-          <path fill="#833d8e" d="M7.36,7.36c9.81-9.81,25.72-9.81,35.53,0l94.66,94.66h0c4.9,4.91,7.35,11.34,7.34,17.77,0,6.42-2.46,12.84-7.36,17.74-4.9,4.9-11.33,7.36-17.76,7.36-6.43,0-12.85-2.45-17.76-7.34h0l-7.38-7.38L7.36,42.89C-2.45,33.08-2.45,17.17,7.36,7.36"/>
-          <path fill="#d62216" d="M7.36,297.14l87.28-87.28,7.38-7.38h0c4.91-4.9,11.33-7.35,17.76-7.34,6.43,0,12.85,2.46,17.76,7.36,4.91,4.91,7.36,11.34,7.36,17.77,0,6.42-2.45,12.85-7.34,17.75l-94.66,94.66c-9.81,9.81-25.72,9.81-35.53,0-9.81-9.81-9.81-25.72,0-35.53"/>
-        </svg>
+        <img class="mas-logo-final" src="assets/mas-logo.svg" alt="Isologo oficial MAS Consultores">
       </div>
     </div>
 
-    <div class="hero-content" style="padding-left: 10px;">
-      <h1 class="animate-up d-200">Somos <span class="text-red">MAS</span>. Expertos en Formación y Desarrollo</h1>
+    <div class="hero-content" style="padding-left: 60px; text-align: left;">
+      <h1 class="animate-up d-200">Somos <span class="text-red">MAS</span>.<br>Expertos en Formación<br>y Desarrollo</h1>
       <p class="hero-lead animate-up d-300">
         Hemos desarrollado por <strong>más de 30 años</strong> las capacidades para que tanto personas como organizaciones
         <strong style="color:var(--navy);">, puedan cumplir sus desafíos y propósitos.</strong>
@@ -920,3 +913,5 @@ function processAnswer(val){
 </script>
 </body>
 </html>
+
+```
