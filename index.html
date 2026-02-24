@@ -3,60 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAS Consultores</title>
+    <title>MAS Consultores Web</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #0072ff, #00c6ff);
-            animation: fadeIn 1s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            animation: slideIn 0.5s;
-        }
-        @keyframes slideIn {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-        }
-        .logo {
-            height: 50px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #0072ff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #005bb5;
-        }
+        body { background-color: white; }
+        .primary { color: white; }
+        .secondary { color: purple; }
+        .highlight { color: yellow; }
+        h1, h2, h3 { margin: 20px; }
+        /* Add Animations */
+        .fade-in { animation: fadeIn 2s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-    <header>
-        <img src="path/to/MAS-logo.png" alt="MAS Logo" class="logo">
-        <h1>Welcome to MAS Consultores</h1>
-        <button>Get Started</button>
+    <header class="fade-in">
+        <img src="path/to/mas_logo.png" alt="MAS Logo" />
+        <h1 class="primary">Welcome to MAS Consultores</h1>
     </header>
-    <main>
-        <section>
-            <h2>Our Services</h2>
-            <p>We offer the best consulting services.</p>
-        </section>
-    </main>
+    <section class="fade-in">
+        <h2 class="secondary">Rodrigo Lara Fernández</h2>
+        <p>Information about Rodrigo Lara Fernández...</p>
+    </section>
+    <section class="fade-in">
+        <h2 class="secondary">eBmetrics</h2>
+        <p>Information about eBmetrics...</p>
+    </section>
+    <section class="fade-in">
+        <h2 class="secondary">Partnerships</h2>
+        <h3 class="highlight">LinkedIn</h3>
+        <p>Details about LinkedIn partnership...</p>
+        <h3 class="highlight">ROI Institute</h3>
+        <p>Details about ROI Institute partnership...</p>
+    </section>
+    <footer>
+        <p>&copy; 2026 MAS Consultores. All rights reserved.</p>
+    </footer>
 </body>
 </html>
