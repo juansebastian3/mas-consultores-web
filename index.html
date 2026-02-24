@@ -47,12 +47,26 @@
   .section-title { font-size:clamp(30px,4vw,46px); font-weight:800; margin-bottom:18px; }
   .section-sub { color:var(--muted); font-size:17px; max-width:580px; line-height:1.7; }
 
-  /* ANIMATIONS */
+  /* SCROLL ANIMATIONS */
   .reveal { opacity:0; transform:translateY(24px); transition:all 0.7s cubic-bezier(0.16,1,0.3,1); }
   .reveal.visible { opacity:1; transform:translateY(0); }
   .delay-1 { transition-delay:0.1s; }
   .delay-2 { transition-delay:0.2s; }
   .delay-3 { transition-delay:0.3s; }
+
+  /* ENTRANCE ANIMATIONS (LOAD) */
+  @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+  
+  .animate-nav { animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-up { opacity: 0; animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-scale { opacity: 0; animation: scaleIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  
+  .d-100 { animation-delay: 0.1s; }
+  .d-200 { animation-delay: 0.2s; }
+  .d-300 { animation-delay: 0.3s; }
+  .d-400 { animation-delay: 0.4s; }
 
   /* NAVBAR */
   nav { position:fixed; top:0; width:100%; z-index:1000; background:rgba(255,255,255,0.92); backdrop-filter:blur(16px) saturate(180%); -webkit-backdrop-filter:blur(16px) saturate(180%); border-bottom:1px solid transparent; transition:all 0.35s ease; }
@@ -235,7 +249,7 @@
 </head>
 <body>
 
-<nav id="navbar">
+<nav id="navbar" class="animate-nav">
   <div class="nav-inner">
     <a class="mas-logo" href="#inicio">
       <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20508%20215%27%3E%0A%20%20%3Crect%20width%3D%27508%27%20height%3D%27215%27%20fill%3D%27%23ffffff%27%2F%3E%0A%20%20%3Cg%20transform%3D%27translate%288%208%29%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27%20stroke-width%3D%2730%27%3E%0A%20%20%20%20%3Cline%20x1%3D%27100%27%20y1%3D%2799%27%20x2%3D%2714%27%20y2%3D%2799%27%20stroke%3D%27%23000000%27%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%27100%27%20y1%3D%2799%27%20x2%3D%27184%27%20y2%3D%2799%27%20stroke%3D%27%23000000%27%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%27100%27%20y1%3D%2799%27%20x2%3D%27100%27%20y2%3D%2718%27%20stroke%3D%27%23ebb520%27%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%27100%27%20y1%3D%2799%27%20x2%3D%27100%27%20y2%3D%27180%27%20stroke%3D%27%23ebb520%27%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%27100%27%20y1%3D%2799%27%20x2%3D%2739%27%20y2%3D%2738%27%20stroke%3D%27%237a3f98%27%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%27100%27%20y1%3D%2799%27%20x2%3D%27161%27%20y2%3D%2738%27%20stroke%3D%27%231ea043%27%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%27100%27%20y1%3D%2799%27%20x2%3D%2739%27%20y2%3D%27160%27%20stroke%3D%27%23e52420%27%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%27100%27%20y1%3D%2799%27%20x2%3D%27161%27%20y2%3D%27160%27%20stroke%3D%27%232e45a0%27%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Ctext%20x%3D%27230%27%20y%3D%27144%27%20font-family%3D%27Arial%20Black%2C%20Arial%2C%20sans-serif%27%20font-size%3D%27114%27%20font-weight%3D%27900%27%20fill%3D%27%23000000%27%3EMAS%3C%2Ftext%3E%0A%3C%2Fsvg%3E" alt="MAS Consultores Logo">
@@ -256,15 +270,15 @@
 
 <section class="hero" id="inicio">
   <div class="container hero-grid">
-    <div class="hero-content reveal">
-      <div class="section-label">Transformando Organizaciones</div>
-      <h1>Desarrollamos el <span class="text-red">Talento</span> de tu organización</h1>
-      <p>Acompañamos a personas y empresas a cumplir sus desafíos estratégicos con soluciones integrales, medibles y basadas en evidencia.</p>
-      <div class="nav-cta">
+    <div class="hero-content">
+      <div class="section-label animate-up">Transformando Organizaciones</div>
+      <h1 class="animate-up d-100">Desarrollamos el <span class="text-red">Talento</span> de tu organización</h1>
+      <p class="animate-up d-200">Acompañamos a personas y empresas a cumplir sus desafíos estratégicos con soluciones integrales, medibles y basadas en evidencia.</p>
+      <div class="nav-cta animate-up d-300">
         <a class="btn-solid" href="#contacto" style="padding:14px 28px; font-size:15px;">Solicitar Diagnóstico</a>
       </div>
     </div>
-    <div class="hero-visual reveal delay-1">
+    <div class="hero-visual animate-scale d-400">
       <div class="hero-card">
         <h3 style="margin-bottom:14px; font-size:21px;">El impacto de MAS</h3>
         <p style="color:var(--muted); font-size:14px;">Más de tres décadas impulsando el crecimiento del capital humano en Latinoamérica.</p>
