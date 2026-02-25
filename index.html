@@ -184,6 +184,25 @@
   .card-plataformas::before { background: var(--brand-verde); }
   .card-medicion::before { background: var(--brand-rojo); }
 
+
+
+  /* EXPERTISE CAROUSEL */
+  .expertise-section { background: #fff; border-bottom: 1px solid var(--border-light); }
+  .expertise-grid { display:grid; grid-template-columns:0.95fr 1.05fr; gap:42px; align-items:center; }
+  .expertise-copy { color: var(--text); font-size:17px; line-height:1.8; }
+  .expertise-copy p { margin-bottom:16px; }
+  .expertise-industries { color:var(--navy3); font-weight:700; }
+  .expertise-carousel { position:relative; border-radius:var(--radius-xl); overflow:hidden; box-shadow:var(--shadow-lg); border:1px solid var(--border-light); background:#fff; }
+  .expertise-track { display:flex; transition:transform 0.5s ease; }
+  .expertise-slide { min-width:100%; }
+  .expertise-slide img { display:block; width:100%; height:420px; object-fit:contain; background:#fff; }
+  .expertise-controls { position:absolute; left:16px; right:16px; bottom:16px; display:flex; align-items:center; justify-content:space-between; }
+  .expertise-arrows { display:flex; gap:8px; }
+  .expertise-arrow { width:36px; height:36px; border-radius:50%; border:none; background:rgba(15,31,51,0.72); color:#fff; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .expertise-dots { display:flex; gap:7px; }
+  .expertise-dot { width:8px; height:8px; border:none; border-radius:50%; background:rgba(255,255,255,0.6); cursor:pointer; }
+  .expertise-dot.active { width:24px; border-radius:4px; background:#fff; }
+
   /* TESTIMONIALS & CASOS */
   .testimonials { background:linear-gradient(145deg, var(--navy3) 0%, var(--navy) 100%); padding:90px 0; color:#fff; overflow:hidden; }
   .testimonials .section-title { color:#fff; }
@@ -280,7 +299,9 @@
   .footer-logo { height:36px; margin-bottom:18px; }
 
   @media(max-width:992px){
-    .hero-grid,.eb-card,.bio-grid,.lead-wrap,.footer-grid,.pas-grid { grid-template-columns:1fr; }
+    .hero-grid,.eb-card,.bio-grid,.lead-wrap,.footer-grid,.pas-grid,.expertise-grid { grid-template-columns:1fr; }
+    .expertise-slide img { height:320px; }
+    .expertise-copy { font-size:16px; }
     .nav-links { display:none; }
     .eb-card { flex-direction:column; text-align:center; gap:20px; }
     .form-row { grid-template-columns:1fr; }
@@ -304,6 +325,7 @@
       <li><a href="#soluciones">Ecosistema MAS</a></li>
       <li><a href="#alianzas">Alianzas</a></li>
       <li><a href="#liderazgo">Liderazgo</a></li>
+      <li><a href="#expertise">Expertise</a></li>
       <li><a href="#casos">Casos</a></li>
       <li><a href="#blog">Blog</a></li>
     </ul>
@@ -530,6 +552,42 @@
             <h4 style="margin-top:8px;">Capacitaciones</h4>
             <p style="font-size:13px; color:var(--muted); margin:0;">Guía esencial para transformar la formación corporativa en resultados medibles.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad expertise-section" id="expertise">
+  <div class="container expertise-grid">
+    <div class="reveal">
+      <div class="section-label">Nuestra Expertise</div>
+      <h2 class="section-title">+ 500 clientes en 15 países</h2>
+      <div class="expertise-copy">
+        <p><strong>+ de 30 años en la acción</strong> nos han dado experiencia en diversas industrias.</p>
+        <p class="expertise-industries">Energía • Telecomunicaciones • Retail • Banca • Alimentación • Educación • Medios • Transportes • Instituciones Públicas • Minería</p>
+      </div>
+    </div>
+
+    <div class="expertise-carousel reveal delay-1" aria-label="Carrusel de clientes MAS Consultores">
+      <div class="expertise-track" id="expertiseTrack">
+        <figure class="expertise-slide"><img src="assets/Foto 1 Clientes.png" alt="Cliente de MAS Consultores 1"></figure>
+        <figure class="expertise-slide"><img src="assets/Foto 2 Clientes.png" alt="Cliente de MAS Consultores 2"></figure>
+        <figure class="expertise-slide"><img src="assets/Foto 3 Clientes.png" alt="Cliente de MAS Consultores 3"></figure>
+        <figure class="expertise-slide"><img src="assets/Foto 4 clientes.png" alt="Cliente de MAS Consultores 4"></figure>
+        <figure class="expertise-slide"><img src="assets/foto 5 Clientes.png" alt="Cliente de MAS Consultores 5"></figure>
+      </div>
+      <div class="expertise-controls">
+        <div class="expertise-arrows">
+          <button class="expertise-arrow" type="button" onclick="goExpertise(expertiseIdx-1)" aria-label="Ver imagen anterior">‹</button>
+          <button class="expertise-arrow" type="button" onclick="goExpertise(expertiseIdx+1)" aria-label="Ver imagen siguiente">›</button>
+        </div>
+        <div class="expertise-dots">
+          <button class="expertise-dot active" type="button" onclick="goExpertise(0)" aria-label="Ver imagen 1"></button>
+          <button class="expertise-dot" type="button" onclick="goExpertise(1)" aria-label="Ver imagen 2"></button>
+          <button class="expertise-dot" type="button" onclick="goExpertise(2)" aria-label="Ver imagen 3"></button>
+          <button class="expertise-dot" type="button" onclick="goExpertise(3)" aria-label="Ver imagen 4"></button>
+          <button class="expertise-dot" type="button" onclick="goExpertise(4)" aria-label="Ver imagen 5"></button>
         </div>
       </div>
     </div>
@@ -829,6 +887,25 @@ const observer=new IntersectionObserver(entries=>{
   });
 },{threshold:0.15,rootMargin:"0px 0px -50px 0px"});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+
+// EXPERTISE CAROUSEL
+let expertiseIdx=0;
+const expertiseTrack=document.getElementById('expertiseTrack');
+const expertiseDots=document.querySelectorAll('.expertise-dot');
+let expertiseInterval;
+function goExpertise(i){
+  if(!expertiseTrack) return;
+  const total=expertiseTrack.children.length;
+  expertiseIdx=(i+total)%total;
+  expertiseTrack.style.transform='translateX(-'+expertiseIdx*100+'%)';
+  expertiseDots.forEach((d,j)=>d.classList.toggle('active',j===expertiseIdx));
+  clearInterval(expertiseInterval);
+  expertiseInterval=setInterval(()=>goExpertise(expertiseIdx+1),4500);
+}
+if(expertiseTrack){
+  expertiseInterval=setInterval(()=>goExpertise(expertiseIdx+1),4500);
+}
 
 // TESTIMONIALS
 let testIdx=0;
