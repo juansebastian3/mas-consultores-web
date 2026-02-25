@@ -71,6 +71,7 @@
   .delay-1 { transition-delay:0.1s; }
   .delay-2 { transition-delay:0.2s; }
   .delay-3 { transition-delay:0.3s; }
+  .delay-4 { transition-delay:0.4s; }
 
   /* ENTRANCE ANIMATIONS (LOAD) */
   @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -183,7 +184,7 @@
   .card-plataformas::before { background: var(--brand-verde); }
   .card-medicion::before { background: var(--brand-rojo); }
 
-  /* TESTIMONIALS & CASOS (Mantenidos igual) */
+  /* TESTIMONIALS & CASOS */
   .testimonials { background:linear-gradient(145deg, var(--navy3) 0%, var(--navy) 100%); padding:90px 0; color:#fff; overflow:hidden; }
   .testimonials .section-title { color:#fff; }
   .test-track { display:flex; transition:transform 0.5s ease; }
@@ -208,7 +209,7 @@
   .btn-link { color:var(--navy); font-size:13px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px; transition:all 0.2s; margin-top:16px; }
   .btn-link:hover { color:var(--red); gap:8px; }
 
-  /* CONTACT FORM Y CHATBOT (Mantenidos) */
+  /* CONTACT FORM Y CHATBOT */
   .lead-wrap { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
   .lead-wa-big { display:flex; align-items:center; gap:14px; background:var(--green-wa); color:#fff; padding:16px 24px; border-radius:var(--radius-md); text-decoration:none; font-weight:700; font-size:16px; transition:all 0.25s; box-shadow:0 4px 15px rgba(37,211,102,0.2); margin-bottom:14px; }
   .lead-wa-big:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(37,211,102,0.3); } 
@@ -300,7 +301,7 @@
       <img src="assets/mas-logo.svg" alt="MAS Consultores Logo">
     </a>
     <ul class="nav-links">
-      <li><a href="#soluciones">Soluciones</a></li>
+      <li><a href="#soluciones">Ecosistema MAS</a></li>
       <li><a href="#alianzas">Alianzas</a></li>
       <li><a href="#liderazgo">Liderazgo</a></li>
       <li><a href="#casos">Casos</a></li>
@@ -409,7 +410,7 @@
   <div class="container">
     <div class="section-label reveal">Dejamos Capacidades Instaladas</div>
     <h2 class="section-title reveal delay-1">Instalamos procesos, no solo plataformas</h2>
-    <p class="section-sub reveal delay-2" style="max-width:800px; margin-bottom:50px;">Nuestro ecosistema de 4 pilares alinea el desarrollo de capacidades a las necesidades estratégicas de tu organización. Transferimos nuestro conocimiento para desarrollar nuevas mentalidades de liderazgo orientadas al impacto en el negocio.</p>
+    <p class="section-sub reveal delay-2" style="max-width:800px; margin-bottom:50px;">Nuestro ecosistema alinea el desarrollo de capacidades a las necesidades estratégicas de tu organización. Transferimos nuestro conocimiento para desarrollar nuevas mentalidades orientadas al impacto en el negocio.</p>
     
     <div class="services-grid">
       
@@ -421,7 +422,7 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-morado);">MAS Consultoría</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>Alineación Estratégica.</strong> No hacemos "levantamiento de necesidades", diseñamos arquitecturas de aprendizaje directamente vinculadas a los OKRs de tu negocio.</p>
+        <p style="color:var(--muted); font-size:14px;"><strong>Alineación Estratégica.</strong> Diseñamos arquitecturas de aprendizaje directamente vinculadas a los OKRs de tu negocio. No hacemos "levantamiento de necesidades", trazamos rutas de impacto.</p>
       </div>
 
       <div class="service-card card-formacion reveal delay-1">
@@ -432,7 +433,7 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-amarillo);">MAS Formación</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>Aprendizaje Ágil e IA.</strong> Integramos metodologías de vanguardia y tecnología <strong>Colossyan</strong> para crear contenidos corporativos hiper-personalizados y escalables.</p>
+        <p style="color:var(--muted); font-size:14px;"><strong>Liderazgo y Aprendizaje Ágil.</strong> Potenciamos a tus equipos con <strong>talleres de liderazgo y feedback</strong> de alto impacto, integrando además tecnología <strong>Colossyan (IA)</strong> para crear contenidos escalables.</p>
       </div>
 
       <div class="service-card card-plataformas reveal delay-2">
@@ -443,7 +444,7 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-verde);">MAS Plataformas</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>El fin del cementerio virtual.</strong> Implementamos LMS dinámicos asegurando la adopción digital y el engagement diario de tus colaboradores en procesos vivos.</p>
+        <p style="color:var(--muted); font-size:14px;"><strong>El fin del cementerio virtual.</strong> Implementamos ecosistemas LMS dinámicos asegurando la adopción digital y el engagement diario de tus colaboradores en procesos vivos de aprendizaje.</p>
       </div>
 
       <div class="service-card card-medicion reveal delay-3">
@@ -454,10 +455,21 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-rojo);">MAS Medición</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>El fin del misterio del ROI.</strong> Evaluamos el impacto en programas de capital humano certificando la metodología de medición Nivel 5 global.</p>
+        <p style="color:var(--muted); font-size:14px;"><strong>El fin del misterio del ROI.</strong> Demostramos el retorno financiero de tu inversión en talento aplicando la metodología de medición Nivel 5 global certificada por el ROI Institute.</p>
       </div>
 
     </div>
+
+    <div class="ecosystem-banner reveal delay-4" style="background: linear-gradient(90deg, var(--brand-morado), var(--brand-amarillo), var(--brand-verde), var(--brand-rojo)); padding: 3px; border-radius: var(--radius-lg); margin-top: 50px; box-shadow: var(--shadow-md);">
+      <div style="background: white; padding: 40px; border-radius: calc(var(--radius-lg) - 3px); text-align: center;">
+        <span aria-hidden="true" style="font-size: 30px; display: block; margin-bottom: 10px;">🔄</span>
+        <h3 style="font-size: 24px; color: var(--navy3); margin-bottom: 15px;">El Efecto Multiplicador del Ecosistema MAS</h3>
+        <p style="color: var(--text); font-size: 16px; margin: 0; max-width: 850px; margin: auto; line-height: 1.8;">
+          Nuestras áreas no trabajan en silos. <strong>Consultoría</strong> traza la ruta estratégica, <strong>Formación</strong> desarrolla las habilidades críticas en la cultura, <strong>Plataformas</strong> habilita el aprendizaje continuo a escala, y <strong>Medición</strong> comprueba el ROI financiero. <br><strong style="color: var(--navy); font-size: 17px; margin-top: 10px; display: inline-block;">Juntas, garantizan que tu inversión en talento impacte directamente en la última línea.</strong>
+        </p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -619,7 +631,7 @@
             </div>
           </div>
           <div class="test-card">
-            <div class="test-quote">La alianza nos permitió implementar un programa de desarrollo que conecta directamente con los objetivos estratégicos y financieros del negocio.</div>
+            <div class="test-quote">La alianza nos permitió implementar un ecosistema de desarrollo que conecta directamente con los objetivos estratégicos y financieros del negocio.</div>
             <div class="test-author">
               <div class="test-avatar" aria-hidden="true">M</div>
               <div><strong style="display:block;">María José Pérez</strong><span class="test-role">Directora de Capital Humano · Copec</span></div>
@@ -641,13 +653,13 @@
     <div class="reveal">
       <div class="section-label">Alineación Estratégica</div>
       <h2 class="section-title">¿Listo para medir el retorno de tu formación?</h2>
-      <p class="section-sub" style="margin-bottom:28px;">Nuestro equipo está listo para auditar tus procesos de talento y diseñar una solución que impacte el negocio.</p>
+      <p class="section-sub" style="margin-bottom:28px;">Nuestro equipo está listo para auditar tus procesos de talento y diseñar un ecosistema que impacte el negocio.</p>
       
-      <a class="lead-wa-big" href="https://wa.me/56997416972?text=Hola%20MAS%20Consultores.%20Me%20interesa%20auditar%20mi%20plataforma%20de%20talento." target="_blank" rel="noopener noreferrer">
+      <a class="lead-wa-big" href="https://wa.me/56997416972?text=Hola%20MAS%20Consultores.%20Me%20interesa%20conversar%20con%20un%20experto%20sobre%20mis%20desaf%C3%ADos%20de%20talento." target="_blank" rel="noopener noreferrer">
         <span aria-hidden="true" style="font-size:24px;">💬</span>
         <div>
-          <strong style="display:block; font-size:16px;">Audita tu plataforma LMS por WhatsApp</strong>
-          <span style="font-size:13px; font-weight:400; opacity:0.9;">Respuesta de un consultor en 5 minutos</span>
+          <strong style="display:block; font-size:16px;">Ponte en contacto con verdaderos expertos</strong>
+          <span style="font-size:13px; font-weight:400; opacity:0.9;">Respuesta de un consultor en menos de 1 hora</span>
         </div>
       </a>
       <p style="color:var(--muted); font-size:13px; margin-bottom:20px;">Dannett Ortiz · +56 9 9741 6972</p>
@@ -660,7 +672,7 @@
     
     <div class="form-card reveal delay-1">
       <h3 style="margin-bottom:6px;">Solicitar Blueprint y Diagnóstico</h3>
-      <p style="color:var(--muted); font-size:14px; margin-bottom:26px;">Te contactaremos con el material y una propuesta.</p>
+      <p style="color:var(--muted); font-size:14px; margin-bottom:26px;">Te contactaremos con el material y una propuesta integral.</p>
       
       <div class="form-progress">
         <div class="form-progress-bar done" id="p1"></div>
@@ -694,12 +706,12 @@
         </div>
         <div class="form-step" id="step2">
           <div class="form-group">
-            <label class="form-label">¿Qué pilar te interesa potenciar?</label>
+            <label class="form-label">¿Qué pilar te interesa potenciar inicialmente?</label>
             <div class="form-chips" id="chips_servicio">
               <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Consultoría Organizacional</button>
-              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Formación / IA Colossyan</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Liderazgo / IA Colossyan</button>
               <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Plataformas y LMS</button>
-              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Medición ROI / Tests eb|metrics</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Medición ROI / Tests</button>
             </div>
           </div>
           <div class="form-group">
@@ -746,7 +758,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <img src="assets/mas-logo.svg" alt="MAS Consultores" class="footer-logo">
-        <p style="color:rgba(255,255,255,0.5); font-size:14px;">Dejamos capacidades instaladas. Alineando el aprendizaje con el negocio.</p>
+        <p style="color:rgba(255,255,255,0.5); font-size:14px;">Dejamos capacidades instaladas. Alineando el ecosistema de aprendizaje con el negocio.</p>
       </div>
       <div class="footer-col">
         <h4>Ecosistema Tecnológico</h4>
@@ -801,7 +813,6 @@
 </div>
 
 <script>
-// FUNCIONALIDAD JS ORIGINAL (Scrool, Contadores, Testimonios, Formulario, Chatbot)
 // NAVBAR
 window.addEventListener('scroll',()=>{
   const nav=document.getElementById('navbar');
@@ -885,7 +896,7 @@ let chatOpen=false,flowIdx=0;
 const leadData={};
 const flow=[
   {key:'init',msg:'¡Hola! 👋 Soy el asistente IA de Grupo MAS.\n\n¿Cuál es tu nombre?',type:'text'},
-  {key:'nombre',msg:'¡Mucho gusto, {nombre}! 😊\n\n¿Qué pilar del negocio necesitas potenciar?',type:'options',options:['Consultoría Estratégica','Formación e IA','Plataformas LMS','Medición ROI y Selección']},
+  {key:'nombre',msg:'¡Mucho gusto, {nombre}! 😊\n\n¿Qué parte de nuestro ecosistema necesitas potenciar?',type:'options',options:['Consultoría Estratégica','Formación y Liderazgo','Plataformas LMS','Medición ROI y Selección']},
   {key:'servicio',msg:'Excelente elección. ¿Cuál es el desafío específico que enfrentan con eso?',type:'text'},
   {key:'desafio',msg:'Entendido. ¿Me compartes tu email o WhatsApp para enviarte nuestro Blueprint gratuito y que un consultor te contacte?',type:'text'},
   {key:'contacto',msg:'¡Listo! 🎉 Tengo la información.\n\nNos pondremos en contacto a la brevedad. También puedes escribirnos directo por WhatsApp:',type:'final'},
