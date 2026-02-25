@@ -324,20 +324,72 @@
   <div class="floating-pill fp-4"></div>
 
   <div class="container hero-grid">
-    <div class="hero-animated-wrapper animate-scale d-100">
-      <div class="mas-animated-logo" role="img" aria-label="Animación del logotipo MAS">
-        <svg class="mas-logo-burst" viewBox="0 0 340 340" aria-hidden="true">
-          <rect class="logo-piece" x="144" y="10" width="52" height="320" rx="26" fill="#edb321" />
-          <rect class="logo-piece delay-a" x="10" y="144" width="145" height="52" rx="26" fill="#1f2937" />
-          <rect class="logo-piece delay-b" x="185" y="144" width="145" height="52" rx="26" fill="#1f2937" />
-          <rect class="logo-piece delay-c" x="40" y="80" width="140" height="52" rx="26" transform="rotate(45 110 106)" fill="#833d8e" />
-          <rect class="logo-piece delay-d" x="160" y="80" width="140" height="52" rx="26" transform="rotate(-45 230 106)" fill="#009739" />
-          <rect class="logo-piece delay-e" x="40" y="208" width="140" height="52" rx="26" transform="rotate(-45 110 234)" fill="#d62216" />
-          <rect class="logo-piece delay-f" x="160" y="208" width="140" height="52" rx="26" transform="rotate(45 230 234)" fill="#23398d" />
-        </svg>
-        <img class="mas-logo-final" src="assets/mas-logo.svg" alt="Isologo oficial MAS Consultores">
-      </div>
-    </div>
+ <div class="hero-animated-wrapper animate-scale d-100">
+  <div class="mas-animated-logo" role="img" aria-label="Animación del isologo MAS">
+    <svg viewBox="0 0 340 340" aria-hidden="true" style="width: 100%; height: 100%; drop-shadow: 0 20px 40px rgba(26,46,74,0.15);">
+      <defs>
+        <style>
+          /* 1. Rotación inicial del '+' para convertirse en 'x' */
+          .anim-group-x {
+            transform-origin: 170px 170px;
+            animation: rot-x 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+          }
+          @keyframes rot-x {
+            0%, 15% { transform: rotate(-45deg); }
+            30%, 100% { transform: rotate(0deg); }
+          }
+
+          /* 2. Separación de las diagonales */
+          .anim-diag-tl { animation: m-tl 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+          .anim-diag-tr { animation: m-tr 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+          .anim-diag-bl { animation: m-bl 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+          .anim-diag-br { animation: m-br 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+          @keyframes m-tl { 0%, 35% { transform: translate(45px, 45px); } 50%, 100% { transform: translate(0, 0); } }
+          @keyframes m-tr { 0%, 35% { transform: translate(-45px, 45px); } 50%, 100% { transform: translate(0, 0); } }
+          @keyframes m-bl { 0%, 35% { transform: translate(45px, -45px); } 50%, 100% { transform: translate(0, 0); } }
+          @keyframes m-br { 0%, 35% { transform: translate(-45px, -45px); } 50%, 100% { transform: translate(0, 0); } }
+
+          /* 3. Entrada de las líneas verticales y horizontales (el '+') */
+          .anim-v  { animation: in-v 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+          .anim-hl { animation: in-hl 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+          .anim-hr { animation: in-hr 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+          @keyframes in-v  { 0%, 40% { transform: translateY(-200px); opacity: 0; } 60%, 100% { transform: translateY(0); opacity: 1; } }
+          @keyframes in-hl { 0%, 40% { transform: translateX(-200px); opacity: 0; } 60%, 100% { transform: translateX(0); opacity: 1; } }
+          @keyframes in-hr { 0%, 40% { transform: translateX(200px); opacity: 0; } 60%, 100% { transform: translateX(0); opacity: 1; } }
+
+          /* 4. Transición de colores: de Morado a la paleta final */
+          .col-v  { fill: #833d8e; animation: c-v 4.5s ease forwards; }
+          .col-hl { fill: #833d8e; animation: c-hl 4.5s ease forwards; }
+          .col-hr { fill: #833d8e; animation: c-hr 4.5s ease forwards; }
+          .col-tl { fill: #833d8e; } /* Esta pieza se queda morada */
+          .col-tr { fill: #833d8e; animation: c-tr 4.5s ease forwards; }
+          .col-bl { fill: #833d8e; animation: c-bl 4.5s ease forwards; }
+          .col-br { fill: #833d8e; animation: c-br 4.5s ease forwards; }
+
+          @keyframes c-v  { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #edb321; } } /* Amarillo */
+          @keyframes c-hl { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #1f2937; } } /* Gris oscuro */
+          @keyframes c-hr { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #1f2937; } } /* Gris oscuro */
+          @keyframes c-tr { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #009739; } } /* Verde */
+          @keyframes c-bl { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #d62216; } } /* Rojo */
+          @keyframes c-br { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #23398d; } } /* Azul */
+        </style>
+      </defs>
+
+      <g class="anim-group-x">
+        <g class="anim-diag-tl"><rect x="40" y="80" width="140" height="52" rx="26" transform="rotate(45 110 106)" class="col-tl" /></g>
+        <g class="anim-diag-tr"><rect x="160" y="80" width="140" height="52" rx="26" transform="rotate(-45 230 106)" class="col-tr" /></g>
+        <g class="anim-diag-bl"><rect x="40" y="208" width="140" height="52" rx="26" transform="rotate(-45 110 234)" class="col-bl" /></g>
+        <g class="anim-diag-br"><rect x="160" y="208" width="140" height="52" rx="26" transform="rotate(45 230 234)" class="col-br" /></g>
+      </g>
+
+      <g class="anim-v"><rect x="144" y="10" width="52" height="320" rx="26" class="col-v" /></g>
+      <g class="anim-hl"><rect x="10" y="144" width="145" height="52" rx="26" class="col-hl" /></g>
+      <g class="anim-hr"><rect x="185" y="144" width="145" height="52" rx="26" class="col-hr" /></g>
+    </svg>
+  </div>
+</div>
 
     <div class="hero-content" style="padding-left: 30px; text-align: left;">
       <h1 class="animate-up d-200">Somos <span class="text-red">MAS</span>.<br>Expertos en Formación y Desarrollo</h1>
