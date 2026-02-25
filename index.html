@@ -324,69 +324,66 @@
   <div class="floating-pill fp-4"></div>
 
   <div class="container hero-grid">
- <div class="hero-animated-wrapper animate-scale d-100">
+<div class="hero-animated-wrapper d-100">
   <div class="mas-animated-logo" role="img" aria-label="Animación del isologo MAS">
-    <svg viewBox="0 0 340 340" aria-hidden="true" style="width: 100%; height: 100%; drop-shadow: 0 20px 40px rgba(26,46,74,0.15);">
+    <svg class="mas-animated-svg" viewBox="0 0 340 340" aria-hidden="true" style="width: 100%; height: 100%; filter: drop-shadow(0 20px 40px rgba(26,46,74,0.15));">
       <defs>
         <style>
-          /* 1. Rotación inicial del '+' para convertirse en 'x' */
-          .anim-group-x {
-            transform-origin: 170px 170px;
-            animation: rot-x 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-          }
-          @keyframes rot-x {
-            0%, 15% { transform: rotate(-45deg); }
-            30%, 100% { transform: rotate(0deg); }
+          /* 1. Escala global para crear un Loop Infinito suave */
+          .mas-animated-svg { animation: loop-scale 6s infinite cubic-bezier(0.2, 0.8, 0.2, 1); }
+          @keyframes loop-scale {
+            0%, 3% { transform: scale(0); opacity: 0; }
+            8%, 90% { transform: scale(1); opacity: 1; }
+            95%, 100% { transform: scale(0); opacity: 0; }
           }
 
-          /* 2. Separación de las diagonales */
-          .anim-diag-tl { animation: m-tl 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-          .anim-diag-tr { animation: m-tr 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-          .anim-diag-bl { animation: m-bl 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-          .anim-diag-br { animation: m-br 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+          /* 2. Piezas rectas (Entran a la mitad de la animación) */
+          .anim-v { animation: in-v 6s infinite cubic-bezier(0.2, 0.8, 0.2, 1); }
+          .anim-hl { animation: in-hl 6s infinite cubic-bezier(0.2, 0.8, 0.2, 1); }
+          .anim-hr { animation: in-hr 6s infinite cubic-bezier(0.2, 0.8, 0.2, 1); }
+          
+          @keyframes in-v { 0%, 45% { transform: translateY(-200px); opacity: 0; } 55%, 100% { transform: translateY(0); opacity: 1; } }
+          @keyframes in-hl { 0%, 45% { transform: translateX(-200px); opacity: 0; } 55%, 100% { transform: translateX(0); opacity: 1; } }
+          @keyframes in-hr { 0%, 45% { transform: translateX(200px); opacity: 0; } 55%, 100% { transform: translateX(0); opacity: 1; } }
 
-          @keyframes m-tl { 0%, 35% { transform: translate(45px, 45px); } 50%, 100% { transform: translate(0, 0); } }
-          @keyframes m-tr { 0%, 35% { transform: translate(-45px, 45px); } 50%, 100% { transform: translate(0, 0); } }
-          @keyframes m-bl { 0%, 35% { transform: translate(45px, -45px); } 50%, 100% { transform: translate(0, 0); } }
-          @keyframes m-br { 0%, 35% { transform: translate(-45px, -45px); } 50%, 100% { transform: translate(0, 0); } }
+          /* 3. Diagonales (Realizan la transformación de +, a X, y se separan) */
+          .anim-diag-tl, .anim-diag-tr, .anim-diag-bl, .anim-diag-br { transform-origin: 170px 170px; }
+          .anim-diag-tl { animation: d-tl 6s infinite cubic-bezier(0.2, 0.8, 0.2, 1); }
+          .anim-diag-tr { animation: d-tr 6s infinite cubic-bezier(0.2, 0.8, 0.2, 1); }
+          .anim-diag-bl { animation: d-bl 6s infinite cubic-bezier(0.2, 0.8, 0.2, 1); }
+          .anim-diag-br { animation: d-br 6s infinite cubic-bezier(0.2, 0.8, 0.2, 1); }
 
-          /* 3. Entrada de las líneas verticales y horizontales (el '+') */
-          .anim-v  { animation: in-v 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-          .anim-hl { animation: in-hl 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-          .anim-hr { animation: in-hr 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+          @keyframes d-tl { 0%, 15% { transform: rotate(-45deg) translate(45px, 45px); } 25%, 35% { transform: rotate(0deg) translate(45px, 45px); } 45%, 100% { transform: rotate(0deg) translate(0, 0); } }
+          @keyframes d-tr { 0%, 15% { transform: rotate(-45deg) translate(-45px, 45px); } 25%, 35% { transform: rotate(0deg) translate(-45px, 45px); } 45%, 100% { transform: rotate(0deg) translate(0, 0); } }
+          @keyframes d-bl { 0%, 15% { transform: rotate(-45deg) translate(45px, -45px); } 25%, 35% { transform: rotate(0deg) translate(45px, -45px); } 45%, 100% { transform: rotate(0deg) translate(0, 0); } }
+          @keyframes d-br { 0%, 15% { transform: rotate(-45deg) translate(-45px, -45px); } 25%, 35% { transform: rotate(0deg) translate(-45px, -45px); } 45%, 100% { transform: rotate(0deg) translate(0, 0); } }
 
-          @keyframes in-v  { 0%, 40% { transform: translateY(-200px); opacity: 0; } 60%, 100% { transform: translateY(0); opacity: 1; } }
-          @keyframes in-hl { 0%, 40% { transform: translateX(-200px); opacity: 0; } 60%, 100% { transform: translateX(0); opacity: 1; } }
-          @keyframes in-hr { 0%, 40% { transform: translateX(200px); opacity: 0; } 60%, 100% { transform: translateX(0); opacity: 1; } }
+          /* 4. Transición de color al logo original */
+          .col-v  { animation: c-v 6s infinite ease; }
+          .col-hl { animation: c-hl 6s infinite ease; }
+          .col-hr { animation: c-hr 6s infinite ease; }
+          .col-tl { fill: #833d8e; } /* Esta pieza morada define el color inicial, se mantiene igual */
+          .col-tr { animation: c-tr 6s infinite ease; }
+          .col-bl { animation: c-bl 6s infinite ease; }
+          .col-br { animation: c-br 6s infinite ease; }
 
-          /* 4. Transición de colores: de Morado a la paleta final */
-          .col-v  { fill: #833d8e; animation: c-v 4.5s ease forwards; }
-          .col-hl { fill: #833d8e; animation: c-hl 4.5s ease forwards; }
-          .col-hr { fill: #833d8e; animation: c-hr 4.5s ease forwards; }
-          .col-tl { fill: #833d8e; } /* Esta pieza se queda morada */
-          .col-tr { fill: #833d8e; animation: c-tr 4.5s ease forwards; }
-          .col-bl { fill: #833d8e; animation: c-bl 4.5s ease forwards; }
-          .col-br { fill: #833d8e; animation: c-br 4.5s ease forwards; }
-
-          @keyframes c-v  { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #edb321; } } /* Amarillo */
-          @keyframes c-hl { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #1f2937; } } /* Gris oscuro */
-          @keyframes c-hr { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #1f2937; } } /* Gris oscuro */
-          @keyframes c-tr { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #009739; } } /* Verde */
-          @keyframes c-bl { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #d62216; } } /* Rojo */
-          @keyframes c-br { 0%, 60% { fill: #833d8e; } 80%, 100% { fill: #23398d; } } /* Azul */
+          @keyframes c-v  { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #edb321; } } /* Amarillo */
+          @keyframes c-hl { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #1f2937; } } /* Gris L */
+          @keyframes c-hr { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #1f2937; } } /* Gris R */
+          @keyframes c-tr { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #009739; } } /* Verde */
+          @keyframes c-bl { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #d62216; } } /* Rojo */
+          @keyframes c-br { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #23398d; } } /* Azul */
         </style>
       </defs>
-
-      <g class="anim-group-x">
-        <g class="anim-diag-tl"><rect x="40" y="80" width="140" height="52" rx="26" transform="rotate(45 110 106)" class="col-tl" /></g>
-        <g class="anim-diag-tr"><rect x="160" y="80" width="140" height="52" rx="26" transform="rotate(-45 230 106)" class="col-tr" /></g>
-        <g class="anim-diag-bl"><rect x="40" y="208" width="140" height="52" rx="26" transform="rotate(-45 110 234)" class="col-bl" /></g>
-        <g class="anim-diag-br"><rect x="160" y="208" width="140" height="52" rx="26" transform="rotate(45 230 234)" class="col-br" /></g>
-      </g>
 
       <g class="anim-v"><rect x="144" y="10" width="52" height="320" rx="26" class="col-v" /></g>
       <g class="anim-hl"><rect x="10" y="144" width="145" height="52" rx="26" class="col-hl" /></g>
       <g class="anim-hr"><rect x="185" y="144" width="145" height="52" rx="26" class="col-hr" /></g>
+
+      <g class="anim-diag-tl"><rect x="40" y="80" width="140" height="52" rx="26" transform="rotate(45 110 106)" class="col-tl" /></g>
+      <g class="anim-diag-tr"><rect x="160" y="80" width="140" height="52" rx="26" transform="rotate(-45 230 106)" class="col-tr" /></g>
+      <g class="anim-diag-bl"><rect x="40" y="208" width="140" height="52" rx="26" transform="rotate(-45 110 234)" class="col-bl" /></g>
+      <g class="anim-diag-br"><rect x="160" y="208" width="140" height="52" rx="26" transform="rotate(45 230 234)" class="col-br" /></g>
     </svg>
   </div>
 </div>
