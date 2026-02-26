@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 <style>
   :root {
     --bg-main:#ffffff; --bg-light:#f7f9fc;
@@ -993,6 +994,65 @@ function addWrappedText(doc, text, x, y, maxWidth, lineHeight, isBold) {
   return y + (lines.length * lineHeight);
 }
 
+function drawPhaseScoreBars(doc, config) {
+  const { x, y, width, height, phaseScores } = config;
+  const phaseMeta = [
+    { key: 1, label: 'N1 Reacción', color: [131, 61, 142], bg: [249, 240, 250] },
+    { key: 2, label: 'N2 Aprendizaje', color: [184, 134, 11], bg: [254, 248, 230] },
+    { key: 3, label: 'N3 Aplicación', color: [0, 151, 57], bg: [230, 247, 237] },
+    { key: 4, label: 'N4 Impacto', color: [214, 34, 22], bg: [253, 232, 230] },
+    { key: 5, label: 'N5 ROI', color: [35, 57, 141], bg: [238, 241, 250] }
+  ];
+
+  const gap = 8;
+  const barWidth = (width - (gap * (phaseMeta.length - 1))) / phaseMeta.length;
+
+  phaseMeta.forEach((phase, index) => {
+    const score = Number(phaseScores[phase.key] || 0);
+    const cardX = x + (index * (barWidth + gap));
+    doc.setFillColor(...phase.bg);
+    doc.roundedRect(cardX, y, barWidth, height, 8, 8, 'F');
+
+    doc.setTextColor(...phase.color);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(13);
+    doc.text(score + '/4', cardX + (barWidth / 2), y + 20, { align: 'center' });
+
+    const progressY = y + 28;
+    const progressH = 6;
+    const progressW = barWidth - 16;
+    doc.setFillColor(255, 255, 255);
+    doc.roundedRect(cardX + 8, progressY, progressW, progressH, 3, 3, 'F');
+    doc.setFillColor(...phase.color);
+    doc.roundedRect(cardX + 8, progressY, progressW * Math.min(score / 4, 1), progressH, 3, 3, 'F');
+
+    doc.setTextColor(71, 85, 105);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.text(phase.label, cardX + (barWidth / 2), y + height - 10, { align: 'center' });
+  });
+}
+
+async function createResultCardDataUrl() {
+  if (!window.html2canvas) return null;
+  const node = document.querySelector('#step6 .step-card');
+  if (!node) return null;
+
+  const canvas = await window.html2canvas(node, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: '#f7f9fc',
+    scrollY: -window.scrollY,
+    windowWidth: Math.max(document.documentElement.clientWidth, 1200)
+  });
+
+  return {
+    dataUrl: canvas.toDataURL('image/png', 0.98),
+    width: canvas.width,
+    height: canvas.height
+  };
+}
+
 async function createMasWatermarkDataUrl() {
   return new Promise((resolve) => {
     const img = new Image();
@@ -1051,6 +1111,7 @@ async function downloadResultsPdf() {
   const summary = getTierSummary(total);
   const { levels, answers } = getSelectedAnswersByLevel();
   const strategicSummary = getStrategicChecklistSummary(profile);
+  const resultSnapshot = await createResultCardDataUrl();
 
   applyWatermark();
   let y = margin;
@@ -1089,6 +1150,26 @@ async function downloadResultsPdf() {
   y = addWrappedText(doc, summary.detalle, margin + 14, y, contentWidth - 28, 14, false);
   y += 16;
 
+  y = ensureSpace(y, 180);
+  doc.setFontSize(12);
+  doc.setTextColor(51, 65, 85);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Vista visual del resultado (igual al panel final):', margin, y);
+  y += 12;
+
+  if (resultSnapshot) {
+    const cardMaxHeight = 300;
+    const imgRatio = resultSnapshot.height / resultSnapshot.width;
+    const imgWidth = contentWidth;
+    const imgHeight = Math.min(cardMaxHeight, imgWidth * imgRatio);
+    y = ensureSpace(y, imgHeight + 12);
+    doc.addImage(resultSnapshot.dataUrl, 'PNG', margin, y, imgWidth, imgHeight, undefined, 'FAST');
+    y += imgHeight + 18;
+  } else {
+    y = addWrappedText(doc, 'No fue posible capturar la vista visual del panel final en este momento.', margin, y + 4, contentWidth, 14, false);
+    y += 10;
+  }
+
   y = ensureSpace(y, 80);
   doc.setFontSize(12);
   doc.setTextColor(51, 65, 85);
@@ -1096,6 +1177,15 @@ async function downloadResultsPdf() {
   y = addWrappedText(doc, 'Mensaje diagnóstico:', margin, y, contentWidth, lineHeight, true);
   y = addWrappedText(doc, document.getElementById('resultContent')?.innerText?.replace(/\s+/g, ' ').slice(0, 420) || 'No disponible', margin, y + 4, contentWidth, 14, false);
   y += 10;
+
+  y = ensureSpace(y, 90);
+  doc.setFontSize(13);
+  doc.setTextColor(26, 46, 74);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Puntaje por nivel Phillips', margin, y);
+  y += 10;
+  drawPhaseScoreBars(doc, { x: margin, y, width: contentWidth, height: 52, phaseScores: levels });
+  y += 68;
 
   doc.setFontSize(15);
   doc.setTextColor(26, 46, 74);
@@ -1165,6 +1255,18 @@ async function downloadResultsPdf() {
     y = ensureSpace(y, 24);
     y = addWrappedText(doc, '- ' + item, margin + 8, y, contentWidth - 8, 14, false);
   });
+
+  y = ensureSpace(y + 16, 80);
+  doc.setDrawColor(226, 232, 240);
+  doc.roundedRect(margin, y, contentWidth, 66, 8, 8, 'S');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(26, 46, 74);
+  doc.text('¿Quieres profundizar este diagnóstico?', margin + 14, y + 22);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(11);
+  doc.setTextColor(51, 65, 85);
+  doc.text('Escríbenos a info@masconsultores.cl o visita masconsultores.cl para más información.', margin + 14, y + 42);
 
   const totalPages = doc.getNumberOfPages();
   for (let i = 1; i <= totalPages; i++) {
