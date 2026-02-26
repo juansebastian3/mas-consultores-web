@@ -66,7 +66,7 @@
   .phase-desc{font-size:11px;color:var(--muted);font-weight:600;margin-left:auto;background:var(--bg-light);padding:3px 10px;border-radius:50px}
   .phase-divider{margin-top:32px;padding-top:4px}
 
-  .check-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:var(--radius-sm);border:2px solid var(--border-light);background:#fff;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);margin-bottom:8px;user-select:none}
+  .check-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:var(--radius-sm);border:2px solid var(--border-light);background:#fff;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);margin-bottom:8px;user-select:none;width:100%;font-family:inherit;text-align:left;appearance:none}
   .check-item:hover{border-color:var(--border);background:var(--bg-light);transform:translateX(4px)}
   .check-item.checked{border-color:currentColor;background:color-mix(in srgb,currentColor 6%,white)}
   .check-box{width:24px;height:24px;border-radius:7px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s cubic-bezier(.16,1,.3,1);margin-top:1px}
@@ -270,44 +270,44 @@
         <span class="phase-name" style="color:var(--nivel1);">Nivel 1 — Reacción y Satisfacción</span>
         <span class="phase-desc">Phillips L1</span>
       </div>
-      <label class="check-item" style="color:var(--nivel1);" data-level="1">
+      <button class="check-item" type="button" style="color:var(--nivel1);" data-level="1">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Aplicamos encuestas de satisfacción estandarizadas al finalizar cada programa.</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel1);" data-level="1">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel1);" data-level="1">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Medimos la relevancia percibida del contenido para el puesto de trabajo (no solo "me gustó").</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel1);" data-level="1">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel1);" data-level="1">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Evaluamos la intención de aplicar lo aprendido con preguntas específicas de acción.</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel1);" data-level="1">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel1);" data-level="1">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Consolidamos y analizamos los datos de reacción para tomar decisiones sobre futuros programas.</span>
-      </label>
+      </button>
 
       <div class="phase-header phase-divider">
         <div class="phase-dot" style="background:var(--nivel2);"></div>
         <span class="phase-name" style="color:var(--nivel2);">Nivel 2 — Aprendizaje</span>
         <span class="phase-desc">Phillips L2</span>
       </div>
-      <label class="check-item" style="color:var(--nivel2);" data-level="2">
+      <button class="check-item" type="button" style="color:var(--nivel2);" data-level="2">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Aplicamos evaluaciones de conocimiento (pre y post) para medir el aprendizaje real.</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel2);" data-level="2">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel2);" data-level="2">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Utilizamos simulaciones, role-plays o pruebas prácticas para evaluar habilidades adquiridas.</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel2);" data-level="2">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel2);" data-level="2">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Nuestro LMS o plataforma entrega reportes de completitud, puntajes y estancamiento por usuario.</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel2);" data-level="2">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel2);" data-level="2">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Los diseños instruccionales se alinean con objetivos de aprendizaje medibles (no genéricos).</span>
-      </label>
+      </button>
 
       <div class="step-nav">
         <button class="btn-secondary" onclick="goToStep(1)">&larr; Volver</button>
@@ -333,44 +333,44 @@
         <span class="phase-name" style="color:var(--nivel3);">Nivel 3 — Aplicación e Implementación</span>
         <span class="phase-desc">Phillips L3</span>
       </div>
-      <label class="check-item" style="color:var(--nivel3);" data-level="3">
+      <button class="check-item" type="button" style="color:var(--nivel3);" data-level="3">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Los participantes terminan cada programa con un plan de acción concreto a 30-60 días.</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel3);" data-level="3">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel3);" data-level="3">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Los jefes directos participan activamente (pre-briefing y post-seguimiento de la capacitación).</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel3);" data-level="3">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel3);" data-level="3">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Realizamos evaluaciones de seguimiento a los 60-90 días para medir cambio de comportamiento.</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel3);" data-level="3">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel3);" data-level="3">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Identificamos y documentamos las barreras y facilitadores de la aplicación en el puesto.</span>
-      </label>
+      </button>
 
       <div class="phase-header phase-divider">
         <div class="phase-dot" style="background:var(--nivel4);"></div>
         <span class="phase-name" style="color:var(--nivel4);">Nivel 4 — Impacto en el Negocio</span>
         <span class="phase-desc">Phillips L4</span>
       </div>
-      <label class="check-item" style="color:var(--nivel4);" data-level="4">
+      <button class="check-item" type="button" style="color:var(--nivel4);" data-level="4">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Definimos KPIs de negocio vinculados al programa ANTES de ejecutar la capacitación.</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel4);" data-level="4">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel4);" data-level="4">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Documentamos la "línea base" de esos KPIs para comparar el antes y después.</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel4);" data-level="4">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel4);" data-level="4">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Aplicamos métodos para aislar los efectos de la capacitación de otros factores (estimación, grupo control, análisis de tendencia).</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel4);" data-level="4">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel4);" data-level="4">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Reportamos el impacto en indicadores operativos al equipo directivo con datos concretos.</span>
-      </label>
+      </button>
 
       <div class="step-nav">
         <button class="btn-secondary" onclick="goToStep(2)">&larr; Volver</button>
@@ -396,22 +396,22 @@
         <span class="phase-name" style="color:var(--nivel5);">Nivel 5 — ROI Financiero</span>
         <span class="phase-desc">Phillips L5</span>
       </div>
-      <label class="check-item" style="color:var(--nivel5);" data-level="5">
+      <button class="check-item" type="button" style="color:var(--nivel5);" data-level="5">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Convertimos las mejoras operativas a valores monetarios utilizando metodologías validadas.</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel5);" data-level="5">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel5);" data-level="5">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Calculamos el costo TOTAL del programa (diseño, ejecución, tecnología, horas-hombre, costo de oportunidad).</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel5);" data-level="5">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel5);" data-level="5">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Aplicamos la fórmula de ROI: (Beneficios Netos / Costos) x 100 para obtener el porcentaje de retorno.</span>
-      </label>
-      <label class="check-item" style="color:var(--nivel5);" data-level="5">
+      </button>
+      <button class="check-item" type="button" style="color:var(--nivel5);" data-level="5">
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Presentamos un reporte financiero de ROI al C-Level o Directorio (no solo métricas de horas o asistencia).</span>
-      </label>
+      </button>
 
       <div class="step-nav">
         <button class="btn-secondary" onclick="goToStep(3)">&larr; Volver</button>
