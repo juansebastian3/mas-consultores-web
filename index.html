@@ -29,7 +29,7 @@
     --red: #75238b; /* Morado marca original */
     --red2: #8f3fb0;
     --red-glow: rgba(117,35,139,0.15);
-    
+
     /* Nuevos Colores Estratégicos Pilares */
     --brand-morado: #833d8e;
     --brand-amarillo: #edb321;
@@ -65,7 +65,7 @@
   .section-title { font-size:clamp(30px,4vw,46px); font-weight:800; margin-bottom:18px; }
   .section-sub { color:var(--muted); font-size:17px; max-width:580px; line-height:1.7; }
 
-  /* ANIMATIONS */
+  /* SCROLL ANIMATIONS */
   .reveal { opacity:0; transform:translateY(24px); transition:all 0.7s cubic-bezier(0.16,1,0.3,1); }
   .reveal.visible { opacity:1; transform:translateY(0); }
   .delay-1 { transition-delay:0.1s; }
@@ -73,14 +73,20 @@
   .delay-3 { transition-delay:0.3s; }
   .delay-4 { transition-delay:0.4s; }
 
+  /* ENTRANCE ANIMATIONS (LOAD) */
   @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
   @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
-  
+
   .animate-nav { animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
   .animate-up { opacity: 0; animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
   .animate-scale { opacity: 0; animation: scaleIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  .d-100 { animation-delay: 0.1s; } .d-200 { animation-delay: 0.2s; } .d-300 { animation-delay: 0.3s; } .d-400 { animation-delay: 0.4s; } .d-500 { animation-delay: 0.5s; }
+  
+  .d-100 { animation-delay: 0.1s; }
+  .d-200 { animation-delay: 0.2s; }
+  .d-300 { animation-delay: 0.3s; }
+  .d-400 { animation-delay: 0.4s; }
+  .d-500 { animation-delay: 0.5s; }
 
   /* NAVBAR */
   nav { position:fixed; top:0; width:100%; z-index:1000; background:rgba(255,255,255,0.92); backdrop-filter:blur(16px) saturate(180%); -webkit-backdrop-filter:blur(16px) saturate(180%); border-bottom:1px solid transparent; transition:all 0.35s ease; }
@@ -97,9 +103,10 @@
   .btn-solid { background:var(--red); color:#fff; padding:10px 24px; border-radius:50px; font-size:13px; font-weight:700; text-decoration:none; transition:all 0.25s; box-shadow:0 4px 14px rgba(117,35,139,0.25); border:none; cursor:pointer; letter-spacing:0.01em; }
   .btn-solid:hover { background:var(--red2); transform:translateY(-1px); box-shadow:0 6px 20px rgba(117,35,139,0.35); }
 
-  /* HERO */
+  /* HERO & ANIMATED LOGO */
   .hero { min-height:100vh; display:flex; align-items:center; position:relative; overflow:hidden; padding-top:72px; background:var(--bg-main); }
   .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; padding:60px 0; position:relative; z-index:1; }
+  
   .hero-animated-wrapper { display: flex; justify-content: center; align-items: center; position: relative; }
   .mas-animated-logo { width:100%; max-width:520px; aspect-ratio:802.75 / 340.05; position:relative; filter:drop-shadow(0 20px 40px rgba(26,46,74,0.15)); animation:float-logo 5s ease-in-out infinite; }
   @keyframes float-logo { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
@@ -123,23 +130,11 @@
   .fp-3 { width: 30px; height: 90px; top: 15%; right: 20%; transform: rotate(50deg); border-color: #bbf7d0; animation-delay: -3.5s; }
   .fp-4 { width: 35px; height: 100px; bottom: 15%; left: 35%; transform: rotate(-40deg); border-color: #fecaca; animation-delay: -1.5s; }
 
-  /* ECOSISTEMA / PILARES */
-  .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:20px; margin-top:40px; }
-  .service-card { background:#fff; border-radius:var(--radius-lg); padding:34px; border:1px solid var(--border-light); transition:all 0.35s; box-shadow:var(--shadow-sm); position:relative; overflow:hidden; }
-  .service-card::before { content:''; position:absolute; top:0; left:0; width:4px; height:0; background:var(--red); transition:height 0.35s; }
-  .service-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); }
-  .service-card:hover::before { height:100%; }
-  .service-icon { width:52px; height:52px; background:var(--bg-light); color:var(--navy); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:20px; transition:all 0.3s; }
-  .service-card:hover .service-icon { background:var(--navy); color:#fff; }
-  .service-card h3 { font-size:19px; margin-bottom:10px; }
-  .card-consultoria::before { background: var(--brand-morado); }
-  .card-formacion::before { background: var(--brand-amarillo); }
-  .card-plataformas::before { background: var(--brand-verde); }
-  .card-medicion::before { background: var(--brand-rojo); }
-
   /* PARTNERS */
   .partners-sec { background:linear-gradient(145deg, var(--navy3) 0%, var(--navy) 60%, var(--navy2) 100%); color:#fff; padding:90px 0; text-align:center; position:relative; overflow:hidden; }
   .partners-sec::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events:none; }
+  .partners-sec .section-label { color:rgba(255,255,255,0.8); }
+  .partners-sec .section-label::before { background:rgba(255,255,255,0.4); }
   .partners-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; margin-top:40px; }
   .partner-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:36px; border-radius:var(--radius-lg); transition:all 0.35s; text-align:left; position:relative; overflow:hidden; display:block; text-decoration:none; color:inherit; }
   .partner-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:transparent; transition:background 0.35s; }
@@ -157,6 +152,9 @@
   .partner-card p { color:rgba(255,255,255,0.65); font-size:14px; line-height:1.7; }
   .p-badge { display:inline-block; background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.9); font-size:11px; padding:4px 12px; border-radius:50px; margin-top:18px; font-weight:700; letter-spacing:0.3px; }
 
+  /* COMMON CARDS */
+  .eb-card { display:flex; align-items:center; gap:44px; background:#fff; padding:44px; border-radius:var(--radius-lg); box-shadow:var(--shadow-md); border:1px solid var(--border-light); }
+
   /* BIO */
   .bio-sec { background:var(--bg-main); }
   .bio-grid { display:grid; grid-template-columns:1fr 1.5fr; gap:60px; align-items:center; }
@@ -170,19 +168,42 @@
   .book-info h4 { font-size:16px; margin-bottom:4px; }
   .book-info span { font-size:12px; color:var(--red); font-weight:700; background:var(--red-glow); padding:4px 10px; border-radius:50px; }
 
-  /* CASOS & BLOG */
-  .cases-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; margin-top:40px; }
-  .case-card { border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-light); transition:all 0.35s; background:#fff; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; }
-  .case-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); }
-  .case-img { height:150px; background:var(--bg-light); display:flex; align-items:center; justify-content:center; font-size:42px; }
-  .case-body { padding:28px; flex:1; display:flex; flex-direction:column; }
-  .case-company { font-size:11px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
-  .case-body h3 { font-size:18px; margin-bottom:10px; }
-  .case-body p { flex:1; }
-  .btn-link { color:var(--navy); font-size:13px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px; transition:all 0.2s; margin-top:16px; }
-  .btn-link:hover { color:var(--red); gap:8px; }
+  /* SERVICES / PILARES */
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:20px; margin-top:40px; }
+  .service-card { background:#fff; border-radius:var(--radius-lg); padding:34px; border:1px solid var(--border-light); transition:all 0.35s; box-shadow:var(--shadow-sm); position:relative; overflow:hidden; }
+  .service-card::before { content:''; position:absolute; top:0; left:0; width:4px; height:0; background:var(--red); transition:height 0.35s; }
+  .service-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+  .service-card:hover::before { height:100%; }
+  .service-icon { width:52px; height:52px; background:var(--bg-light); color:var(--navy); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:20px; transition:all 0.3s; }
+  .service-card:hover .service-icon { background:var(--navy); color:#fff; }
+  .service-card h3 { font-size:19px; margin-bottom:10px; }
+  
+  /* Colores de Hover por Pilar */
+  .card-consultoria::before { background: var(--brand-morado); }
+  .card-formacion::before { background: var(--brand-amarillo); }
+  .card-plataformas::before { background: var(--brand-verde); }
+  .card-medicion::before { background: var(--brand-rojo); }
 
-  /* TESTIMONIALS */
+
+
+  /* EXPERTISE CAROUSEL */
+  .expertise-section { background: #fff; border-bottom: 1px solid var(--border-light); }
+  .expertise-grid { display:grid; grid-template-columns:0.95fr 1.05fr; gap:42px; align-items:center; }
+  .expertise-copy { color: var(--text); font-size:17px; line-height:1.8; }
+  .expertise-copy p { margin-bottom:16px; }
+  .expertise-industries { color:var(--navy3); font-weight:700; }
+  .expertise-carousel { position:relative; border-radius:var(--radius-xl); overflow:hidden; box-shadow:var(--shadow-lg); border:1px solid var(--border-light); background:#fff; }
+  .expertise-track { display:flex; transition:transform 0.5s ease; }
+  .expertise-slide { min-width:100%; }
+  .expertise-slide img { display:block; width:100%; height:420px; object-fit:contain; background:#fff; }
+  .expertise-controls { position:absolute; left:16px; right:16px; bottom:16px; display:flex; align-items:center; justify-content:space-between; }
+  .expertise-arrows { display:flex; gap:8px; }
+  .expertise-arrow { width:36px; height:36px; border-radius:50%; border:none; background:rgba(15,31,51,0.72); color:#fff; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .expertise-dots { display:flex; gap:7px; }
+  .expertise-dot { width:8px; height:8px; border:none; border-radius:50%; background:rgba(255,255,255,0.6); cursor:pointer; }
+  .expertise-dot.active { width:24px; border-radius:4px; background:#fff; }
+
+  /* TESTIMONIALS & CASOS */
   .testimonials { background:linear-gradient(145deg, var(--navy3) 0%, var(--navy) 100%); padding:90px 0; color:#fff; overflow:hidden; }
   .testimonials .section-title { color:#fff; }
   .test-track { display:flex; transition:transform 0.5s ease; }
@@ -196,47 +217,45 @@
   .test-dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.2); cursor:pointer; transition:all 0.25s; border:none; padding:0; }
   .test-dot.active { background:var(--brand-amarillo); width:28px; border-radius:4px; }
 
-  /* CONTACTO Y QUIZ */
+  .cases-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; margin-top:40px; }
+  .case-card { border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-light); transition:all 0.35s; background:#fff; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; }
+  .case-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+  .case-img { height:150px; background:var(--bg-light); display:flex; align-items:center; justify-content:center; font-size:42px; }
+  .case-body { padding:28px; flex:1; display:flex; flex-direction:column; }
+  .case-company { font-size:11px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
+  .case-body h3 { font-size:18px; margin-bottom:10px; }
+  .case-body p { flex:1; }
+  .btn-link { color:var(--navy); font-size:13px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px; transition:all 0.2s; margin-top:16px; }
+  .btn-link:hover { color:var(--red); gap:8px; }
+
+  /* CONTACT FORM Y CHATBOT */
   .lead-wrap { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
   .lead-wa-big { display:flex; align-items:center; gap:14px; background:var(--green-wa); color:#fff; padding:16px 24px; border-radius:var(--radius-md); text-decoration:none; font-weight:700; font-size:16px; transition:all 0.25s; box-shadow:0 4px 15px rgba(37,211,102,0.2); margin-bottom:14px; }
   .lead-wa-big:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(37,211,102,0.3); } 
   .divider-or { display:flex; align-items:center; gap:12px; color:var(--muted); font-size:13px; margin:18px 0; }
   .divider-or::before,.divider-or::after { content:''; flex:1; height:1px; background:var(--border); }
   .trust-item { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:14px; margin-bottom:10px; }
-  
-  .quiz-container { background: #fff; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); border: 1px solid var(--border); overflow: hidden; position: relative; }
-  .quiz-header { background: linear-gradient(135deg, var(--navy3), var(--navy)); padding: 25px 30px; color: white; text-align: center; }
-  .quiz-header h3 { color: white; font-size: 22px; margin-bottom: 8px; }
-  .quiz-progress { display: flex; height: 6px; background: rgba(255,255,255,0.2); }
-  .quiz-progress-bar { height: 100%; background: var(--brand-amarillo); width: 0%; transition: width 0.4s ease; }
-  .quiz-body { padding: 35px; }
-  .quiz-step { display: none; animation: scaleIn 0.4s ease forwards; }
-  .quiz-step.active { display: block; }
-  
-  .q-title { font-size: 16px; color: var(--navy); margin-bottom: 15px; font-weight: 700; }
-  .chip-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
-  .chip-btn { padding: 10px 18px; border-radius: 50px; border: 1px solid var(--border); background: var(--bg-light); cursor: pointer; transition: all 0.2s; font-weight: 600; font-size: 13px; color: var(--text); }
-  .chip-btn:hover { border-color: var(--brand-morado); }
-  .chip-btn.selected { background: var(--brand-morado); color: white; border-color: var(--brand-morado); box-shadow: 0 4px 10px rgba(131, 61, 142, 0.3); }
-  
-  .checklist-item { display: flex; align-items: flex-start; gap: 15px; padding: 14px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; background: white; }
-  .checklist-item:hover { background: var(--bg-light); border-color: var(--brand-azul); }
-  .checklist-item.checked { background: #f0fdf4; border-color: var(--brand-verde); }
-  .check-box { width: 22px; height: 22px; border: 2px solid var(--muted); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
-  .checklist-item.checked .check-box { background: var(--brand-verde); border-color: var(--brand-verde); }
-  .check-box::after { content: '✓'; color: white; font-size: 14px; font-weight: bold; opacity: 0; }
-  .checklist-item.checked .check-box::after { opacity: 1; }
-  .check-text { font-size: 14px; color: var(--text); line-height: 1.5; }
-  
-  .quiz-nav { display: flex; justify-content: space-between; margin-top: 25px; border-top: 1px solid var(--border-light); padding-top: 20px; }
-  
+  .form-card { background:#fff; border-radius:var(--radius-xl); padding:38px; box-shadow:var(--shadow-lg); border:1px solid var(--border-light); }
+  .form-step { display:none; }
+  .form-step.active { display:block; }
+  .form-progress { display:flex; gap:6px; margin-bottom:26px; }
+  .form-progress-bar { height:3px; flex:1; border-radius:2px; background:var(--border); transition:background 0.3s; }
+  .form-progress-bar.done { background:var(--red); }
   .form-label { display:block; font-size:13px; font-weight:600; color:var(--navy); margin-bottom:8px; }
-  .form-input { width:100%; padding:12px 16px; border:1px solid var(--border); border-radius:10px; font-size:14px; background:var(--bg-light); transition:all 0.2s; outline:none; font-family:inherit; margin-bottom: 15px;}
-  .form-input:focus { border-color:var(--navy); background:#fff; box-shadow:0 0 0 3px rgba(26,46,74,0.04); }
-  
-  .result-box { text-align: center; padding: 10px; }
-  .score-circle { width: 100px; height: 100px; border-radius: 50%; background: var(--bg-light); border: 8px solid var(--brand-amarillo); display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 900; color: var(--navy); margin: 0 auto 20px; }
-  .insight-box { background: #fffbeb; border-left: 4px solid var(--brand-amarillo); padding: 20px; text-align: left; border-radius: 0 12px 12px 0; margin-top: 20px; }
+  .form-input,.form-select,.form-textarea { width:100%; padding:12px 16px; border:1px solid var(--border); border-radius:10px; font-size:14px; background:var(--bg-light); transition:all 0.2s; outline:none; font-family:inherit; }
+  .form-input:focus,.form-select:focus,.form-textarea:focus { border-color:var(--navy); background:#fff; box-shadow:0 0 0 3px rgba(26,46,74,0.04); }
+  .form-input.error,.form-select.error { border-color:var(--red2); background-color:#fff5f5; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .form-group { margin-bottom:18px; }
+  .form-chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip-option { padding:8px 14px; border-radius:50px; border:1px solid var(--border); background:#fff; font-size:13px; cursor:pointer; transition:all 0.2s; color:var(--text); font-family:inherit; }
+  .chip-option:hover,.chip-option.selected { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .step-nav { display:flex; gap:10px; margin-top:10px; }
+  .btn-next { background:var(--navy); color:#fff; padding:12px 24px; border-radius:10px; border:none; font-size:14px; font-weight:700; cursor:pointer; transition:all 0.2s; width:100%; font-family:inherit; }
+  .btn-next:hover { background:var(--navy2); }
+  .btn-back { background:transparent; color:var(--muted); padding:12px 20px; border-radius:10px; border:1px solid var(--border); font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; }
+  .error-text { color:var(--red2); font-size:12px; margin-top:4px; display:none; }
+  .form-success { text-align:center; padding:24px 0; }
 
   /* FLOATING BUTTONS & CHATBOT */
   #wa-float { position:fixed; bottom:104px; right:28px; z-index:9999; background:var(--green-wa); color:#fff; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; text-decoration:none; box-shadow:0 6px 20px rgba(37,211,102,0.35); transition:transform 0.2s; }
@@ -280,9 +299,18 @@
   .footer-logo { height:36px; margin-bottom:18px; }
 
   @media(max-width:992px){
-    .hero-grid,.pas-grid,.lead-wrap,.footer-grid,.bio-grid { grid-template-columns:1fr; }
+    .hero-grid,.eb-card,.bio-grid,.lead-wrap,.footer-grid,.pas-grid,.expertise-grid { grid-template-columns:1fr; }
+    .expertise-slide img { height:320px; }
+    .expertise-copy { font-size:16px; }
     .nav-links { display:none; }
+    .eb-card { flex-direction:column; text-align:center; gap:20px; }
+    .form-row { grid-template-columns:1fr; }
     #chatbot-window { width:calc(100vw - 32px); right:16px; bottom:96px; }
+    .hero-grid { gap:40px; }
+    .hero-animated-wrapper { grid-row: 1; }
+    .hero-content { padding-left: 0 !important; text-align: center; }
+    .mas-logo img { height:46px; }
+    .mas-animated-logo { max-width:400px; }
   }
 </style>
 </head>
@@ -297,11 +325,13 @@
       <li><a href="#soluciones">Ecosistema MAS</a></li>
       <li><a href="#alianzas">Alianzas</a></li>
       <li><a href="#liderazgo">Liderazgo</a></li>
-      <li><a href="#casos">Casos y Blog</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#casos">Casos</a></li>
+      <li><a href="#blog">Blog</a></li>
     </ul>
     <div class="nav-cta">
-      <a class="btn-outline" href="#diagnostico">Hacer Diagnóstico Gratuito</a>
-      <a class="btn-solid" href="https://wa.me/56997416972" target="_blank">Hablemos</a>
+      <a class="btn-outline" href="#contacto">Descargar Checklist ROI</a>
+      <a class="btn-solid" href="#contacto">Hablemos</a>
     </div>
   </div>
 </nav>
@@ -314,7 +344,7 @@
 
   <div class="container hero-grid">
     <div class="hero-animated-wrapper d-100">
-      <div class="mas-animated-logo">
+      <div class="mas-animated-logo" role="img" aria-label="Animación del isologo MAS">
         <svg class="mas-animated-svg" viewBox="0 0 340 340" aria-hidden="true" style="width: 100%; height: 100%; filter: drop-shadow(0 20px 40px rgba(26,46,74,0.15));">
           <defs>
             <style>
@@ -335,24 +365,42 @@
               @keyframes d-tr { 0%, 15% { transform: rotate(-45deg) translate(-45px, 45px); } 25%, 35% { transform: rotate(0deg) translate(-45px, 45px); } 45%, 100% { transform: rotate(0deg) translate(0, 0); } }
               @keyframes d-bl { 0%, 15% { transform: rotate(-45deg) translate(45px, -45px); } 25%, 35% { transform: rotate(0deg) translate(45px, -45px); } 45%, 100% { transform: rotate(0deg) translate(0, 0); } }
               @keyframes d-br { 0%, 15% { transform: rotate(-45deg) translate(-45px, -45px); } 25%, 35% { transform: rotate(0deg) translate(-45px, -45px); } 45%, 100% { transform: rotate(0deg) translate(0, 0); } }
-              .col-v  { animation: c-v 6s infinite ease; } .col-hl { animation: c-hl 6s infinite ease; } .col-hr { animation: c-hr 6s infinite ease; } .col-tl { fill: #833d8e; } .col-tr { animation: c-tr 6s infinite ease; } .col-bl { animation: c-bl 6s infinite ease; } .col-br { animation: c-br 6s infinite ease; }
-              @keyframes c-v  { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #edb321; } } @keyframes c-hl { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #1f2937; } } @keyframes c-hr { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #1f2937; } } @keyframes c-tr { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #009739; } } @keyframes c-bl { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #d62216; } } @keyframes c-br { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #23398d; } }
+              .col-v  { animation: c-v 6s infinite ease; }
+              .col-hl { animation: c-hl 6s infinite ease; }
+              .col-hr { animation: c-hr 6s infinite ease; }
+              .col-tl { fill: #833d8e; } 
+              .col-tr { animation: c-tr 6s infinite ease; }
+              .col-bl { animation: c-bl 6s infinite ease; }
+              .col-br { animation: c-br 6s infinite ease; }
+              @keyframes c-v  { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #edb321; } } 
+              @keyframes c-hl { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #1f2937; } } 
+              @keyframes c-hr { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #1f2937; } } 
+              @keyframes c-tr { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #009739; } } 
+              @keyframes c-bl { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #d62216; } } 
+              @keyframes c-br { 0%, 65% { fill: #833d8e; } 75%, 100% { fill: #23398d; } } 
             </style>
           </defs>
-          <g class="anim-diag-tl"><rect x="40" y="80" width="140" height="52" rx="26" transform="rotate(45 110 106)" class="col-tl" /></g><g class="anim-diag-tr"><rect x="160" y="80" width="140" height="52" rx="26" transform="rotate(-45 230 106)" class="col-tr" /></g><g class="anim-diag-bl"><rect x="40" y="208" width="140" height="52" rx="26" transform="rotate(-45 110 234)" class="col-bl" /></g><g class="anim-diag-br"><rect x="160" y="208" width="140" height="52" rx="26" transform="rotate(45 230 234)" class="col-br" /></g><g class="anim-hl"><rect x="10" y="144" width="145" height="52" rx="26" class="col-hl" /></g><g class="anim-hr"><rect x="185" y="144" width="145" height="52" rx="26" class="col-hr" /></g><g class="anim-v"><rect x="144" y="10" width="52" height="320" rx="26" class="col-v" /></g>
+          <g class="anim-diag-tl"><rect x="40" y="80" width="140" height="52" rx="26" transform="rotate(45 110 106)" class="col-tl" /></g>
+          <g class="anim-diag-tr"><rect x="160" y="80" width="140" height="52" rx="26" transform="rotate(-45 230 106)" class="col-tr" /></g>
+          <g class="anim-diag-bl"><rect x="40" y="208" width="140" height="52" rx="26" transform="rotate(-45 110 234)" class="col-bl" /></g>
+          <g class="anim-diag-br"><rect x="160" y="208" width="140" height="52" rx="26" transform="rotate(45 230 234)" class="col-br" /></g>
+          <g class="anim-hl"><rect x="10" y="144" width="145" height="52" rx="26" class="col-hl" /></g>
+          <g class="anim-hr"><rect x="185" y="144" width="145" height="52" rx="26" class="col-hr" /></g>
+          <g class="anim-v"><rect x="144" y="10" width="52" height="320" rx="26" class="col-v" /></g>
         </svg>
       </div>
     </div>
-    <div class="hero-content">
+    <div class="hero-content" style="padding-left: 0; text-align: left;">
       <h1 class="animate-up d-200">
-        Convierte la capacitación en el motor estratégico de RRHH. <span class="text-highlight">Con resultados medibles.</span>
+        Convierte la capacitación en el <span class="text-highlight">motor estratégico de RRHH</span> con resultados medibles.
       </h1>
       <p class="hero-lead animate-up d-300">
-        Llevamos <strong>30 años</strong> transformando el aprendizaje corporativo para desarrollar el talento que tu organización necesita hoy.
-      </p>
-      <p class="hero-sub animate-up d-400">Instalamos procesos ágiles, medimos el ROI y dejamos capacidades instaladas que aseguran el retorno de tu inversión de manera sostenible en el tiempo.</p> 
+       Llevamos <strong>30 años transformado el aprendizaje corporativo</strong>. Instalamos procesos ágiles, medimos el ROI y dejamos capacidades instaladas que impactan tu organización de manera sostenible.
+        
+
       <div class="nav-cta animate-up d-500" style="gap: 16px; flex-wrap: wrap;">
-        <a class="btn-solid" href="#diagnostico" style="padding:16px 32px; font-size:15px; background:var(--brand-rojo);">Hacer Diagnóstico Gratuito</a>
+        <a class="btn-solid" href="#contacto" style="padding:16px 32px; font-size:15px; background:var(--brand-rojo);">Hablemos de tu impacto</a>
+        <a class="btn-outline" href="#contacto" style="padding:16px 32px; font-size:15px;">Descargar Checklist ROI</a>
       </div>
     </div>
   </div>
@@ -364,7 +412,7 @@
       <div class="section-label">El desafío actual</div>
       <h2 style="font-size: 2.2rem; margin-bottom: 20px; color: var(--navy3);">El 70% de las capacitaciones no transfieren conocimientos al puesto de trabajo.</h2>
       <p style="color: var(--text); font-size: 1.1rem; margin-bottom: 20px;">Las organizaciones invierten millones en tecnología que nadie usa y en cursos genéricos que no cambian comportamientos. ¿El resultado? Frustración, pérdida de tiempo y un nulo impacto en el negocio.</p>
-      
+
       <div class="highlight-box reveal delay-1">
         <h3>La brecha de habilidades te está costando caro.</h3>
         <p style="margin: 0; font-size: 15px;">La retención de talento y la adaptación al cambio ya no se solucionan con un "curso de liderazgo" anual. Si no mides el retorno de tu inversión en talento, estás operando a ciegas en un mercado implacable.</p>
@@ -385,8 +433,9 @@
     <div class="section-label reveal">Dejamos Capacidades Instaladas</div>
     <h2 class="section-title reveal delay-1">Instalamos procesos, no solo plataformas</h2>
     <p class="section-sub reveal delay-2" style="max-width:800px; margin-bottom:50px;">Nuestro ecosistema alinea el desarrollo de capacidades a las necesidades estratégicas de tu organización. Transferimos nuestro conocimiento para desarrollar nuevas mentalidades orientadas al impacto en el negocio.</p>
-    
+
     <div class="services-grid">
+      
       <div class="service-card card-consultoria reveal">
         <div class="service-icon" aria-hidden="true" style="background: transparent; width: 68px; height: 68px;">
           <svg viewBox="0 0 340 340" style="width: 100%; height: 100%;">
@@ -395,7 +444,7 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-morado);">MAS Consultoría</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>Alineación Estratégica.</strong> Diseñamos arquitecturas de aprendizaje vinculadas a los OKRs de tu negocio.</p>
+        <p style="color:var(--muted); font-size:14px;"><strong>Alineación Estratégica.</strong> Diseñamos arquitecturas de aprendizaje directamente vinculadas a los OKRs de tu negocio. No hacemos "levantamiento de necesidades", trazamos rutas de impacto.</p>
       </div>
 
       <div class="service-card card-formacion reveal delay-1">
@@ -406,7 +455,7 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-amarillo);">MAS Formación</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>Liderazgo y Aprendizaje Ágil.</strong> Potenciamos a tus equipos con talleres de liderazgo y tecnología IA Colossyan.</p>
+        <p style="color:var(--muted); font-size:14px;"><strong>Liderazgo y Aprendizaje Ágil.</strong> Potenciamos a tus equipos con <strong>talleres de liderazgo y feedback</strong> de alto impacto, integrando además tecnología <strong>Colossyan (IA)</strong> para crear contenidos escalables.</p>
       </div>
 
       <div class="service-card card-plataformas reveal delay-2">
@@ -417,7 +466,7 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-verde);">MAS Plataformas</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>El fin del cementerio virtual.</strong> Implementamos ecosistemas LMS dinámicos asegurando adopción y engagement.</p>
+        <p style="color:var(--muted); font-size:14px;"><strong>El fin del cementerio virtual.</strong> Implementamos ecosistemas LMS dinámicos asegurando la adopción digital y el engagement diario de tus colaboradores en procesos vivos de aprendizaje.</p>
       </div>
 
       <div class="service-card card-medicion reveal delay-3">
@@ -428,8 +477,9 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-rojo);">MAS Medición</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>El fin del misterio del ROI.</strong> Demostramos el retorno financiero de tu inversión en talento (Metodología Nivel 5).</p>
+        <p style="color:var(--muted); font-size:14px;"><strong>El fin del misterio del ROI.</strong> Demostramos el retorno financiero de tu inversión en talento aplicando la metodología de medición Nivel 5 global certificada por el ROI Institute.</p>
       </div>
+
     </div>
 
     <div class="ecosystem-banner reveal delay-4" style="background: linear-gradient(90deg, var(--brand-morado), var(--brand-amarillo), var(--brand-verde), var(--brand-rojo)); padding: 3px; border-radius: var(--radius-lg); margin-top: 50px; box-shadow: var(--shadow-md);">
@@ -437,10 +487,11 @@
         <span aria-hidden="true" style="font-size: 30px; display: block; margin-bottom: 10px;">🔄</span>
         <h3 style="font-size: 24px; color: var(--navy3); margin-bottom: 15px;">El Efecto Multiplicador del Ecosistema MAS</h3>
         <p style="color: var(--text); font-size: 16px; margin: 0; max-width: 850px; margin: auto; line-height: 1.8;">
-          Nuestras áreas no trabajan en silos. <strong>Consultoría</strong> traza la ruta, <strong>Formación</strong> desarrolla habilidades, <strong>Plataformas</strong> habilita a escala, y <strong>Medición</strong> comprueba el ROI. <br><strong style="color: var(--navy); font-size: 17px; margin-top: 10px; display: inline-block;">Juntas, garantizan que tu inversión impacte directamente en la última línea.</strong>
+          Nuestras áreas no trabajan en silos. <strong>Consultoría</strong> traza la ruta estratégica, <strong>Formación</strong> desarrolla las habilidades críticas en la cultura, <strong>Plataformas</strong> habilita el aprendizaje continuo a escala, y <strong>Medición</strong> comprueba el ROI financiero. <br><strong style="color: var(--navy); font-size: 17px; margin-top: 10px; display: inline-block;">Juntas, garantizan que tu inversión en talento impacte directamente en la última línea.</strong>
         </p>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -449,28 +500,35 @@
     <span class="section-label" style="color:rgba(255,255,255,0.8);">Autoridad y Benchmark</span>
     <h2 style="color:#fff; font-size:36px; margin-bottom:18px;">Líderes Tecnológicos y Metodológicos</h2>
     <p style="color:rgba(255,255,255,0.6); max-width:600px; margin:auto; font-size:16px;">Nos asociamos con líderes mundiales integrando IA y certificaciones de clase mundial a tu gestión de talento.</p>
-    
+
     <div class="partners-grid">
-      <a class="partner-card reveal delay-1" href="https://roiinstitute.net/" target="_blank">
-        <div class="logo-pill roi-pill"><img src="assets/roi-logo.svg" alt="ROI Institute" class="partner-logo roi-logo"></div>
+      <a class="partner-card reveal delay-1" href="https://roiinstitute.net/" target="_blank" rel="noopener noreferrer">
+        <div class="logo-pill roi-pill">
+          <img src="assets/roi-logo.svg" alt="ROI Institute" class="partner-logo roi-logo">
+        </div>
         <h3>ROI Institute Partner</h3>
-        <p>Partners oficiales desde 2003 y los únicos en la región certificados para medir el ROI Nivel 5.</p>
+        <p>Partners oficiales de Jack Phillips desde 2003 y los <strong style="color:rgba(255,255,255,0.9);">únicos en la región</strong> certificados para medir el ROI Nivel 5.</p>
       </a>
-      <a class="partner-card reveal delay-2" href="#" target="_blank">
+
+      <a class="partner-card reveal delay-2" href="#" target="_blank" rel="noopener noreferrer">
         <div class="p-logo clsn">Colossyan</div>
         <h3>Partners en Formación IA</h3>
-        <p>Pioneros en el uso de Avatares e IA generativa para escalar el aprendizaje.</p>
-        <span class="p-badge">IA y Generación</span>
+        <p>Pioneros en el uso de <strong>Avatares e IA generativa</strong> para escalar el aprendizaje y democratizar la formación asincrónica.</p>
+        <span class="p-badge" style="background:rgba(255,255,255,0.2);">IA y Generación de Contenido</span>
       </a>
-      <a class="partner-card reveal delay-3" href="https://business.linkedin.com/talent-solutions" target="_blank">
+
+      <a class="partner-card reveal delay-3" href="https://business.linkedin.com/talent-solutions" target="_blank" rel="noopener noreferrer">
         <div class="p-logo li">in</div>
         <h3>LinkedIn Silver Partner</h3>
-        <p>Desde 2025, somos Silver Partners potenciando soluciones para Hiring y Learning.</p>
+        <p>Desde 2025, somos <strong style="color:rgba(255,255,255,0.9);">Silver Partners</strong> potenciando soluciones robustas para Hiring y Learning corporativo.</p>
       </a>
-      <a class="partner-card reveal delay-4" href="https://www.ebmetrics.cl/" target="_blank">
-        <div class="logo-pill"><img src="assets/eb-metrics-logo.svg" alt="eb | metrics" class="partner-logo eb-logo"></div>
+
+      <a class="partner-card reveal delay-4" href="https://www.ebmetrics.cl/" target="_blank" rel="noopener noreferrer">
+        <div class="logo-pill">
+          <img src="assets/eb-metrics-logo.svg" alt="eb | metrics" class="partner-logo eb-logo">
+        </div>
         <h3>eb | metrics</h3>
-        <p>Especialistas en ciencia de datos y selección. Resultados predictivos legítimos.</p>
+        <p>Especialistas en <strong>ciencia de datos y selección</strong>. Resultados predictivos legítimos para la mejor toma de decisiones organizacionales.</p>
       </a>
     </div>
   </div>
@@ -500,6 +558,42 @@
   </div>
 </section>
 
+<section class="section-pad expertise-section" id="expertise">
+  <div class="container expertise-grid">
+    <div class="reveal">
+      <div class="section-label">Nuestra Expertise</div>
+      <h2 class="section-title">+ 500 clientes en 15 países</h2>
+      <div class="expertise-copy">
+        <p><strong>+ de 30 años en la acción</strong> nos han dado experiencia en diversas industrias.</p>
+        <p class="expertise-industries">Energía • Telecomunicaciones • Retail • Banca • Alimentación • Educación • Medios • Transportes • Instituciones Públicas • Minería</p>
+      </div>
+    </div>
+
+    <div class="expertise-carousel reveal delay-1" aria-label="Carrusel de clientes MAS Consultores">
+      <div class="expertise-track" id="expertiseTrack">
+        <figure class="expertise-slide"><img src="assets/Foto 1 Clientes.png" alt="Cliente de MAS Consultores 1"></figure>
+        <figure class="expertise-slide"><img src="assets/Foto 2 Clientes.png" alt="Cliente de MAS Consultores 2"></figure>
+        <figure class="expertise-slide"><img src="assets/Foto 3 Clientes.png" alt="Cliente de MAS Consultores 3"></figure>
+        <figure class="expertise-slide"><img src="assets/Foto 4 clientes.png" alt="Cliente de MAS Consultores 4"></figure>
+        <figure class="expertise-slide"><img src="assets/foto 5 Clientes.png" alt="Cliente de MAS Consultores 5"></figure>
+      </div>
+      <div class="expertise-controls">
+        <div class="expertise-arrows">
+          <button class="expertise-arrow" type="button" onclick="goExpertise(expertiseIdx-1)" aria-label="Ver imagen anterior">‹</button>
+          <button class="expertise-arrow" type="button" onclick="goExpertise(expertiseIdx+1)" aria-label="Ver imagen siguiente">›</button>
+        </div>
+        <div class="expertise-dots">
+          <button class="expertise-dot active" type="button" onclick="goExpertise(0)" aria-label="Ver imagen 1"></button>
+          <button class="expertise-dot" type="button" onclick="goExpertise(1)" aria-label="Ver imagen 2"></button>
+          <button class="expertise-dot" type="button" onclick="goExpertise(2)" aria-label="Ver imagen 3"></button>
+          <button class="expertise-dot" type="button" onclick="goExpertise(3)" aria-label="Ver imagen 4"></button>
+          <button class="expertise-dot" type="button" onclick="goExpertise(4)" aria-label="Ver imagen 5"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section-pad" id="casos" style="background:var(--bg-light);">
   <div class="container">
     <div class="section-label">Casos de éxito</div>
@@ -510,7 +604,8 @@
         <div class="case-body">
           <div class="case-company">Banco Santander</div>
           <h3>Programa de desarrollo de liderazgo</h3>
-          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Diseñamos iniciativas enfocadas en la transferencia al puesto de trabajo.</p>
+          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Diseñamos iniciativas de desarrollo enfocadas en la transferencia al puesto de trabajo.</p>
+          <a class="btn-link" href="#contacto">Hablemos de tu caso →</a>
         </div>
       </div>
       <div class="case-card reveal delay-1">
@@ -518,7 +613,8 @@
         <div class="case-body">
           <div class="case-company">Copec</div>
           <h3>Evaluación de competencias a escala</h3>
-          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Por 10 años, Copec utilizó nuestro programa de evaluación metodológico.</p>
+          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Por 10 años, Copec utilizó nuestro programa metodológico de evaluación de competencias.</p>
+          <a class="btn-link" href="#contacto">Hablemos de tu caso →</a>
         </div>
       </div>
       <div class="case-card reveal delay-2">
@@ -526,7 +622,8 @@
         <div class="case-body">
           <div class="case-company">Gasco</div>
           <h3>Transformación cultural y formativa</h3>
-          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Alineamos su transformación estratégica con capacidades organizacionales.</p>
+          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Alineamos su transformación estratégica con capacidades organizacionales sólidas.</p>
+          <a class="btn-link" href="#contacto">Hablemos de tu caso →</a>
         </div>
       </div>
     </div>
@@ -537,29 +634,33 @@
   <div class="container">
     <div class="section-label reveal">Insights Estratégicos</div>
     <h2 class="section-title reveal delay-1">Recursos para Gerentes de RRHH</h2>
+    <p class="section-sub reveal delay-2">Domina People Analytics, transferencia de habilidades y formación en entornos ágiles.</p>
+    
     <div class="cases-grid">
       <div class="case-card reveal">
         <div class="case-body">
           <div class="case-company">People Analytics</div>
-          <h3 style="color: var(--brand-morado);">Cómo medir el impacto real de la capacitación (y no morir en el intento)</h3>
-          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Descubre cómo pasar de la métrica de vanidad al ROI efectivo...</p>
-          <a class="btn-link" href="https://blog.masconsultores.cl/" target="_blank">Leer artículo →</a>
+          <h3 style="color: var(--brand-morado);">Cómo medir el impacto real de la capacitación en los KPIs del negocio (y no morir en el intento)</h3>
+          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">La evaluación de la capacitación sigue siendo un desafío. Descubre cómo pasar de la métrica de vanidad al ROI efectivo...</p>
+          <a class="btn-link" href="https://blog.masconsultores.cl/" target="_blank">Leer artículo completo →</a>
         </div>
       </div>
+      
       <div class="case-card reveal delay-1">
         <div class="case-body">
           <div class="case-company">Transferencia de Habilidades</div>
-          <h3 style="color: var(--brand-amarillo);">El 70% de tus capacitaciones se pierde: Estrategias de retención</h3>
-          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Asegura que los conocimientos se conviertan en comportamientos medibles...</p>
-          <a class="btn-link" href="https://blog.masconsultores.cl/" target="_blank">Leer artículo →</a>
+          <h3 style="color: var(--brand-amarillo);">El 70% de tus capacitaciones se pierde: Estrategias para que el aprendizaje salga del aula</h3>
+          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Conoce el Checklist ROI definitivo para asegurar que los conocimientos se conviertan en comportamientos medibles en tu equipo...</p>
+          <a class="btn-link" href="https://blog.masconsultores.cl/" target="_blank">Leer artículo completo →</a>
         </div>
       </div>
+      
       <div class="case-card reveal delay-2">
         <div class="case-body">
           <div class="case-company">Tecnología y Talento</div>
-          <h3 style="color: var(--brand-verde);">El fin de las plataformas vacías en entornos VUCA</h3>
-          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Cómo integrar un LMS que realmente sea adoptado por la organización...</p>
-          <a class="btn-link" href="https://blog.masconsultores.cl/" target="_blank">Leer artículo →</a>
+          <h3 style="color: var(--brand-verde);">El fin de las plataformas vacías: Cómo instalar procesos de aprendizaje ágil en entornos VUCA</h3>
+          <p style="color:var(--muted); font-size:14px; margin-bottom:16px;">Las herramientas por sí solas no generan cultura. Cómo integrar un LMS que realmente sea adoptado por la organización...</p>
+          <a class="btn-link" href="https://blog.masconsultores.cl/" target="_blank">Leer artículo completo →</a>
         </div>
       </div>
     </div>
@@ -575,177 +676,140 @@
         <div class="test-track" id="testTrack">
           <div class="test-card">
             <div class="test-quote">El apoyo de MAS ha sido fundamental en el logro de nuestras metas de aprendizaje. Procesos reales, no solo software.</div>
-            <div class="test-author"><div class="test-avatar">G</div><div><strong style="display:block;">Gabriela Coll</strong><span class="test-role">Learning Lead · ACCENTURE</span></div></div>
+            <div class="test-author">
+              <div class="test-avatar" aria-hidden="true">G</div>
+              <div><strong style="display:block;">Gabriela Coll</strong><span class="test-role">Learning Lead Chile · ACCENTURE</span></div>
+            </div>
           </div>
           <div class="test-card">
             <div class="test-quote">MAS nos ayudó a transformar nuestra cultura de aprendizaje. Metodologías prácticas que el negocio finalmente valora y puede medir.</div>
-            <div class="test-author"><div class="test-avatar">R</div><div><strong style="display:block;">Ricardo Fuentes</strong><span class="test-role">Gerente de Personas · Banco Santander</span></div></div>
+            <div class="test-author">
+              <div class="test-avatar" aria-hidden="true">R</div>
+              <div><strong style="display:block;">Ricardo Fuentes</strong><span class="test-role">Gerente de Personas · Banco Santander</span></div>
+            </div>
           </div>
           <div class="test-card">
             <div class="test-quote">La alianza nos permitió implementar un ecosistema de desarrollo que conecta directamente con los objetivos estratégicos y financieros del negocio.</div>
-            <div class="test-author"><div class="test-avatar">M</div><div><strong style="display:block;">María José Pérez</strong><span class="test-role">Dir. de Capital Humano · Copec</span></div></div>
+            <div class="test-author">
+              <div class="test-avatar" aria-hidden="true">M</div>
+              <div><strong style="display:block;">María José Pérez</strong><span class="test-role">Directora de Capital Humano · Copec</span></div>
+            </div>
           </div>
         </div>
       </div>
       <div class="test-dots" id="testDots">
-        <button class="test-dot active" onclick="goTest(0)"></button>
-        <button class="test-dot" onclick="goTest(1)"></button>
-        <button class="test-dot" onclick="goTest(2)"></button>
+        <button class="test-dot active" aria-label="Testimonio 1" onclick="goTest(0)"></button>
+        <button class="test-dot" aria-label="Testimonio 2" onclick="goTest(1)"></button>
+        <button class="test-dot" aria-label="Testimonio 3" onclick="goTest(2)"></button>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section-pad" id="diagnostico" style="background: var(--bg-main);">
+<section class="section-pad" id="contacto">
   <div class="container lead-wrap">
-    
+
     <div class="reveal">
       <div class="section-label">Alineación Estratégica</div>
       <h2 class="section-title">¿Listo para medir el retorno de tu formación?</h2>
-      <p class="section-sub" style="margin-bottom:28px;">Nuestro equipo auditará tus procesos de talento para diseñar un ecosistema que impacte el negocio.</p>
-      
+      <p class="section-sub" style="margin-bottom:28px;">Nuestro equipo está listo para auditar tus procesos de talento y diseñar un ecosistema que impacte el negocio.</p>
+
       <a class="lead-wa-big" href="https://wa.me/56997416972?text=Hola%20MAS%20Consultores.%20Me%20interesa%20conversar%20con%20un%20experto%20sobre%20mis%20desaf%C3%ADos%20de%20talento." target="_blank" rel="noopener noreferrer">
         <span aria-hidden="true" style="font-size:24px;">💬</span>
         <div>
-          <strong style="display:block; font-size:16px;">Ponte en contacto con expertos</strong>
+          <strong style="display:block; font-size:16px;">Ponte en contacto con verdaderos expertos</strong>
           <span style="font-size:13px; font-weight:400; opacity:0.9;">Respuesta de un consultor en menos de 1 hora</span>
         </div>
       </a>
-      <p style="color:var(--muted); font-size:13px; margin-bottom:20px;">Dannett Ortiz · +56 9 9741 6972</p>
-      
-      <div class="divider-or">o realiza nuestra auditoría interactiva</div>
-      
-      <div class="trust-item"><span aria-hidden="true" style="color:var(--brand-morado);">📄</span> <strong>Diagnóstico Gratuito:</strong> Auditoría de Madurez de Aprendizaje</div>
-      <div class="trust-item"><span aria-hidden="true" style="color:var(--green-wa);">✓</span> Descubre en 2 minutos tus fugas de capital ocultas</div>
+      <p style="color:var(--muted); font-size:13px; margin-bottom:20px;">Área comercial · info@masconsultores.cl</p>
+
+      <div class="divider-or">o descarga nuestra plantilla exclusiva</div>
+
+      <div class="trust-item"><span aria-hidden="true" style="color:var(--brand-morado);">📄</span> <strong>Checklist ROI Gratuito:</strong> Auditoría de Madurez de Aprendizaje Corporativo</div>
+      <div class="trust-item"><span aria-hidden="true" style="color:var(--green-wa);">✓</span> Identifica fugas de dinero en capacitación</div>
     </div>
-
-    <div class="quiz-container reveal delay-1">
-      <div class="quiz-progress">
-        <div class="quiz-progress-bar" id="q-progress"></div>
+    
+    <div class="form-card reveal delay-1">
+      <h3 style="margin-bottom:6px;">Solicitar Checklist ROI y Diagnóstico</h3>
+      <p style="color:var(--muted); font-size:14px; margin-bottom:26px;">Te contactaremos con el material y una propuesta integral.</p>
+      
+      <div class="form-progress">
+        <div class="form-progress-bar done" id="p1"></div>
+        <div class="form-progress-bar" id="p2"></div>
+        <div class="form-progress-bar" id="p3"></div>
       </div>
-      <div class="quiz-header">
-        <h3 id="q-header-text">Paso 1: Perfil de tu Organización</h3>
-        <p style="color: rgba(255,255,255,0.8); font-size: 14px; margin: 0;" id="q-sub-text">Ayúdanos a calibrar el estándar esperado para tu empresa.</p>
-      </div>
-
-      <div class="quiz-body">
-        
-        <div class="quiz-step active" id="q-step-1">
-          <div class="q-title">¿Cuántos colaboradores tiene tu organización?</div>
-          <div class="chip-group" id="grp-tamaño">
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'tamaño')">1 – 50</div>
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'tamaño')">51 – 200</div>
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'tamaño')">201 – 1.000</div>
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'tamaño')">+ 1.000</div>
-          </div>
-
-          <div class="q-title">¿Cuántos años llevan operando?</div>
-          <div class="chip-group" id="grp-años">
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'años')">0 - 5 años</div>
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'años')">6 - 15 años</div>
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'años')">16 - 30 años</div>
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'años')">+ 30 años</div>
-          </div>
-
-          <div class="q-title">Nivel principal a capacitar:</div>
-          <div class="chip-group" id="grp-nivel">
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'nivel')">Primera Línea</div>
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'nivel')">Jefaturas</div>
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'nivel')">Profesionales</div>
-            <div class="chip-btn" onclick="selectQuizOpt(this, 'nivel')">Gerencia</div>
-          </div>
-
-          <div class="q-title">¿Qué pilar te interesa potenciar inicialmente?</div>
-          <div class="chip-group" id="grp-servicio">
-             <button type="button" class="chip-btn" onclick="selectQuizOpt(this,'servicio')">Consultoría</button>
-             <button type="button" class="chip-btn" onclick="selectQuizOpt(this,'servicio')">Formación Técnica</button>
-             <button type="button" class="chip-btn" onclick="selectQuizOpt(this,'servicio')">Talleres</button>
-             <button type="button" class="chip-btn" onclick="selectQuizOpt(this,'servicio')">Plataforma LMS</button>
-             <button type="button" class="chip-btn" onclick="selectQuizOpt(this,'servicio')">Plataforma Desempeño</button>
-             <button type="button" class="chip-btn" onclick="selectQuizOpt(this,'servicio')">Medición ROI</button>
-             <button type="button" class="chip-btn" onclick="selectQuizOpt(this,'servicio')">Diagnóstico</button>
-          </div>
-
-          <div class="quiz-nav" style="justify-content: flex-end;">
-            <button class="btn-solid" onclick="nextQuizStep(2)">Siguiente: Iniciar Auditoría →</button>
-          </div>
-        </div>
-
-        <div class="quiz-step" id="q-step-2">
-          <p style="color: var(--muted); margin-bottom: 20px; font-size: 14px;">Marca con un ✓ lo que tu organización hace de manera consistente.</p>
-          
-          <h4 style="color: var(--brand-morado); margin-bottom: 12px; font-size: 15px;">Fase 1: Alineación Estratégica</h4>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Diseñamos cursos para problemas de negocio (no solo por "peticiones").</div></div>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Establecemos KPIs medibles antes de iniciar formación.</div></div>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Documentamos la "línea base" de KPIs antes de entrenar.</div></div>
-
-          <h4 style="color: var(--brand-amarillo); margin-bottom: 12px; margin-top: 20px; font-size: 15px;">Fase 2: Aprendizaje y Reacción</h4>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Medimos intención real de aplicar (más allá de la encuesta de satisfacción).</div></div>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Aplicamos pruebas/simulaciones de habilidades.</div></div>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Tenemos un LMS que indica exactamente completitud y estancamiento.</div></div>
-
-          <div class="quiz-nav">
-            <button class="btn-outline" onclick="nextQuizStep(1)">← Volver</button>
-            <button class="btn-solid" onclick="nextQuizStep(3)">Siguiente Fase →</button>
-          </div>
-        </div>
-
-        <div class="quiz-step" id="q-step-3">
-          <h4 style="color: var(--brand-verde); margin-bottom: 12px; font-size: 15px;">Fase 3: Transferencia al Puesto</h4>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Terminan con un plan de acción a 30 días.</div></div>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Jefes directos se involucran y brindan feedback post-capacitación.</div></div>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Evaluaciones de seguimiento a 3 meses para ver cambio de comportamiento.</div></div>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Sabemos aislar matemáticamente los efectos de la capacitación en los resultados.</div></div>
-
-          <h4 style="color: var(--brand-rojo); margin-bottom: 12px; margin-top: 20px; font-size: 15px;">Fase 4: Retorno de Inversión (ROI)</h4>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Convertimos datos operativos a valores monetarios reales.</div></div>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Calculamos el costo TOTAL (software, HH, diseño).</div></div>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Aplicamos fórmulas para porcentaje de ROI Financiero.</div></div>
-          <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Presentamos resultados financieros al C-Level (no solo horas).</div></div>
-
-          <div class="quiz-nav">
-            <button class="btn-outline" onclick="nextQuizStep(2)">← Volver</button>
-            <button class="btn-solid" onclick="nextQuizStep(4)">Calcular mi Resultado</button>
-          </div>
-        </div>
-
-        <div class="quiz-step" id="q-step-4">
-          <div style="text-align: center; margin-bottom: 25px;">
-            <div style="font-size: 40px; margin-bottom: 10px;">📊</div>
-            <h3 style="color: var(--navy); font-size: 20px;">¡Tu análisis está listo!</h3>
-            <p style="color: var(--muted); font-size: 14px;">Ingresa tus datos para ver tu puntaje, leer el análisis y recibir tu reporte.</p>
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label class="form-label">Nombre *</label>
-            <input type="text" id="quiz-nombre" class="form-input" required>
-            
-            <label class="form-label">Email Corporativo *</label>
-            <input type="email" id="quiz-email" class="form-input" required>
-          </div>
-
-          <div class="quiz-nav" style="justify-content: center; margin-top: 15px;">
-            <button class="btn-solid" style="padding: 14px 40px; font-size: 15px; width: 100%;" onclick="submitQuiz()">Ver mi Puntaje y Diagnóstico Ahora</button>
-          </div>
-        </div>
-
-        <div class="quiz-step" id="q-step-5">
-          <div class="result-box">
-            <h3 style="color: var(--navy); margin-bottom: 15px; font-size: 18px;">Tu Puntaje de Madurez ROI</h3>
-            <div class="score-circle" id="final-score">0/14</div>
-            <h4 id="score-title" style="font-size: 18px; color: var(--brand-rojo); margin-bottom: 10px;">Nivel de Riesgo</h4>
-            <p id="score-desc" style="color: var(--muted); font-size: 14px; margin: 0 auto;">Tu presupuesto de capacitación es un "gasto ciego". Estás perdiendo la oportunidad de demostrar impacto.</p>
-            
-            <div class="insight-box">
-              <h4 style="color: var(--navy3); margin-bottom: 8px; font-size: 14px;">Análisis Estratégico:</h4>
-              <p id="dynamic-insight" style="font-size: 13px; margin: 0; color: var(--text);">Cargando análisis...</p>
+      <form id="leadForm" onsubmit="event.preventDefault();">
+        <div class="form-step active" id="step1">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="f_nombre">Nombre *</label>
+              <input class="form-input" id="f_nombre" type="text" placeholder="Tu nombre" required>
+              <div class="error-text">Este campo es obligatorio</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f_empresa">Empresa *</label>
+              <input class="form-input" id="f_empresa" type="text" placeholder="Tu empresa" required>
+              <div class="error-text">Este campo es obligatorio</div>
             </div>
 
-            <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid var(--border-light);">
-              <p style="font-weight: 700; color: var(--navy); margin-bottom: 10px; font-size: 14px;">¿No sabes cómo avanzar al siguiente nivel?</p>
-              <a href="https://wa.me/56997416972?text=Hola,%20acabo%20de%20hacer%20el%20Diagn%C3%B3stico%20ROI%20y%20me%20gustar%C3%ADa%20analizar%20mis%20resultados." target="_blank" class="btn-solid" style="background: var(--green-wa); font-size: 14px; padding: 12px 20px; display: block; text-align: center;">💬 Analizar resultados con un experto</a>
+          </div>
+          <div class="form-group">
+            <label class="form-label">¿Cuántos colaboradores tiene tu organización?</label>
+            <div class="form-chips" id="chips_tamaño">
+              <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">1–50</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">51–200</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">201–1.000</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'tamaño')">+1.000</button>
+            </div>
+
+          </div>
+          <button type="button" class="btn-next" onclick="validateAndGo(1,2)">Siguiente →</button>
+        </div>
+        <div class="form-step" id="step2">
+          <div class="form-group">
+            <label class="form-label">¿Qué pilar te interesa potenciar inicialmente?</label>
+            <div class="form-chips" id="chips_servicio">
+              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Consultoría Organizacional</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Liderazgo / IA Colossyan</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Plataformas y LMS</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'servicio')">Medición ROI / Tests</button>
+            </div>
+
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f_desafio">Principal desafío *</label>
+            <textarea class="form-textarea" id="f_desafio" placeholder="Ej: necesitamos medir el retorno de nuestra formación y mejorar la adopción..." required></textarea>
+            <div class="error-text">Por favor describe tu desafío</div>
+          </div>
+          <div class="step-nav">
+            <button type="button" class="btn-back" onclick="goStep(1)">← Volver</button>
+            <button type="button" class="btn-next" style="flex:1" onclick="validateAndGo(2,3)">Siguiente →</button>
+          </div>
+        </div>
+        <div class="form-step" id="step3">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="f_email">Email Corporativo *</label>
+              <input class="form-input" id="f_email" type="email" placeholder="tu@empresa.cl" required>
+              <div class="error-text">Email inválido</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f_telefono">Teléfono</label>
+              <input class="form-input" id="f_telefono" type="tel" placeholder="+56 9 XXXX XXXX">
+
             </div>
           </div>
+          <div class="step-nav" style="margin-top:20px;">
+            <button type="button" class="btn-back" onclick="goStep(2)">← Volver</button>
+            <button type="button" class="btn-solid" style="flex:1; padding:12px; font-size:14px;" onclick="submitForm()">Descargar y Enviar Solicitud</button>
+          </div>
+        </div>
+      </form>
+      <div class="form-step" id="stepSuccess">
+        <div class="form-success">
+          <div style="font-size:50px; margin-bottom:10px;" aria-hidden="true">✅</div>
+          <h3 style="color:var(--navy); margin-bottom:10px;">¡Solicitud recibida!</h3>
+          <p style="color:var(--muted); font-size:14px;">Revisa tu bandeja de entrada. Te responderemos en menos de <strong>24 horas hábiles</strong>.</p>
         </div>
 
       </div>
@@ -762,18 +826,34 @@
       </div>
       <div class="footer-col">
         <h4>Ecosistema Tecnológico</h4>
-        <ul><li><a href="#alianzas">LinkedIn Partners</a></li><li><a href="#alianzas">ROI Institute</a></li><li><a href="#alianzas">Colossyan</a></li><li><a href="#alianzas">eb | metrics</a></li></ul>
+        <ul>
+          <li><a href="#alianzas">LinkedIn Partners</a></li>
+          <li><a href="#alianzas">ROI Institute</a></li>
+          <li><a href="#alianzas">Colossyan</a></li>
+          <li><a href="#alianzas">eb | metrics</a></li>
+        </ul>
       </div>
       <div class="footer-col">
         <h4>Pilares</h4>
-        <ul><li><a href="#soluciones">Consultoría</a></li><li><a href="#soluciones">Formación</a></li><li><a href="#soluciones">Plataformas</a></li><li><a href="#soluciones">Medición</a></li></ul>
+        <ul>
+          <li><a href="#soluciones">MAS Consultoría</a></li>
+          <li><a href="#soluciones">MAS Formación</a></li>
+          <li><a href="#soluciones">MAS Plataformas</a></li>
+          <li><a href="#soluciones">MAS Medición</a></li>
+        </ul>
       </div>
       <div class="footer-col">
         <h4>Contacto</h4>
-        <ul><li style="color:rgba(255,255,255,0.5); font-size:14px;">Providencia, Santiago</li><li style="color:rgba(255,255,255,0.5); font-size:14px;">+56 22 584 00 90</li></ul>
+        <ul>
+          <li style="color:rgba(255,255,255,0.5); font-size:14px;">Providencia, Santiago</li>
+          <li style="color:rgba(255,255,255,0.5); font-size:14px;">+56 22 584 00 90</li>
+          <li style="color:rgba(255,255,255,0.5); font-size:14px;">info@masconsultores.cl</li>
+        </ul>
       </div>
     </div>
-    <div class="footer-bottom"><p>© 2026 Grupo MAS Consultores. Todos los derechos reservados.</p></div>
+    <div class="footer-bottom">
+      <p>© 2026 Grupo MAS Consultores. Todos los derechos reservados.</p>
+    </div>
   </div>
 </footer>
 
@@ -787,7 +867,7 @@
       <strong>Asistente Grupo MAS</strong>
       <span>🟢 En línea · Powered by IA</span>
     </div>
-    <button class="chat-close" onclick="toggleChat()">✕</button>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Cerrar chat">✕</button>
   </div>
   <div class="chat-messages" id="chatMessages"></div>
   <div class="chat-input-row">
@@ -797,136 +877,150 @@
 </div>
 
 <script>
-// ANIMACIONES Y SCROLL (Mantenido Original)
-window.addEventListener('scroll',()=>{ document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20); });
-const observer=new IntersectionObserver(entries=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('visible'); }}); },{threshold:0.15,rootMargin:"0px 0px -50px 0px"});
+// NAVBAR
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('navbar');
+  nav.classList.toggle('scrolled',window.scrollY>20);
+});
+
+// SCROLL REVEAL
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.15,rootMargin:"0px 0px -50px 0px"});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-// TESTIMONIALS (Mantenido Original)
-let testIdx=0; const testTrack=document.getElementById('testTrack'); const testDots=document.querySelectorAll('.test-dot');
+
+// EXPERTISE CAROUSEL
+let expertiseIdx=0;
+const expertiseTrack=document.getElementById('expertiseTrack');
+const expertiseDots=document.querySelectorAll('.expertise-dot');
+let expertiseInterval;
+function goExpertise(i){
+  if(!expertiseTrack) return;
+  const total=expertiseTrack.children.length;
+  expertiseIdx=(i+total)%total;
+  expertiseTrack.style.transform='translateX(-'+expertiseIdx*100+'%)';
+  expertiseDots.forEach((d,j)=>d.classList.toggle('active',j===expertiseIdx));
+  clearInterval(expertiseInterval);
+  expertiseInterval=setInterval(()=>goExpertise(expertiseIdx+1),4500);
+}
+if(expertiseTrack){
+  expertiseInterval=setInterval(()=>goExpertise(expertiseIdx+1),4500);
+}
+
+// TESTIMONIALS
+let testIdx=0;
+const testTrack=document.getElementById('testTrack');
+const testDots=document.querySelectorAll('.test-dot');
 let testInterval=setInterval(()=>goTest((testIdx+1)%3),5000);
 function goTest(i){
-  testIdx=i; testTrack.style.transform='translateX(-'+i*100+'%)';
+  testIdx=i;
+  testTrack.style.transform='translateX(-'+i*100+'%)';
   testDots.forEach((d,j)=>d.classList.toggle('active',j===i));
-  clearInterval(testInterval); testInterval=setInterval(()=>goTest((testIdx+1)%3),5000);
+  clearInterval(testInterval);
+  testInterval=setInterval(()=>goTest((testIdx+1)%3),5000);
 }
 
-// LÓGICA DEL DIAGNÓSTICO INTERACTIVO (ROI QUIZ)
-let quizData = { tamaño: '', años: '', nivel: '', servicio: '', score: 0 };
+// FORM
+const chips={};
+function selectChip(el,group){
+  document.querySelectorAll('#chips_'+group+' .chip-option').forEach(c=>c.classList.remove('selected'));
 
-function selectQuizOpt(el, group) {
-  document.querySelectorAll(`#grp-${group} .chip-btn`).forEach(btn => btn.classList.remove('selected'));
   el.classList.add('selected');
-  quizData[group] = el.innerText;
+  chips[group]=el.textContent;
 }
-
-function toggleCheck(el) {
-  el.classList.toggle('checked');
-}
-
-function nextQuizStep(step) {
-  if(step === 2) {
-    if(!quizData.tamaño || !quizData.años || !quizData.nivel || !quizData.servicio) {
-      alert("Por favor selecciona todas las opciones de perfilamiento."); return;
+function validateAndGo(cur,next){
+  let valid=true;
+  document.getElementById('step'+cur).querySelectorAll('input[required],textarea[required]').forEach(inp=>{
+    if(!inp.checkValidity()){
+      inp.classList.add('error');
+      if(inp.nextElementSibling)inp.nextElementSibling.style.display='block';
+      valid=false;
+    }else{
+      inp.classList.remove('error');
+      if(inp.nextElementSibling)inp.nextElementSibling.style.display='none';
     }
-  }
-  document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
-  document.getElementById(`q-step-${step}`).classList.add('active');
-  
-  const headerText = document.getElementById('q-header-text');
-  const subText = document.getElementById('q-sub-text');
-  const bar = document.getElementById('q-progress');
-  
-  if(step === 1) { headerText.innerText = 'Paso 1: Perfil de tu Organización'; subText.innerText = 'Ayúdanos a calibrar el estándar esperado.'; bar.style.width = '20%'; }
-  if(step === 2) { headerText.innerText = 'Paso 2: Fase 1 y 2'; subText.innerText = 'Alineación Estratégica y Reacción.'; bar.style.width = '50%'; }
-  if(step === 3) { headerText.innerText = 'Paso 3: Fase 3 y 4'; subText.innerText = 'Transferencia al Puesto y ROI.'; bar.style.width = '75%'; }
-  if(step === 4) { headerText.innerText = 'Generando Análisis...'; subText.innerText = 'Ya casi está listo.'; bar.style.width = '95%'; }
-  if(step === 5) { headerText.innerText = 'Tu Reporte Estratégico'; subText.innerText = 'Resultados de tu Auditoría.'; bar.style.width = '100%'; }
+  });
+  if(valid)goStep(next);
 }
+function goStep(n){
+  document.querySelectorAll('.form-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  ['p1','p2','p3'].forEach((id,i)=>document.getElementById(id).classList.toggle('done',i<n));
 
-function submitQuiz() {
-  const nombre = document.getElementById('quiz-nombre').value;
-  const email = document.getElementById('quiz-email').value;
-  if(!nombre || !email || !email.includes('@')) { alert("Por favor ingresa un nombre y email válido."); return; }
+}
+function submitForm(){
+  const email=document.getElementById('f_email');
+  if(!email.checkValidity()){
+    email.classList.add('error');
+    email.nextElementSibling.style.display='block';
+    return;
 
-  const checks = document.querySelectorAll('.checklist-item.checked');
-  quizData.score = checks.length; // Max 14
-
-  let insight = "";
-  if(quizData.tamaño.includes("201") || quizData.tamaño.includes("+") || quizData.años.includes("16") || quizData.años.includes("+")) {
-    insight += `Por el tamaño de tu plantilla (${quizData.tamaño}) y trayectoria, tu estándar mínimo debe ser certificar la <strong>Transferencia al Puesto y Medición Financiera</strong>. `;
-  } else {
-    insight += `Estar en fase de consolidación (${quizData.tamaño} empleados) es el momento ideal para instalar procesos medibles antes de escalar gastos. `;
   }
-
-  if(quizData.nivel.includes("Jefaturas") || quizData.nivel.includes("Gerencia")) {
-    insight += `<br><br>Al entrenar a <strong>${quizData.nivel}</strong>, medir el Nivel 5 es crítico: un líder mal capacitado cuesta hasta 3 veces su salario anual en impacto organizacional.`;
-  } else {
-    insight += `<br><br>Capacitando a <strong>${quizData.nivel}</strong>, aislar los efectos en métricas operativas te dará el ROI más rápido para mostrar a Gerencia.`;
-  }
-
-  document.getElementById('dynamic-insight').innerHTML = insight;
-  document.getElementById('final-score').innerText = `${quizData.score}/14`;
-
-  const title = document.getElementById('score-title');
-  const desc = document.getElementById('score-desc');
-  if(quizData.score >= 11) {
-    title.innerText = "Nivel Experto (Alto Retorno)"; title.style.color = "var(--brand-verde)";
-    desc.innerText = "Tienes un ecosistema maduro. Estás listo para escalar con IA y potenciar tus procesos.";
-    document.querySelector('.score-circle').style.borderColor = "var(--brand-verde)";
-  } else if (quizData.score >= 6) {
-    title.innerText = "Nivel Intermedio (Desarrollo)"; title.style.color = "var(--brand-amarillo)";
-    desc.innerText = "Mides reacción, pero tu puente hacia el impacto financiero está roto. Faltan procesos de transferencia.";
-    document.querySelector('.score-circle').style.borderColor = "var(--brand-amarillo)";
-  } else {
-    title.innerText = "Nivel de Riesgo (Fugas de Capital)"; title.style.color = "var(--brand-rojo)";
-    desc.innerText = "Tu presupuesto es un 'gasto ciego'. Tienes una oportunidad urgente de instalar procesos medibles.";
-    document.querySelector('.score-circle').style.borderColor = "var(--brand-rojo)";
-  }
-
-  /* REEMPLAZAR "TU_WEBHOOK" CON LA URL DE MAKE/CRM PARA MANDAR EL PDF Y LOS DATOS */
-  const payload = {
-    nombre: nombre, email: email, score: quizData.score, tamano: quizData.tamaño, anos: quizData.años, nivel: quizData.nivel, servicio: quizData.servicio
+  const data={
+    nombre:document.getElementById('f_nombre').value,
+    empresa:document.getElementById('f_empresa').value,
+    tamaño:chips['tamaño']||'N/A',
+    servicio:chips['servicio']||'N/A',
+    desafio:document.getElementById('f_desafio').value,
+    email:email.value,
+    telefono:document.getElementById('f_telefono').value,
   };
-  // fetch('TU_WEBHOOK', { method: 'POST', body: JSON.stringify(payload) }).catch(e => console.log(e));
-
-  nextQuizStep(5);
+  console.log('Lead capturado (Auditoría ROI):',data);
+  document.querySelectorAll('.form-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('stepSuccess').classList.add('active');
+  ['p1','p2','p3'].forEach(id=>document.getElementById(id).classList.add('done'));
 }
 
-// CHATBOT LOGIC (Actualizado a tus 4 opciones simplificadas)
-let chatOpen=false,flowIdx=0; const leadData={};
+// CHATBOT
+let chatOpen=false,flowIdx=0;
+const leadData={};
 const flow=[
   {key:'init',msg:'¡Hola! 👋 Soy el asistente IA de Grupo MAS.\n\n¿Cuál es tu nombre?',type:'text'},
-  {key:'nombre',msg:'¡Mucho gusto, {nombre}! 😊\n\n¿Qué parte de nuestro ecosistema necesitas potenciar?',type:'options',options:['Consultoría o Diagnóstico','Formación y Talleres','Plataformas Tecnológicas','Medición ROI']},
+  {key:'nombre',msg:'¡Mucho gusto, {nombre}! 😊\n\n¿Qué parte de nuestro ecosistema necesitas potenciar?',type:'options',options:['Consultoría Estratégica','Formación y Liderazgo','Plataformas LMS','Medición ROI y Selección']},
   {key:'servicio',msg:'Excelente elección. ¿Cuál es el desafío específico que enfrentan con eso?',type:'text'},
-  {key:'desafio',msg:'Entendido. ¿Me compartes tu email o WhatsApp para enviarte nuestro material y que un consultor te contacte?',type:'text'},
+  {key:'desafio',msg:'Entendido. ¿Me compartes tu email o WhatsApp para enviarte nuestro Checklist ROI gratuito y que un consultor te contacte?',type:'text'},
   {key:'contacto',msg:'¡Listo! 🎉 Tengo la información.\n\nNos pondremos en contacto a la brevedad. También puedes escribirnos directo por WhatsApp:',type:'final'},
 ];
 function toggleChat(){
-  chatOpen=!chatOpen; document.getElementById('chatbot-window').classList.toggle('open',chatOpen);
+  chatOpen=!chatOpen;
+  document.getElementById('chatbot-window').classList.toggle('open',chatOpen);
   if(chatOpen&&flowIdx===0)setTimeout(()=>addBotMsg(flow[0].msg,flow[0].type,flow[0].options),400);
 }
 function escapeHTML(str){return str.replace(/[&<>'"]/g,tag=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[tag]));}
 function addBotMsg(msg,type='text',options=[]){
   const msgs=document.getElementById('chatMessages');
-  const typing=document.createElement('div'); typing.className='msg msg-bot';
+  const typing=document.createElement('div');
+  typing.className='msg msg-bot';
   typing.innerHTML='<div style="padding:10px 14px;background:var(--bg-light);border-radius:14px;font-size:12px;">Escribiendo...</div>';
-  msgs.appendChild(typing); msgs.scrollTop=msgs.scrollHeight;
+  msgs.appendChild(typing);
+  msgs.scrollTop=msgs.scrollHeight;
   setTimeout(()=>{
     if(msgs.contains(typing))msgs.removeChild(typing);
-    const d=document.createElement('div'); d.className='msg msg-bot';
-    const text=msg.replace('{nombre}',escapeHTML(leadData.nombre||''));
+    const d=document.createElement('div');
+    d.className='msg msg-bot';
+    const safeNombre=escapeHTML(leadData.nombre||'');
+    const text=msg.replace('{nombre}',safeNombre);
     let html='<div class="msg-bubble">'+text.replace(/\n/g,'<br>')+'</div>';
     if(options&&options.length)html+='<div class="msg-options">'+options.map(o=>'<button class="msg-opt" onclick="selectOpt(this,\''+o+'\')">'+o+'</button>').join('')+'</div>';
     if(type==='final')html+='<div style="margin-top:12px"><a href="https://wa.me/56997416972" target="_blank" style="background:#25D366;color:#fff;padding:8px 16px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;display:inline-block">💬 Abrir WhatsApp</a></div>';
-    d.innerHTML=html; msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight;
+    d.innerHTML=html;
+    msgs.appendChild(d);
+    msgs.scrollTop=msgs.scrollHeight;
   },800);
 }
 function addUserMsg(text){
   const msgs=document.getElementById('chatMessages');
-  const d=document.createElement('div'); d.className='msg msg-user';
+  const d=document.createElement('div');
+  d.className='msg msg-user';
   d.innerHTML='<div class="msg-bubble">'+escapeHTML(text)+'</div>';
-  msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight;
+  msgs.appendChild(d);
+  msgs.scrollTop=msgs.scrollHeight;
 }
 function selectOpt(el,val){
   el.closest('.msg-options').querySelectorAll('.msg-opt').forEach(o=>{o.style.pointerEvents='none';o.style.opacity='0.6';});
@@ -934,8 +1028,11 @@ function selectOpt(el,val){
   addUserMsg(val);processAnswer(val);
 }
 function sendMsg(){
-  const input=document.getElementById('chatInput'); const val=input.value.trim();
-  if(!val)return; input.value=''; addUserMsg(val);processAnswer(val);
+  const input=document.getElementById('chatInput');
+  const val=input.value.trim();
+  if(!val)return;
+  input.value='';
+  addUserMsg(val);processAnswer(val);
 }
 function processAnswer(val){
   const cur=flow[flowIdx];
@@ -944,7 +1041,10 @@ function processAnswer(val){
   else if(cur.key==='servicio')leadData.desafio=val;
   else if(cur.key==='desafio')leadData.contacto=val;
   flowIdx++;
-  if(flowIdx<flow.length){ const next=flow[flowIdx]; setTimeout(()=>addBotMsg(next.msg,next.type,next.options),500); }
+  if(flowIdx<flow.length){
+    const next=flow[flowIdx];
+    setTimeout(()=>addBotMsg(next.msg,next.type,next.options),500);
+  }
 }
 </script>
 </body>
