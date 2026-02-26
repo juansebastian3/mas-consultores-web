@@ -472,17 +472,30 @@
 <script>
 // --- CONFIGURACIÓN DE IA ---
 async function fetchAIAnalysis(promptText) {
+  // Pon aquí la URL de tu Webhook de Make
   const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/5ppnnj3ux0p1apjig6ls1e2qwp3vt3uu"; 
+
+  // TRUCO MÁGICO: Escapamos el texto para que las comillas y saltos de línea no rompan Make
+  const safePrompt = JSON.stringify(promptText).slice(1, -1);
+
   try {
     const response = await fetch(MAKE_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: promptText })
+      body: JSON.stringify({ prompt: safePrompt }) // Enviamos el prompt limpio
     });
-    if (!response.ok) return null;
-    const data = await response.json();
-    return data.reporte;
+    
+    if (!response.ok) {
+      console.error("❌ Error de Make.com");
+      return null;
+    }
+
+    // Leemos la respuesta como texto plano directo (sin JSON) para evitar errores de Make
+    const textData = await response.text();
+    return textData; 
+    
   } catch (e) {
+    console.error("❌ Error de conexión:", e);
     return null;
   }
 }
