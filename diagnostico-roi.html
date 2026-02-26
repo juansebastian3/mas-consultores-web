@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 <style>
   :root {
     --bg-main:#ffffff; --bg-light:#f7f9fc;
@@ -459,6 +460,9 @@
       <a class="btn-cta-big" href="index.html#contacto">
         &#128640; Analizar resultados con un experto certificado
       </a>
+      <button class="btn-secondary" onclick="downloadResultsPdf()" style="width:100%;margin-top:12px;justify-content:center;">
+        &#128190; Descargar respuestas y resultado en PDF
+      </button>
       <button class="btn-secondary" onclick="resetQuiz()" style="width:100%;margin-top:12px;justify-content:center;">&#128260; Repetir diagnóstico</button>
     </div>
   </div>
@@ -719,6 +723,195 @@ function resetQuiz() {
   ['countNum2','countNum3','countNum4'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='0';});
   Object.keys(profile).forEach(k=>delete profile[k]);
   goToStep(1);
+}
+
+function getTierSummary(total) {
+  if (total >= 16) {
+    return {
+      label: 'Ecosistema Maduro',
+      detalle: 'Tu organización opera en los niveles más altos de la Metodología Phillips.'
+    };
+  }
+  if (total >= 10) {
+    return {
+      label: 'En Desarrollo',
+      detalle: 'Tu organización tiene avances, pero aún faltan procesos estructurados para demostrar impacto financiero.'
+    };
+  }
+  return {
+    label: 'Zona de Riesgo',
+    detalle: 'Hoy existe alta inversión sin evidencia clara de retorno. La oportunidad de mejora es significativa.'
+  };
+}
+
+function getSelectedAnswersByLevel() {
+  const levels = {
+    1: 'Nivel 1 — Reacción',
+    2: 'Nivel 2 — Aprendizaje',
+    3: 'Nivel 3 — Aplicación',
+    4: 'Nivel 4 — Impacto',
+    5: 'Nivel 5 — ROI'
+  };
+
+  const answers = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+  document.querySelectorAll('.check-item.checked').forEach(item => {
+    const level = item.dataset.level;
+    if (!level || !answers[level]) return;
+    const text = item.querySelector('.check-text');
+    if (text && text.textContent.trim()) answers[level].push(text.textContent.trim());
+  });
+
+  return { levels, answers };
+}
+
+function addWrappedText(doc, text, x, y, maxWidth, lineHeight, isBold) {
+  doc.setFont('helvetica', isBold ? 'bold' : 'normal');
+  const lines = doc.splitTextToSize(text, maxWidth);
+  doc.text(lines, x, y);
+  return y + (lines.length * lineHeight);
+}
+
+async function createMasWatermarkDataUrl() {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        resolve(null);
+        return;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.globalAlpha = 0.08;
+      ctx.drawImage(img, 0, 0);
+      resolve(canvas.toDataURL('image/png'));
+    };
+    img.onerror = () => resolve(null);
+    img.src = 'assets/mas-logo.svg';
+  });
+}
+
+async function downloadResultsPdf() {
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    alert('No fue posible generar el PDF en este momento. Intenta nuevamente.');
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 48;
+  const contentWidth = pageWidth - (margin * 2);
+  const lineHeight = 16;
+
+  const watermark = await createMasWatermarkDataUrl();
+
+  function applyWatermark() {
+    if (!watermark) return;
+    const wmWidth = 340;
+    const wmHeight = 220;
+    const x = (pageWidth - wmWidth) / 2;
+    const y = (pageHeight - wmHeight) / 2;
+    doc.addImage(watermark, 'PNG', x, y, wmWidth, wmHeight, undefined, 'FAST');
+  }
+
+  function ensureSpace(y, needed) {
+    if (y + needed <= pageHeight - margin) return y;
+    doc.addPage();
+    applyWatermark();
+    return margin;
+  }
+
+  const total = document.querySelectorAll('.check-item.checked').length;
+  const summary = getTierSummary(total);
+  const { levels, answers } = getSelectedAnswersByLevel();
+
+  applyWatermark();
+  let y = margin;
+
+  doc.setTextColor(26, 46, 74);
+  doc.setFontSize(22);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Diagnóstico ROI - Reporte Personalizado', margin, y);
+
+  y += 28;
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(100, 116, 139);
+  doc.text('MAS Consultores | Único Partner Oficial del ROI Institute en Latinoamérica', margin, y);
+
+  y += 28;
+  doc.setFontSize(12);
+  doc.setTextColor(51, 65, 85);
+  y = addWrappedText(doc, 'Nombre: ' + (profile.nombre || 'No registrado'), margin, y, contentWidth, lineHeight, true);
+  y = addWrappedText(doc, 'Empresa: ' + (profile.empresa || 'No registrada'), margin, y + 4, contentWidth, lineHeight, true);
+  y = addWrappedText(doc, 'Email: ' + (profile.email || 'No registrado'), margin, y + 4, contentWidth, lineHeight, false);
+
+  y += 12;
+  y = ensureSpace(y, 90);
+  doc.setDrawColor(226, 232, 240);
+  doc.roundedRect(margin, y, contentWidth, 74, 8, 8, 'S');
+  y += 22;
+  doc.setFontSize(14);
+  doc.setTextColor(15, 31, 51);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Resultado: ' + summary.label + ' (' + total + '/20)', margin + 14, y);
+  y += 20;
+  doc.setFontSize(11);
+  doc.setTextColor(51, 65, 85);
+  doc.setFont('helvetica', 'normal');
+  y = addWrappedText(doc, summary.detalle, margin + 14, y, contentWidth - 28, 14, false);
+  y += 16;
+
+  doc.setFontSize(15);
+  doc.setTextColor(26, 46, 74);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Respuestas seleccionadas', margin, y);
+  y += 20;
+
+  Object.keys(levels).forEach(level => {
+    const selected = answers[level];
+    y = ensureSpace(y, 36);
+    doc.setFontSize(12);
+    doc.setTextColor(35, 57, 98);
+    doc.setFont('helvetica', 'bold');
+    doc.text(levels[level] + ' (' + selected.length + '/4)', margin, y);
+    y += 16;
+
+    if (!selected.length) {
+      y = ensureSpace(y, 22);
+      doc.setFontSize(11);
+      doc.setTextColor(100, 116, 139);
+      doc.setFont('helvetica', 'italic');
+      doc.text('- Sin respuestas seleccionadas.', margin + 12, y);
+      y += 16;
+      return;
+    }
+
+    selected.forEach(answer => {
+      y = ensureSpace(y, 48);
+      doc.setFontSize(11);
+      doc.setTextColor(51, 65, 85);
+      doc.setFont('helvetica', 'normal');
+      y = addWrappedText(doc, '- ' + answer, margin + 12, y, contentWidth - 12, 14, false);
+      y += 4;
+    });
+    y += 8;
+  });
+
+  const totalPages = doc.getNumberOfPages();
+  for (let i = 1; i <= totalPages; i++) {
+    doc.setPage(i);
+    doc.setFontSize(9);
+    doc.setTextColor(148, 163, 184);
+    doc.text('Página ' + i + ' de ' + totalPages, pageWidth - margin, pageHeight - 24, { align: 'right' });
+  }
+
+  const safeName = (profile.nombre || 'diagnostico').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'diagnostico';
+  doc.save('diagnostico-roi-' + safeName + '.pdf');
 }
 
 function escapeHTML(str){const d=document.createElement('div');d.textContent=str;return d.innerHTML;}
