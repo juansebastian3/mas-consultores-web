@@ -583,12 +583,36 @@ async function submitLead() {
 }
 
 function buildExecutiveReportPrompt(profileData, checklistSnapshot) {
+  const maxPerLevel = 4;
   let checklistDetail = '';
   Object.keys(checklistSnapshot.levelNames).forEach(level => {
     const checked = checklistSnapshot.selected[level] || [];
-    checklistDetail += `${checklistSnapshot.levelNames[level]}: ${checked.join(' | ') || 'Ninguna'}\n`;
+    checklistDetail += `${checklistSnapshot.levelNames[level]} (${checked.length}/${maxPerLevel}): ${checked.join(' | ') || 'Ninguna'}\n`;
   });
-  return `Actúa como Director de Consultoría. Genera Business Case para ${profileData.nombre} en ${profileData.empresa}. Industria: ${profileData.rubro}. Prácticas: ${checklistDetail}. Devuelve solo HTML estructurado.`;
+  return `
+Genera un Business Case ejecutivo breve para ${profileData.nombre} de ${profileData.empresa} (${profileData.rubro}).
+
+Contexto de diagnóstico (0 a 4 checks por nivel):
+${checklistDetail}
+
+Instrucciones obligatorias:
+1) Responder SOLO con HTML válido, sin markdown ni bloques tipo \`\`\`html.
+2) Tono consultivo en tercera persona sobre MAS Consultores (ej.: "MAS Consultores recomienda...").
+3) NO afirmar "base sólida" si un nivel tiene 0 o 1 checks. Ajustar el diagnóstico al puntaje real.
+4) Estructura corta y accionable con estos títulos: Resumen Ejecutivo, Hallazgos por Nivel, Oportunidad Crítica, Recomendación Prioritaria, Próximos Pasos.
+5) Máximo 650 palabras. Frases directas para lectura rápida.
+6) Incentivar explícitamente una reunión de trabajo con MAS Consultores en Próximos Pasos.
+7) Cerrar exactamente con: "Atentamente, MAS Consultores".
+`;
+}
+
+function sanitizeAIHtml(rawHtml) {
+  if (!rawHtml) return '';
+  return rawHtml
+    .replace(/^\s*```html\s*/i, '')
+    .replace(/^\s*```\s*/i, '')
+    .replace(/\s*```\s*$/i, '')
+    .trim();
 }
 
 async function calculateResults() {
@@ -599,7 +623,7 @@ async function calculateResults() {
 
   const snapshot = getChecklistSnapshotForPrompt();
   const prompt = buildExecutiveReportPrompt(profile, snapshot);
-  const aiReportHtml = await fetchAIAnalysis(prompt);
+  const aiReportHtml = sanitizeAIHtml(await fetchAIAnalysis(prompt));
 
   const finalReportBlock = aiReportHtml ? `<div class="ai-report-container">${aiReportHtml}</div>` : `<div class="ai-report-container"><h3>Reporte temporalmente no disponible</h3></div>`;
 
@@ -641,7 +665,22 @@ async function downloadResultsPdf() {
   const imgData = canvas.toDataURL('image/png');
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF('p', 'mm', 'a4');
-  pdf.addImage(imgData, 'PNG', 0, 0, 210, (canvas.height * 210) / canvas.width);
+  const pageWidth = 210;
+  const pageHeight = 297;
+  const imgHeight = (canvas.height * pageWidth) / canvas.width;
+  let remainingHeight = imgHeight;
+  let offsetY = 0;
+
+  pdf.addImage(imgData, 'PNG', 0, offsetY, pageWidth, imgHeight);
+  remainingHeight -= pageHeight;
+
+  while (remainingHeight > 0) {
+    offsetY -= pageHeight;
+    pdf.addPage();
+    pdf.addImage(imgData, 'PNG', 0, offsetY, pageWidth, imgHeight);
+    remainingHeight -= pageHeight;
+  }
+
   pdf.save('Business-Case-ROI.pdf');
 }
 
