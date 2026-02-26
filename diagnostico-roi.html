@@ -658,25 +658,31 @@ ${checklistDetail}`;
 }
 
 async function fetchAIAnalysis(promptText) {
-  if (!API_KEY) {
-    console.error("Falta la API Key");
-    return null;
-  }
+
+async function fetchAIAnalysis(promptText) {
+  
+  const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/5ppnnj3ux0p1apjig6ls1e2qwp3vt3uu"; 
+
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+    const response = await fetch(MAKE_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: promptText }] }]
-      })
+      body: JSON.stringify({ prompt: promptText }) // Le enviamos el prompt a Make
     });
     
-    const data = await response.json();
-
     if (!response.ok) {
-      console.error("❌ Google Gemini rechazó la petición. Motivo:", data.error?.message || "Error desconocido");
+      console.error("❌ Error de Make.com:", response.statusText);
       return null;
     }
+
+    const data = await response.json();
+    return data.reporte; // Make nos devolverá el reporte en esta variable
+    
+  } catch (e) {
+    console.error("❌ Error de conexión con Make:", e);
+    return null;
+  }
+}
 
     let textResult = data.candidates[0].content.parts[0].text;
     
