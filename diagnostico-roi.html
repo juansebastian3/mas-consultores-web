@@ -583,27 +583,28 @@ async function submitLead() {
 }
 
 function buildExecutiveReportPrompt(profileData, checklistSnapshot) {
-  const maxPerLevel = 4;
-  let checklistDetail = '';
-  Object.keys(checklistSnapshot.levelNames).forEach(level => {
+  const userDataLines = [
+    `Nombre: ${profileData.nombre || 'No informado'}`,
+    `Empresa: ${profileData.empresa || 'No informada'}`,
+    `Cargo: ${profileData.cargo || 'No informado'}`,
+    `Tamaño: ${profileData.colaboradores || 'No informado'}`,
+    `Industria: ${profileData.rubro || 'No informada'}`,
+    `Presupuesto: ${profileData.presupuesto || 'No informado'}`
+  ];
+
+  const practicesByLevel = Object.keys(checklistSnapshot.levelNames).map(level => {
+    const levelName = checklistSnapshot.levelNames[level];
     const checked = checklistSnapshot.selected[level] || [];
-    checklistDetail += `${checklistSnapshot.levelNames[level]} (${checked.length}/${maxPerLevel}): ${checked.join(' | ') || 'Ninguna'}\n`;
-  });
-  return `
-Genera un Business Case ejecutivo breve para ${profileData.nombre} de ${profileData.empresa} (${profileData.rubro}).
+    const unchecked = checklistSnapshot.unselected[level] || [];
+    return `${levelName}\n- Prácticas checkeadas: ${checked.join(' | ') || 'Ninguna'}\n- Prácticas no checkeadas: ${unchecked.join(' | ') || 'Ninguna'}`;
+  }).join('\n\n');
 
-Contexto de diagnóstico (0 a 4 checks por nivel):
-${checklistDetail}
-
-Instrucciones obligatorias:
-1) Responder SOLO con HTML válido, sin markdown ni bloques tipo \`\`\`html.
-2) Tono consultivo en tercera persona sobre MAS Consultores (ej.: "MAS Consultores recomienda...").
-3) NO afirmar "base sólida" si un nivel tiene 0 o 1 checks. Ajustar el diagnóstico al puntaje real.
-4) Estructura corta y accionable con estos títulos: Resumen Ejecutivo, Hallazgos por Nivel, Oportunidad Crítica, Recomendación Prioritaria, Próximos Pasos.
-5) Máximo 650 palabras. Frases directas para lectura rápida.
-6) Incentivar explícitamente una reunión de trabajo con MAS Consultores en Próximos Pasos.
-7) Cerrar exactamente con: "Atentamente, MAS Consultores".
-`;
+  return `Actúa como un Director de Consultoría Experto en la Metodología ROI de Phillips y Estratega de Talento Organizacional.
+\nVoy a entregarte los resultados de un "Diagnóstico de Madurez ROI" completado por un usuario. Tu objetivo es redactar un informe ejecutivo, ágil y dinamico, estratégico y persuasivo analizando sus respuestas.
+\nOBJETIVO CRÍTICO DEL INFORME:\nEste informe no solo lo leerá el usuario que completó el test; será utilizado por él/ella como "Champion" (promotor interno) para mostrárselo a sus pares, a la Gerencia General (CEO) o a la Gerencia de Finanzas (CFO). Por lo tanto, el documento debe funcionar como un "Business Case" que justifique la urgencia de cambiar su modelo de capacitación y demuestre que MAS Consultores es el único aliado seguro para hacerlo.\n\nContexto de tu empresa: \nRepresentas a "MAS Consultores", el único partner oficial del ROI Institute en Latinoamérica, con más de 30 años de experiencia instalando capacidades y ecosistemas de aprendizaje (Consultoría, Formación, Plataformas LMS y Medición ROI Nivel 5).\n\nInstrucciones estructurales para redactar el informe:\n\n1. Tono y Audiencia Dual:\nDirígete al usuario por su nombre ("tú"), pero utiliza un lenguaje financiero, de negocios y de gestión de riesgos tan contundente que cualquier Director que lea el informe entienda la urgencia. Habla de "fuga de capital", "gasto ciego en talento", "retorno de inversión", "alineación estratégica" y "ventaja competitiva".\n\n2. El Business Case (El riesgo y la pérdida de valor en no actuar): 
+Comienza contextualizando el tamaño de su empresa y su presupuesto. Explica por qué seguir capacitando sin llegar a los Niveles 4 (Impacto) y 5 (ROI Financiero) es un riesgo estructural. Dale al Champion argumentos irrebatibles: "Cada millón invertido sin trazabilidad al puesto de trabajo es presupuesto perdido". Hazle ver a la gerencia que el modelo actual es ineficiente.\n\n3. Resumen del Diagnóstico (Brechas y Puntos Ciegos):\nToma sus respuestas y destaca lo que SÍ hacen bien (ej. Reacción y Aprendizaje), pero expón con crudeza las brechas en Transferencia (Nivel 3) y ROI (Niveles 4 y 5). \n\n4. Guía Estratégica (El "Qué", pero NUNCA el "Cómo"):\nEntrega una hoja de ruta abstracta de 3 o 4 pasos (ej. "Aislar los efectos de la capacitación", "Vincular el diseño instruccional a los KPIs operativos"). \nIMPORTANTE: Explica muy bien QUÉ deben lograr, pero omite deliberadamente la explicación de CÓMO se hace tácticamente. Genera la sensación de que es un proceso metodológico de alta ingeniería para el cual necesitan expertos. 
+\n5. Credenciales y Autoridad (Por qué MAS Consultores):\nEsta sección es vital para convencer a la gerencia. Argumenta por qué este ecosistema NO debe construirse improvisando con recursos internos o proveedores genéricos. Posiciona explícitamente a MAS Consultores como la única opción lógica destacando:\n- Que somos el ÚNICO partner oficial del ROI Institute y Jack Phillips en Latinoamérica.\n- Nuestros 30 años de experiencia demostrable.\n- Que no entregamos "cursos", sino que "instalamos capacidades y procesos" para que el cambio sea sostenible.\n- La integración de tecnología ágil (como IA y Colossyan) sumada a la medición científica.\n\n6. Cierre y Llamado a la Acción (Para el Champion y su Jefatura):\nConcluye empoderando al usuario. Sugiérele que este diagnóstico es el primer paso para transformar a RRHH en un socio estratégico del negocio. Invítalo a él y a su equipo directivo a agendar una "Reunión de Diagnóstico de Impacto" con nuestros directores para trazar un roadmap para el siguiente año. 
+\n---\nDATOS DEL USUARIO A ANALIZAR:\n${userDataLines.join('\n')}\n\nDetalle exacto de prácticas checkeadas y no checkeadas:\n${practicesByLevel}`;
 }
 
 function sanitizeAIHtml(rawHtml) {
@@ -651,12 +652,18 @@ async function calculateResults() {
 function getChecklistSnapshotForPrompt() {
   const levelNames = { 1: 'Reacción', 2: 'Aprendizaje', 3: 'Aplicación', 4: 'Impacto', 5: 'ROI' };
   const selected = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+  const unselected = { 1: [], 2: [], 3: [], 4: [], 5: [] };
   document.querySelectorAll('.check-item.checked').forEach(item => {
     const level = item.dataset.level;
     const text = item.querySelector('.check-text')?.textContent?.trim();
     if (level && text) selected[level].push(text);
   });
-  return { levelNames, selected };
+  document.querySelectorAll('.check-item:not(.checked)').forEach(item => {
+    const level = item.dataset.level;
+    const text = item.querySelector('.check-text')?.textContent?.trim();
+    if (level && text) unselected[level].push(text);
+  });
+  return { levelNames, selected, unselected };
 }
 
 async function downloadResultsPdf() {
