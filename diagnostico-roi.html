@@ -104,10 +104,24 @@
   .gauge-fill{fill:none;stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset 1.5s cubic-bezier(.16,1,.3,1),stroke .5s}
   .gauge-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:36px;fill:var(--navy);text-anchor:middle}
   .gauge-label{font-family:'DM Sans',sans-serif;font-size:11px;fill:var(--muted);text-anchor:middle;font-weight:600;text-transform:uppercase;letter-spacing:1px}
+  .score-header{background:linear-gradient(135deg,var(--navy3),var(--navy));border-radius:var(--radius-lg);padding:32px 28px 24px;margin-bottom:28px;color:#fff;text-align:center}
+  .score-header h2{color:#fff;font-size:24px;margin-bottom:4px}
+  .score-header .score-sub{color:rgba(255,255,255,.65);font-size:13px;font-weight:500}
+  .score-header .gauge-bg{stroke:rgba(255,255,255,.15)}
+  .score-header .gauge-text{fill:#fff}
+  .score-header .gauge-label{fill:rgba(255,255,255,.6)}
+  .score-maturity{display:inline-block;padding:6px 18px;border-radius:50px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-top:12px}
   .phase-breakdown{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:28px}
-  .pb-item{padding:14px 8px;border-radius:var(--radius-sm);text-align:center}
+  .pb-item{padding:16px 8px;border-radius:var(--radius-sm);text-align:center;position:relative;overflow:hidden}
+  .pb-item::after{content:'';position:absolute;bottom:0;left:10%;width:80%;height:4px;border-radius:4px;background:currentColor;opacity:.3}
   .pb-score{font-size:22px;font-weight:900;display:block}
   .pb-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;opacity:.8}
+  .pb-bar{width:100%;height:6px;background:rgba(0,0,0,.06);border-radius:50px;margin-top:8px;overflow:hidden}
+  .pb-bar-fill{height:100%;border-radius:50px;transition:width 1s cubic-bezier(.16,1,.3,1)}
+  .book-rec{display:flex;align-items:center;gap:20px;background:linear-gradient(135deg,#f8f4fb,#f0e8f5);border:2px solid rgba(131,61,142,.15);border-radius:var(--radius-md);padding:20px 24px;margin:20px 0;text-align:left}
+  .book-icon{font-size:48px;flex-shrink:0}
+  .book-rec p{font-size:14px;line-height:1.6;margin:0}
+  .book-rec strong{color:var(--brand-morado)}
   .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--navy);color:#fff;padding:16px 32px;border-radius:var(--radius-sm);font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .25s;font-family:inherit;width:100%;letter-spacing:.01em}
   .btn-primary:hover{background:var(--navy2);transform:translateY(-1px);box-shadow:var(--shadow-md)}
   .btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:var(--muted);padding:14px 24px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;border:2px solid var(--border);cursor:pointer;transition:all .2s;font-family:inherit}
@@ -637,37 +651,41 @@ function buildExecutiveReportPrompt(profileData, checklistSnapshot) {
     const unchecked = checklistSnapshot.unselected[level] || [];
     return `${levelName}\n- Practicas checkeadas: ${checked.join(' | ') || 'Ninguna'}\n- Practicas no checkeadas: ${unchecked.join(' | ') || 'Ninguna'}`;
   }).join('\n\n');
-  return `Eres un analista de madurez en medicion de capacitacion basado en la Metodologia ROI de Phillips. Representas a MAS Consultores, unico partner del ROI Institute en Latinoamerica.
+  return `Eres un analista senior de medicion de impacto organizacional, especializado en la Metodologia ROI de Phillips (Niveles 1-5). Representas a MAS Consultores, unico partner del ROI Institute en Latinoamerica.
 
 FORMATO: Responde SOLO en HTML. Usa <h3> para titulos, <p> para parrafos, <ul><li> para listas, <strong> para negrita. NO Markdown. NO uses # ni ** ni ---. Solo etiquetas HTML.
 
 REGLAS DE ESTILO CRITICAS:
-- Se BREVE y DIRECTO. Maximo 2-3 oraciones por parrafo.
-- NO uses frases de halago ni felicitaciones como "quiero felicitarte" o "excelente primer paso".
-- NO uses cierres largos ni emotivos. El cierre debe ser 1 parrafo corto maximo.
-- Tono profesional, ejecutivo, orientado a datos. Como un informe de consultoria real, no un pitch de ventas.
+- BREVE y DIRECTO. Maximo 2-3 oraciones por parrafo.
+- PROHIBIDO: frases de halago, felicitaciones, "quiero felicitarte", "excelente primer paso", "es un placer".
+- PROHIBIDO: cierres largos, emotivos o motivacionales. Nada de "estamos listos para apoyarte" ni "este es el primer paso hacia la transformacion".
+- PROHIBIDO: repetir o listar textualmente las practicas del checklist. El usuario ya las vio. En vez de listarlas, INTERPRETA y ANALIZA su significado estrategico.
+- Tono: como un informe de McKinsey o Deloitte. Frio, analitico, basado en datos.
 - Tutea al usuario por su nombre.
-- Usa lenguaje financiero: fuga de capital, gasto sin trazabilidad, retorno, costo de oportunidad.
+- Usa lenguaje financiero concreto: fuga de capital, gasto ciego, costo de oportunidad, capital sin trazabilidad.
 
 ESTRUCTURA (respeta este orden exacto, no agregues secciones extra):
 
-<h3>Contexto</h3>
-1-2 oraciones situando la empresa: tamano, industria, presupuesto. Sin adornos.
+<h3>Radiografia de ${profileData.empresa || 'tu organizacion'}</h3>
+2-3 oraciones analizando el contexto: que significa operar en su industria con ese tamano y presupuesto. Incluir un dato o benchmark relevante de la industria sobre inversion en capacitacion (puedes inferirlo). No repetir datos crudos.
 
-<h3>Diagnostico: Que hacen bien</h3>
-Lista corta de las practicas que SI tienen implementadas, agrupadas por nivel.
+<h3>Donde esta el valor (y donde se fuga)</h3>
+NO listes las practicas del checklist. En cambio, haz un ANALISIS ESTRATEGICO: que patron revelan sus respuestas? Que madurez tienen realmente? Usa analogias de negocio. Ejemplo: si solo miden reaccion y aprendizaje pero no impacto, di algo como "Es como medir las ventas de un producto sin saber si genera margen". Destaca 2-3 insights clave con impacto financiero estimado cuando sea posible.
 
-<h3>Brechas criticas</h3>
-Lista de lo que NO estan haciendo en Niveles 3, 4 y 5. Ser directo sobre el riesgo financiero de cada brecha. Sin rodeos.
+<h3>El costo oculto de no medir</h3>
+Cuantifica o estima el riesgo. Si tienen presupuesto de $X en capacitacion y no miden ROI, que porcentaje tipicamente se pierde segun estudios? Cita datos del ROI Institute o de Jack Phillips sobre el costo de no medir (puedes parafrasear). Hazlo tangible y concreto para un CFO.
 
-<h3>Hoja de ruta</h3>
-3-4 pasos concretos que deben lograr (QUE hacer, nunca COMO hacerlo). Ejemplo: "Definir KPIs de negocio antes de disenar programas", "Implementar aislamiento de efectos post-capacitacion". No explicar la metodologia.
+<h3>Hoja de ruta: 4 movimientos estrategicos</h3>
+4 pasos concretos que deben lograr (QUE hacer, nunca COMO hacerlo). Cada paso en 1 oracion. Genera la sensacion de que requiere expertise especializado. No expliques la metodologia.
 
 <h3>Por que MAS Consultores</h3>
-Maximo 4 bullets: unico partner ROI Institute en LATAM, 30 anos de experiencia, instalamos procesos (no cursos), tecnologia + medicion cientifica. Sin parrafos largos.
+Maximo 4 bullets muy cortos: unico partner ROI Institute en LATAM, +30 anos, instalamos capacidades (no cursos), tecnologia + medicion cientifica.
+
+<h3>Lectura recomendada</h3>
+Recomienda el libro <strong>Capacitaciones</strong> de <strong>Rodrigo Lara Fernandez</strong>, fundador de MAS Consultores. En 1-2 oraciones, posicionalo como lectura esencial para quien quiera entender como transformar la capacitacion en una inversion medible. Mencionalo como recurso practico, no academico.
 
 <h3>Siguiente paso</h3>
-UNA oracion invitando a agendar una reunion de diagnostico con el equipo directivo. Nada mas.
+UNA sola oracion invitando a agendar una Reunion de Diagnostico de Impacto con el equipo directivo. Sin adornos, sin emociones. Solo la invitacion directa.
 
 ---
 DATOS:
@@ -715,22 +733,39 @@ async function calculateResults() {
     ? `<div class="ai-report-container">${aiReportHtml}</div>`
     : `<div class="ai-report-container"><h3>Reporte temporalmente no disponible</h3><p>No pudimos conectar con el servicio de IA. Por favor intenta nuevamente en unos minutos o contacta directamente a MAS Consultores para tu diagnóstico personalizado.</p></div>`;
 
+  // Determinar nivel de madurez
+  const pct = (total / 20) * 100;
+  let maturityLabel, maturityColor, maturityBg;
+  if (pct <= 25) { maturityLabel = 'Inicial'; maturityColor = '#d62216'; maturityBg = 'rgba(214,34,22,.15)'; }
+  else if (pct <= 50) { maturityLabel = 'En Desarrollo'; maturityColor = '#edb321'; maturityBg = 'rgba(237,179,33,.15)'; }
+  else if (pct <= 75) { maturityLabel = 'Avanzado'; maturityColor = '#009739'; maturityBg = 'rgba(0,151,57,.15)'; }
+  else { maturityLabel = 'Estrategico'; maturityColor = '#23398d'; maturityBg = 'rgba(35,57,141,.15)'; }
+
+  const levelColors = { 1:'#833d8e', 2:'#edb321', 3:'#009739', 4:'#d62216', 5:'#23398d' };
+  const levelNames = { 1:'Reaccion', 2:'Aprendizaje', 3:'Aplicacion', 4:'Impacto', 5:'ROI' };
+
   document.getElementById('resultContent').innerHTML = `
-    <h2 style="color: var(--navy); font-size: 28px; margin-bottom: 24px;">Reporte Ejecutivo ROI</h2>
-    <div class="gauge-container">
-      <svg class="gauge-svg" viewBox="0 0 200 120">
-        <path class="gauge-bg" d="M 20 100 A 80 80 0 0 1 180 100"/>
-        <path class="gauge-fill" d="M 20 100 A 80 80 0 0 1 180 100" stroke="var(--brand-morado)" stroke-dasharray="251" stroke-dashoffset="${251 - (total / 20) * 251}"/>
-        <text class="gauge-text" x="100" y="90">${total}</text>
-        <text class="gauge-label" x="100" y="110">de 20 PUNTOS</text>
-      </svg>
+    <div class="score-header">
+      <h2>Business Case ROI — ${profile.empresa || 'Tu Empresa'}</h2>
+      <p class="score-sub">Diagnostico de Madurez | Metodologia Phillips Nivel 5</p>
+      <div class="gauge-container" style="margin-top:20px;margin-bottom:8px;">
+        <svg class="gauge-svg" viewBox="0 0 200 120">
+          <path class="gauge-bg" d="M 20 100 A 80 80 0 0 1 180 100"/>
+          <path class="gauge-fill" d="M 20 100 A 80 80 0 0 1 180 100" stroke="${maturityColor}" stroke-dasharray="251" stroke-dashoffset="${251 - (total / 20) * 251}"/>
+          <text class="gauge-text" x="100" y="88">${total}/20</text>
+          <text class="gauge-label" x="100" y="108">PUNTOS</text>
+        </svg>
+      </div>
+      <span class="score-maturity" style="background:${maturityBg};color:${maturityColor};">Nivel de Madurez: ${maturityLabel}</span>
     </div>
     <div class="phase-breakdown">
-      <div class="pb-item"><span class="pb-score">${levels[1]}/4</span><span class="pb-label">N1</span></div>
-      <div class="pb-item"><span class="pb-score">${levels[2]}/4</span><span class="pb-label">N2</span></div>
-      <div class="pb-item"><span class="pb-score">${levels[3]}/4</span><span class="pb-label">N3</span></div>
-      <div class="pb-item"><span class="pb-score">${levels[4]}/4</span><span class="pb-label">N4</span></div>
-      <div class="pb-item"><span class="pb-score">${levels[5]}/4</span><span class="pb-label">N5</span></div>
+      ${[1,2,3,4,5].map(n => `
+        <div class="pb-item" style="color:${levelColors[n]};">
+          <span class="pb-score">${levels[n]}/4</span>
+          <span class="pb-label">${levelNames[n]}</span>
+          <div class="pb-bar"><div class="pb-bar-fill" style="width:${(levels[n]/4)*100}%;background:${levelColors[n]};"></div></div>
+        </div>
+      `).join('')}
     </div>
     ${finalReportBlock}
   `;
@@ -751,26 +786,84 @@ function getChecklistSnapshotForPrompt() {
   });
   return { levelNames, selected, unselected };
 }
+async function loadLogoAsDataUrl() {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = img.naturalWidth || 200;
+      c.height = img.naturalHeight || 60;
+      const ctx = c.getContext('2d');
+      ctx.drawImage(img, 0, 0, c.width, c.height);
+      resolve(c.toDataURL('image/png'));
+    };
+    img.onerror = () => resolve(null);
+    img.src = 'assets/mas-logo.svg';
+  });
+}
 async function downloadResultsPdf() {
+  // Ocultar botones antes de capturar
+  const btns = document.querySelectorAll('#btn-final-contacto, #btn-final-pdf, #btn-final-reset');
+  btns.forEach(b => b.style.display = 'none');
+
   const targetNode = document.querySelector('#step6 .step-card');
-  const canvas = await html2canvas(targetNode, { scale: 2 });
+  const canvas = await html2canvas(targetNode, { scale: 2, useCORS: true });
   const imgData = canvas.toDataURL('image/png');
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF('p', 'mm', 'a4');
   const pageWidth = 210;
   const pageHeight = 297;
   const imgHeight = (canvas.height * pageWidth) / canvas.width;
+
+  // Cargar logo para watermark
+  const logoData = await loadLogoAsDataUrl();
+
   let remainingHeight = imgHeight;
   let offsetY = 0;
+  let pageNum = 0;
+
+  function addWatermarkToPage() {
+    if (logoData) {
+      // Watermark centrada semitransparente
+      pdf.saveGraphicsState();
+      pdf.setGState(new pdf.GState({ opacity: 0.06 }));
+      const wmWidth = 120;
+      const wmHeight = 36;
+      pdf.addImage(logoData, 'PNG', (pageWidth - wmWidth) / 2, (pageHeight - wmHeight) / 2, wmWidth, wmHeight);
+      pdf.restoreGraphicsState();
+
+      // Logo pequeno abajo a la derecha
+      pdf.saveGraphicsState();
+      pdf.setGState(new pdf.GState({ opacity: 0.4 }));
+      pdf.addImage(logoData, 'PNG', pageWidth - 45, pageHeight - 15, 35, 10);
+      pdf.restoreGraphicsState();
+    }
+    // Footer
+    pdf.setFontSize(8);
+    pdf.setTextColor(150);
+    pdf.text('MAS Consultores | Unico Partner ROI Institute en Latinoamerica | www.masconsultores.cl', pageWidth / 2, pageHeight - 6, { align: 'center' });
+  }
+
   pdf.addImage(imgData, 'PNG', 0, offsetY, pageWidth, imgHeight);
+  addWatermarkToPage();
   remainingHeight -= pageHeight;
+
   while (remainingHeight > 0) {
     offsetY -= pageHeight;
     pdf.addPage();
     pdf.addImage(imgData, 'PNG', 0, offsetY, pageWidth, imgHeight);
+    addWatermarkToPage();
     remainingHeight -= pageHeight;
   }
-  pdf.save('Business-Case-ROI.pdf');
+
+  // Restaurar botones
+  btns.forEach(b => b.style.display = '');
+  document.getElementById('btn-final-contacto').style.display = 'flex';
+  document.getElementById('btn-final-pdf').style.display = 'flex';
+  document.getElementById('btn-final-reset').style.display = 'flex';
+
+  pdf.save('Business-Case-ROI-' + (profile.empresa || 'Empresa').replace(/\s+/g, '-') + '.pdf');
 }
 function launchConfetti() {
   for(let i=0;i<50;i++){
