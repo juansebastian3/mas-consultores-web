@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Diagnóstico ROI - Evalúa la madurez de tu ecosistema de capacitación según la Metodología ROI de Phillips. Quiz interactivo de MAS Consultores, único partner oficial del ROI Institute en Latinoamérica.">
 <title>Diagnóstico de Madurez ROI — Metodología Phillips Nivel 5 | MAS Consultores</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -28,44 +27,35 @@
   html{scroll-behavior:smooth}
   body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--bg-light);color:var(--text);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
   h1,h2,h3,h4{font-family:'Plus Jakarta Sans','DM Sans',sans-serif;color:var(--navy);line-height:1.15;letter-spacing:-0.02em}
-
   nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
   .nav-inner{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px}
   .nav-back{color:var(--navy);text-decoration:none;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;transition:color .2s}
   .nav-back:hover{color:var(--brand-morado)}
-
   .quiz-wrapper{max-width:800px;margin:0 auto;padding:100px 24px 60px}
-
   .progress-container{margin-bottom:40px}
   .progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
   .progress-label{font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:1px}
   .progress-step-text{font-size:13px;color:var(--muted);font-weight:600}
   .progress-bar-track{width:100%;height:8px;background:var(--border);border-radius:50px;overflow:hidden}
   .progress-bar-fill{height:100%;border-radius:50px;transition:width .6s cubic-bezier(.16,1,.3,1),background .4s;width:0%}
-
   .step{display:none;animation:fadeStep .5s ease}
   .step.active{display:block}
   @keyframes fadeStep{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-
   .step-card{background:#fff;border-radius:var(--radius-xl);padding:44px;box-shadow:var(--shadow-lg);border:1px solid var(--border-light)}
   .step-icon{font-size:40px;margin-bottom:16px;display:block}
   .step-title{font-size:clamp(22px,3.5vw,30px);font-weight:800;margin-bottom:8px}
   .step-subtitle{color:var(--muted);font-size:15px;margin-bottom:32px;line-height:1.6}
-
   .question-group{margin-bottom:28px}
   .question-label{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;display:block}
-
   .chips{display:flex;flex-wrap:wrap;gap:10px}
   .chip{padding:11px 20px;border-radius:50px;border:2px solid var(--border);background:#fff;font-size:14px;cursor:pointer;transition:all .25s;color:var(--text);font-family:inherit;font-weight:500}
   .chip:hover{border-color:var(--navy);background:var(--bg-light)}
   .chip.selected{background:var(--navy);color:#fff;border-color:var(--navy);transform:scale(1.03)}
-
   .phase-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;margin-top:8px}
   .phase-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
   .phase-name{font-size:15px;font-weight:800}
   .phase-desc{font-size:11px;color:var(--muted);font-weight:600;margin-left:auto;background:var(--bg-light);padding:3px 10px;border-radius:50px}
   .phase-divider{margin-top:32px;padding-top:4px}
-
   .check-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:var(--radius-sm);border:2px solid var(--border-light);background:#fff;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);margin-bottom:8px;user-select:none;width:100%;font-family:inherit;text-align:left;appearance:none}
   .check-item:hover{border-color:var(--border);background:var(--bg-light);transform:translateX(4px)}
   .check-item.checked{border-color:currentColor;background:color-mix(in srgb,currentColor 6%,white)}
@@ -76,10 +66,8 @@
   .check-item.checked .check-box svg{opacity:1;transform:scale(1)}
   .check-item.checked .check-box svg path{stroke-dashoffset:0}
   .check-text{font-size:13.5px;line-height:1.55;font-weight:500}
-
   .check-counter{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;border-radius:50px;background:var(--bg-light);border:1px solid var(--border);margin-bottom:22px;font-size:14px;font-weight:600;color:var(--navy)}
   .check-counter .count-num{font-weight:900;font-size:18px}
-
   .lead-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 20px}
   .form-group{margin-bottom:18px}
   .form-label{display:block;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px}
@@ -87,10 +75,9 @@
   .form-input:focus{border-color:var(--navy);background:#fff;box-shadow:0 0 0 4px rgba(26,46,74,.06)}
   .form-input.error{border-color:var(--brand-rojo);background:#fff5f5}
   .error-msg{color:var(--brand-rojo);font-size:12px;margin-top:4px;display:none;font-weight:600}
-
   .result-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:50px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px}
   .result-message{font-size:16px;line-height:1.8;margin-bottom:28px;padding:24px;border-radius:var(--radius-md);text-align:left}
-  
+
   .ai-report-container { background: #fdfdfe; border: 2px solid var(--brand-morado); border-radius: var(--radius-lg); padding: 36px; text-align: left; margin-bottom: 30px; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
   .ai-report-container::before { content:''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--brand-morado); }
   .ai-report-container h3 { color: var(--navy); font-size: 20px; margin-top: 28px; margin-bottom: 12px; font-weight: 800; }
@@ -99,40 +86,39 @@
   .ai-report-container ul { margin-bottom: 20px; padding-left: 20px; }
   .ai-report-container li { font-size: 15px; margin-bottom: 8px; line-height: 1.6; color: var(--text); }
   .ai-report-container strong { color: var(--navy); font-weight: 700; }
-
+  .ai-report-container h1 { color: var(--brand-morado); font-size: 26px; margin-bottom: 16px; }
+  .ai-report-container h2 { color: var(--navy); font-size: 22px; margin-top: 28px; margin-bottom: 12px; }
+  .ai-report-container h4 { color: var(--navy); font-size: 17px; margin-top: 20px; margin-bottom: 10px; }
+  .ai-report-container ol { margin-bottom: 20px; padding-left: 20px; }
+  .ai-report-container ol li { font-size: 15px; margin-bottom: 8px; line-height: 1.6; }
+  .ai-report-container blockquote { border-left: 4px solid var(--brand-morado); padding: 12px 20px; margin: 16px 0; background: rgba(131,61,142,0.04); font-style: italic; }
+  .ai-report-container hr { border: none; border-top: 2px solid var(--border-light); margin: 24px 0; }
   .partner-banner{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,var(--navy3),var(--navy));padding:20px 24px;border-radius:var(--radius-md);margin-bottom:20px;text-align:left}
   .partner-logos{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0}
   .partner-banner img{height:48px;border-radius:8px;background:#fff;padding:6px 10px;flex-shrink:0}
   .partner-banner-text{color:rgba(255,255,255,.85);font-size:13px;line-height:1.6}
   .partner-banner-text strong{color:#fff;display:block;font-size:14px;margin-bottom:2px}
-
   .gauge-container{display:flex;justify-content:center;margin-bottom:32px}
   .gauge-svg{width:220px;height:130px}
   .gauge-bg{fill:none;stroke:var(--border);stroke-width:14;stroke-linecap:round}
   .gauge-fill{fill:none;stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset 1.5s cubic-bezier(.16,1,.3,1),stroke .5s}
   .gauge-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:36px;fill:var(--navy);text-anchor:middle}
   .gauge-label{font-family:'DM Sans',sans-serif;font-size:11px;fill:var(--muted);text-anchor:middle;font-weight:600;text-transform:uppercase;letter-spacing:1px}
-
   .phase-breakdown{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:28px}
   .pb-item{padding:14px 8px;border-radius:var(--radius-sm);text-align:center}
   .pb-score{font-size:22px;font-weight:900;display:block}
   .pb-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;opacity:.8}
-
   .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--navy);color:#fff;padding:16px 32px;border-radius:var(--radius-sm);font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .25s;font-family:inherit;width:100%;letter-spacing:.01em}
   .btn-primary:hover{background:var(--navy2);transform:translateY(-1px);box-shadow:var(--shadow-md)}
   .btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:var(--muted);padding:14px 24px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;border:2px solid var(--border);cursor:pointer;transition:all .2s;font-family:inherit}
   .btn-secondary:hover{border-color:var(--navy);color:var(--navy)}
   .btn-cta-big{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--brand-rojo);color:#fff;padding:20px 36px;border-radius:var(--radius-md);font-size:17px;font-weight:800;text-decoration:none;transition:all .3s;box-shadow:0 6px 20px rgba(214,34,22,.25);margin-top:20px;border:none;cursor:pointer;width:100%;font-family:inherit;letter-spacing:.01em}
   .btn-cta-big:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(214,34,22,.35);background:#c01e14}
-
   .step-nav{display:flex;gap:12px;margin-top:32px}
   .step-nav .btn-primary{flex:1}
-
   @keyframes confetti-fall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
   .confetti{position:fixed;top:-10px;width:10px;height:10px;z-index:9999;pointer-events:none;animation:confetti-fall 3s ease-in forwards}
-
   .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-
   @media(max-width:640px){
     .step-card{padding:28px 20px}
     .chips{gap:8px}.chip{padding:9px 14px;font-size:13px}
@@ -146,7 +132,6 @@
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-inner">
     <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
@@ -155,9 +140,7 @@
     <a class="nav-back" href="index.html">&larr; Volver al sitio</a>
   </div>
 </nav>
-
 <div class="quiz-wrapper">
-
   <div class="progress-container">
     <div class="progress-header">
       <span class="progress-label">Diagnóstico ROI — Metodología Phillips</span>
@@ -167,13 +150,11 @@
       <div class="progress-bar-fill" id="progressFill" style="width:16.6%;background:var(--navy);"></div>
     </div>
   </div>
-
   <div class="step active" id="step1">
     <div class="step-card">
       <span class="step-icon">&#128202;</span>
       <h2 class="step-title">Perfil Organizacional</h2>
       <p class="step-subtitle">Antes de evaluar tu madurez ROI, necesitamos conocer el contexto de tu organización. Esto nos permite entregar un diagnóstico relevante a tu realidad.</p>
-
       <div class="question-group">
         <span class="question-label">Rubro / Industria</span>
         <div class="chips" data-group="rubro">
@@ -190,7 +171,6 @@
           <button class="chip" type="button">Otro</button>
         </div>
       </div>
-
       <div class="question-group">
         <span class="question-label">¿Cuántos colaboradores tiene tu organización?</span>
         <div class="chips" data-group="colaboradores">
@@ -200,7 +180,6 @@
           <button class="chip" type="button">+1.000</button>
         </div>
       </div>
-
       <div class="question-group">
         <span class="question-label">¿Cuántos años lleva operando la organización?</span>
         <div class="chips" data-group="anos">
@@ -210,7 +189,6 @@
           <button class="chip" type="button">+30 años</button>
         </div>
       </div>
-
       <div class="question-group">
         <span class="question-label">Tu cargo o rol principal</span>
         <div class="chips" data-group="cargo">
@@ -222,7 +200,6 @@
           <button class="chip" type="button">Otro</button>
         </div>
       </div>
-
       <div class="question-group">
         <span class="question-label">Nivel principal al que destinan capacitación</span>
         <div class="chips" data-group="nivel">
@@ -234,7 +211,6 @@
           <button class="chip" type="button">Transversal (todos los niveles)</button>
         </div>
       </div>
-
       <div class="question-group">
         <span class="question-label">Presupuesto anual aproximado en capacitación</span>
         <div class="chips" data-group="presupuesto">
@@ -245,25 +221,21 @@
           <button class="chip" type="button">Más de $500M CLP</button>
         </div>
       </div>
-
       <div class="step-nav">
         <button class="btn-primary" onclick="goToStep(2)">Comenzar evaluación de madurez &rarr;</button>
       </div>
     </div>
   </div>
-
   <div class="step" id="step2">
     <div class="step-card">
       <span class="step-icon">&#9989;</span>
       <h2 class="step-title">Niveles 1 y 2 — Reacción y Aprendizaje</h2>
       <p class="step-subtitle">Marca las prácticas que tu organización realiza de manera <strong>consistente y documentada</strong>. Si ninguna aplica a tu caso, simplemente avanza.</p>
-
       <div class="check-counter" id="counter2">
         <span>Prácticas confirmadas:</span>
         <span class="count-num" id="countNum2">0</span>
         <span>de 8</span>
       </div>
-
       <div class="phase-header">
         <div class="phase-dot" style="background:var(--nivel1);"></div>
         <span class="phase-name" style="color:var(--nivel1);">Nivel 1 — Reacción y Satisfacción</span>
@@ -285,7 +257,6 @@
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Consolidamos y analizamos los datos de reacción para decisiones futuras.</span>
       </button>
-
       <div class="phase-header phase-divider">
         <div class="phase-dot" style="background:var(--nivel2);"></div>
         <span class="phase-name" style="color:var(--nivel2);">Nivel 2 — Aprendizaje</span>
@@ -307,26 +278,22 @@
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Diseños instruccionales alineados con objetivos de aprendizaje medibles.</span>
       </button>
-
       <div class="step-nav">
         <button class="btn-secondary" onclick="goToStep(1)">&larr; Volver</button>
         <button class="btn-primary" onclick="goToStep(3)">Siguiente: Niveles 3 y 4 &rarr;</button>
       </div>
     </div>
   </div>
-
   <div class="step" id="step3">
     <div class="step-card">
       <span class="step-icon">&#128200;</span>
       <h2 class="step-title">Niveles 3 y 4 — Aplicación e Impacto</h2>
       <p class="step-subtitle">Mide la transferencia al puesto e impacto en indicadores del negocio.</p>
-
       <div class="check-counter" id="counter3">
         <span>Prácticas confirmadas:</span>
         <span class="count-num" id="countNum3">0</span>
         <span>de 8</span>
       </div>
-
       <div class="phase-header">
         <div class="phase-dot" style="background:var(--nivel3);"></div>
         <span class="phase-name" style="color:var(--nivel3);">Nivel 3 — Aplicación e Implementación</span>
@@ -348,7 +315,6 @@
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Identificamos barreras y facilitadores de la aplicación en el puesto.</span>
       </button>
-
       <div class="phase-header phase-divider">
         <div class="phase-dot" style="background:var(--nivel4);"></div>
         <span class="phase-name" style="color:var(--nivel4);">Nivel 4 — Impacto en el Negocio</span>
@@ -370,26 +336,22 @@
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Reportamos impacto en indicadores operativos con datos concretos.</span>
       </button>
-
       <div class="step-nav">
         <button class="btn-secondary" onclick="goToStep(2)">&larr; Volver</button>
         <button class="btn-primary" onclick="goToStep(4)">Siguiente: Nivel 5 — ROI &rarr;</button>
       </div>
     </div>
   </div>
-
   <div class="step" id="step4">
     <div class="step-card">
       <span class="step-icon">&#128176;</span>
       <h2 class="step-title">Nivel 5 — Retorno de la Inversión (ROI)</h2>
       <p class="step-subtitle">Demuestra el valor financiero real de la capacitación.</p>
-
       <div class="check-counter" id="counter4">
         <span>Prácticas confirmadas:</span>
         <span class="count-num" id="countNum4">0</span>
         <span>de 4</span>
       </div>
-
       <div class="phase-header">
         <div class="phase-dot" style="background:var(--nivel5);"></div>
         <span class="phase-name" style="color:var(--nivel5);">Nivel 5 — ROI Financiero</span>
@@ -411,20 +373,17 @@
         <span class="check-box"><svg viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4"/></svg></span>
         <span class="check-text">Presentamos un reporte financiero de ROI al Directorio.</span>
       </button>
-
       <div class="step-nav">
         <button class="btn-secondary" onclick="goToStep(3)">&larr; Volver</button>
         <button class="btn-primary" onclick="goToStep(5)">Ver mi resultado &rarr;</button>
       </div>
     </div>
   </div>
-
   <div class="step" id="step5">
     <div class="step-card" style="text-align:center;">
       <div class="lead-icon">&#128274;</div>
       <h2 class="step-title">¡Tu diagnóstico está listo!</h2>
       <p class="step-subtitle">Ingresa tus datos para generar tu Business Case personalizado mediante IA.</p>
-
       <div style="text-align:left;">
         <div class="form-row">
           <div class="form-group">
@@ -444,14 +403,12 @@
           <div class="error-msg" id="errorEmail">Ingresa un email corporativo válido</div>
         </div>
       </div>
-
       <div class="step-nav" style="flex-direction:column;gap:10px;">
         <button class="btn-primary" onclick="submitLead()" style="background:var(--brand-morado);font-size:16px;padding:18px;">&#128161; Generar Reporte Estratégico (IA)</button>
         <button class="btn-secondary" onclick="goToStep(4)" style="width:100%;justify-content:center;">&larr; Volver al checklist</button>
       </div>
     </div>
   </div>
-
   <div class="step" id="step6">
     <div class="step-card" style="text-align:center;">
       <div id="resultContent"></div>
@@ -466,44 +423,127 @@
       </button>
     </div>
   </div>
-
 </div>
-
 <script>
 // --- CONFIGURACIÓN DE IA ---
 async function fetchAIAnalysis(promptText) {
-  // Pon aquí la URL de tu Webhook de Make
-  const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/5ppnnj3ux0p1apjig6ls1e2qwp3vt3uu"; 
-
-  // TRUCO MÁGICO: Escapamos el texto para que las comillas y saltos de línea no rompan Make
-  const safePrompt = JSON.stringify(promptText).slice(1, -1);
+  const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/5ppnnj3ux0p1apjig6ls1e2qwp3vt3uu";
 
   try {
     const response = await fetch(MAKE_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: safePrompt }) // Enviamos el prompt limpio
+      body: JSON.stringify({ prompt: promptText })
     });
-    
+
     if (!response.ok) {
-      console.error("❌ Error de Make.com");
+      console.error("Error de Make.com - Status:", response.status);
       return null;
     }
 
-    // Leemos la respuesta como texto plano directo (sin JSON) para evitar errores de Make
     const textData = await response.text();
-    return textData; 
-    
+    console.log("--- RESPUESTA CRUDA DE MAKE ---");
+    console.log(textData);
+    console.log("--- FIN RESPUESTA ---");
+
+    // Intentar parsear como JSON por si Make envuelve la respuesta
+    try {
+      const jsonData = JSON.parse(textData);
+      // Si es JSON, buscar el contenido del reporte en distintos campos comunes
+      if (typeof jsonData === 'string') return jsonData;
+      if (jsonData.text) return jsonData.text;
+      if (jsonData.result) return jsonData.result;
+      if (jsonData.output) return jsonData.output;
+      if (jsonData.response) return jsonData.response;
+      if (jsonData.message) return jsonData.message;
+      if (jsonData.content) return jsonData.content;
+      if (jsonData.data) {
+        if (typeof jsonData.data === 'string') return jsonData.data;
+        if (jsonData.data.text) return jsonData.data.text;
+      }
+      // Si tiene candidates (formato Gemini API directo)
+      if (jsonData.candidates && jsonData.candidates[0]) {
+        const candidate = jsonData.candidates[0];
+        if (candidate.content && candidate.content.parts && candidate.content.parts[0]) {
+          return candidate.content.parts[0].text;
+        }
+      }
+      // Si nada coincide, convertir todo a string
+      return JSON.stringify(jsonData);
+    } catch (e) {
+      // No es JSON, es texto plano - perfecto
+      return textData;
+    }
+
   } catch (e) {
-    console.error("❌ Error de conexión:", e);
+    console.error("Error de conexión:", e);
     return null;
   }
+}
+
+// --- Convertir Markdown a HTML ---
+function markdownToHtml(md) {
+  if (!md) return '';
+  let html = md;
+
+  // Escapar HTML existente que no sea parte de tags válidos
+  // (no escapamos porque Gemini puede enviar HTML directo)
+
+  // Headers: ### -> h3, ## -> h2, # -> h1
+  html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+  // Bold: **text** -> <strong>text</strong>
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+  // Italic: *text* -> <em>text</em>  (pero no dentro de listas)
+  html = html.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
+
+  // Blockquotes: > text -> <blockquote>
+  html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+
+  // Horizontal rules
+  html = html.replace(/^---$/gm, '<hr>');
+
+  // Unordered lists: - item or * item
+  html = html.replace(/^[\-\*] (.+)$/gm, '<li>$1</li>');
+  // Wrap consecutive <li> in <ul>
+  html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+  // Ordered lists: 1. item
+  html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+  // Don't double-wrap if already in <ul>
+
+  // Paragraphs: double newlines
+  html = html.replace(/\n\n+/g, '</p><p>');
+  // Single newlines within paragraphs -> <br> (but not after block elements)
+  html = html.replace(/(?<!<\/h[1-4]>)(?<!<\/li>)(?<!<\/ul>)(?<!<\/ol>)(?<!<\/blockquote>)(?<!<\/p>)(?<!<hr>)\n(?!<)/g, '<br>');
+
+  // Wrap in paragraph if not starting with a block element
+  if (!html.startsWith('<h') && !html.startsWith('<ul') && !html.startsWith('<ol') && !html.startsWith('<blockquote')) {
+    html = '<p>' + html + '</p>';
+  }
+
+  // Clean up empty paragraphs
+  html = html.replace(/<p>\s*<\/p>/g, '');
+  // Fix paragraphs wrapping block elements
+  html = html.replace(/<p>\s*(<h[1-4]>)/g, '$1');
+  html = html.replace(/(<\/h[1-4]>)\s*<\/p>/g, '$1');
+  html = html.replace(/<p>\s*(<ul>)/g, '$1');
+  html = html.replace(/(<\/ul>)\s*<\/p>/g, '$1');
+  html = html.replace(/<p>\s*(<hr>)/g, '$1');
+  html = html.replace(/(<hr>)\s*<\/p>/g, '$1');
+  html = html.replace(/<p>\s*(<blockquote>)/g, '$1');
+  html = html.replace(/(<\/blockquote>)\s*<\/p>/g, '$1');
+
+  return html;
 }
 
 const profile = {};
 let currentStep = 1;
 const totalSteps = 6;
-
 document.querySelectorAll('.chips').forEach(container => {
   const group = container.dataset.group;
   container.querySelectorAll('.chip').forEach(chip => {
@@ -514,14 +554,12 @@ document.querySelectorAll('.chips').forEach(container => {
     });
   });
 });
-
 document.querySelectorAll('.check-item').forEach(item => {
   item.addEventListener('click', () => {
     item.classList.toggle('checked');
     updateCounters();
   });
 });
-
 function updateCounters() {
   const c2 = document.getElementById('countNum2');
   const c3 = document.getElementById('countNum3');
@@ -530,7 +568,6 @@ function updateCounters() {
   if(c3) c3.textContent = document.querySelectorAll('#step3 .check-item.checked').length;
   if(c4) c4.textContent = document.querySelectorAll('#step4 .check-item.checked').length;
 }
-
 function goToStep(n) {
   if (currentStep === 1 && n > 1 && !profile.colaboradores) {
     const el = document.querySelector('[data-group="colaboradores"]');
@@ -546,42 +583,40 @@ function goToStep(n) {
   document.getElementById('progressText').textContent = 'Paso ' + n + ' de ' + totalSteps;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 async function submitLead() {
   const nombre = document.getElementById('leadNombre');
   const empresa = document.getElementById('leadEmpresa');
   const email = document.getElementById('leadEmail');
   let valid = true;
-
   [nombre, empresa].forEach(el => {
     const errId = 'error' + el.id.replace('lead','');
     if (!el.value.trim()) { el.classList.add('error'); document.getElementById(errId).style.display = 'block'; valid = false; }
     else { el.classList.remove('error'); document.getElementById(errId).style.display = 'none'; }
   });
-
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { email.classList.add('error'); document.getElementById('errorEmail').style.display = 'block'; valid = false; }
   else { email.classList.remove('error'); document.getElementById('errorEmail').style.display = 'none'; }
-
   if (!valid) return;
   profile.nombre = nombre.value.trim();
   profile.empresa = empresa.value.trim();
   profile.email = email.value.trim();
-
   document.getElementById('btn-final-contacto').style.display = 'none';
   document.getElementById('btn-final-pdf').style.display = 'none';
   document.getElementById('btn-final-reset').style.display = 'none';
-
-  document.getElementById('resultContent').innerHTML = `<div style="padding: 60px 20px; text-align: center;"><h3>Redactando tu Business Case con IA...</h3></div>`;
+  document.getElementById('resultContent').innerHTML = `<div style="padding: 60px 20px; text-align: center;">
+    <div style="margin-bottom:20px;">
+      <div style="width:48px;height:48px;border:4px solid var(--brand-morado);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto;"></div>
+      <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+    </div>
+    <h3>Redactando tu Business Case con IA...</h3>
+    <p style="color:var(--muted);margin-top:8px;font-size:14px;">Esto puede tomar 15-30 segundos</p>
+  </div>`;
   goToStep(6);
-
   await calculateResults();
   launchConfetti();
-
   document.getElementById('btn-final-contacto').style.display = 'flex';
   document.getElementById('btn-final-pdf').style.display = 'flex';
   document.getElementById('btn-final-reset').style.display = 'flex';
 }
-
 function buildExecutiveReportPrompt(profileData, checklistSnapshot) {
   const userDataLines = [
     `Nombre: ${profileData.nombre || 'No informado'}`,
@@ -591,29 +626,73 @@ function buildExecutiveReportPrompt(profileData, checklistSnapshot) {
     `Industria: ${profileData.rubro || 'No informada'}`,
     `Presupuesto: ${profileData.presupuesto || 'No informado'}`
   ];
-
   const practicesByLevel = Object.keys(checklistSnapshot.levelNames).map(level => {
     const levelName = checklistSnapshot.levelNames[level];
     const checked = checklistSnapshot.selected[level] || [];
     const unchecked = checklistSnapshot.unselected[level] || [];
-    return `${levelName}\n- Prácticas checkeadas: ${checked.join(' | ') || 'Ninguna'}\n- Prácticas no checkeadas: ${unchecked.join(' | ') || 'Ninguna'}`;
+    return `${levelName}\n- Practicas checkeadas: ${checked.join(' | ') || 'Ninguna'}\n- Practicas no checkeadas: ${unchecked.join(' | ') || 'Ninguna'}`;
   }).join('\n\n');
+  return `Actua como un Director de Consultoria Experto en la Metodologia ROI de Phillips y Estratega de Talento Organizacional.
 
-  return `Actúa como un Director de Consultoría Experto en la Metodología ROI de Phillips y Estratega de Talento Organizacional.
-\nVoy a entregarte los resultados de un "Diagnóstico de Madurez ROI" completado por un usuario. Tu objetivo es redactar un informe ejecutivo, ágil y dinamico, estratégico y persuasivo analizando sus respuestas.
-\nOBJETIVO CRÍTICO DEL INFORME:\nEste informe no solo lo leerá el usuario que completó el test; será utilizado por él/ella como "Champion" (promotor interno) para mostrárselo a sus pares, a la Gerencia General (CEO) o a la Gerencia de Finanzas (CFO). Por lo tanto, el documento debe funcionar como un "Business Case" que justifique la urgencia de cambiar su modelo de capacitación y demuestre que MAS Consultores es el único aliado seguro para hacerlo.\n\nContexto de tu empresa: \nRepresentas a "MAS Consultores", el único partner oficial del ROI Institute en Latinoamérica, con más de 30 años de experiencia instalando capacidades y ecosistemas de aprendizaje (Consultoría, Formación, Plataformas LMS y Medición ROI Nivel 5).\n\nInstrucciones estructurales para redactar el informe:\n\n1. Tono y Audiencia Dual:\nDirígete al usuario por su nombre ("tú"), pero utiliza un lenguaje financiero, de negocios y de gestión de riesgos tan contundente que cualquier Director que lea el informe entienda la urgencia. Habla de "fuga de capital", "gasto ciego en talento", "retorno de inversión", "alineación estratégica" y "ventaja competitiva".\n\n2. El Business Case (El riesgo y la pérdida de valor en no actuar): 
-Comienza contextualizando el tamaño de su empresa y su presupuesto. Explica por qué seguir capacitando sin llegar a los Niveles 4 (Impacto) y 5 (ROI Financiero) es un riesgo estructural. Dale al Champion argumentos irrebatibles: "Cada millón invertido sin trazabilidad al puesto de trabajo es presupuesto perdido". Hazle ver a la gerencia que el modelo actual es ineficiente.\n\n3. Resumen del Diagnóstico (Brechas y Puntos Ciegos):\nToma sus respuestas y destaca lo que SÍ hacen bien (ej. Reacción y Aprendizaje), pero expón con crudeza las brechas en Transferencia (Nivel 3) y ROI (Niveles 4 y 5). \n\n4. Guía Estratégica (El "Qué", pero NUNCA el "Cómo"):\nEntrega una hoja de ruta abstracta de 3 o 4 pasos (ej. "Aislar los efectos de la capacitación", "Vincular el diseño instruccional a los KPIs operativos"). \nIMPORTANTE: Explica muy bien QUÉ deben lograr, pero omite deliberadamente la explicación de CÓMO se hace tácticamente. Genera la sensación de que es un proceso metodológico de alta ingeniería para el cual necesitan expertos. 
-\n5. Credenciales y Autoridad (Por qué MAS Consultores):\nEsta sección es vital para convencer a la gerencia. Argumenta por qué este ecosistema NO debe construirse improvisando con recursos internos o proveedores genéricos. Posiciona explícitamente a MAS Consultores como la única opción lógica destacando:\n- Que somos el ÚNICO partner oficial del ROI Institute y Jack Phillips en Latinoamérica.\n- Nuestros 30 años de experiencia demostrable.\n- Que no entregamos "cursos", sino que "instalamos capacidades y procesos" para que el cambio sea sostenible.\n- La integración de tecnología ágil (como IA y Colossyan) sumada a la medición científica.\n\n6. Cierre y Llamado a la Acción (Para el Champion y su Jefatura):\nConcluye empoderando al usuario. Sugiérele que este diagnóstico es el primer paso para transformar a RRHH en un socio estratégico del negocio. Invítalo a él y a su equipo directivo a agendar una "Reunión de Diagnóstico de Impacto" con nuestros directores para trazar un roadmap para el siguiente año. 
-\n---\nDATOS DEL USUARIO A ANALIZAR:\n${userDataLines.join('\n')}\n\nDetalle exacto de prácticas checkeadas y no checkeadas:\n${practicesByLevel}`;
+Voy a entregarte los resultados de un "Diagnostico de Madurez ROI" completado por un usuario. Tu objetivo es redactar un informe ejecutivo, agil y dinamico, estrategico y persuasivo analizando sus respuestas.
+
+FORMATO DE RESPUESTA OBLIGATORIO:
+Responde UNICAMENTE en formato HTML valido. Usa etiquetas <h3> para titulos de seccion, <p> para parrafos, <ul> y <li> para listas, <strong> para texto en negrita, y <hr> para separadores. NO uses Markdown. NO uses caracteres como # o ** o ---. Solo HTML puro.
+
+OBJETIVO CRITICO DEL INFORME:
+Este informe no solo lo leera el usuario que completo el test; sera utilizado por el/ella como "Champion" (promotor interno) para mostrarselo a sus pares, a la Gerencia General (CEO) o a la Gerencia de Finanzas (CFO). Por lo tanto, el documento debe funcionar como un "Business Case" que justifique la urgencia de cambiar su modelo de capacitacion y demuestre que MAS Consultores es el unico aliado seguro para hacerlo.
+
+Contexto de tu empresa:
+Representas a "MAS Consultores", el unico partner oficial del ROI Institute en Latinoamerica, con mas de 30 anos de experiencia instalando capacidades y ecosistemas de aprendizaje (Consultoria, Formacion, Plataformas LMS y Medicion ROI Nivel 5).
+
+Instrucciones estructurales para redactar el informe:
+
+1. Tono y Audiencia Dual:
+Dirigete al usuario por su nombre ("tu"), pero utiliza un lenguaje financiero, de negocios y de gestion de riesgos tan contundente que cualquier Director que lea el informe entienda la urgencia. Habla de "fuga de capital", "gasto ciego en talento", "retorno de inversion", "alineacion estrategica" y "ventaja competitiva".
+
+2. El Business Case (El riesgo y la perdida de valor en no actuar):
+Comienza contextualizando el tamano de su empresa y su presupuesto. Explica por que seguir capacitando sin llegar a los Niveles 4 (Impacto) y 5 (ROI Financiero) es un riesgo estructural. Dale al Champion argumentos irrebatibles: "Cada millon invertido sin trazabilidad al puesto de trabajo es presupuesto perdido". Hazle ver a la gerencia que el modelo actual es ineficiente.
+
+3. Resumen del Diagnostico (Brechas y Puntos Ciegos):
+Toma sus respuestas y destaca lo que SI hacen bien (ej. Reaccion y Aprendizaje), pero expon con crudeza las brechas en Transferencia (Nivel 3) y ROI (Niveles 4 y 5).
+
+4. Guia Estrategica (El "Que", pero NUNCA el "Como"):
+Entrega una hoja de ruta abstracta de 3 o 4 pasos (ej. "Aislar los efectos de la capacitacion", "Vincular el diseno instruccional a los KPIs operativos").
+IMPORTANTE: Explica muy bien QUE deben lograr, pero omite deliberadamente la explicacion de COMO se hace tacticamente. Genera la sensacion de que es un proceso metodologico de alta ingenieria para el cual necesitan expertos.
+
+5. Credenciales y Autoridad (Por que MAS Consultores):
+Esta seccion es vital para convencer a la gerencia. Argumenta por que este ecosistema NO debe construirse improvisando con recursos internos o proveedores genericos. Posiciona explicitamente a MAS Consultores como la unica opcion logica destacando:
+- Que somos el UNICO partner oficial del ROI Institute y Jack Phillips en Latinoamerica.
+- Nuestros 30 anos de experiencia demostrable.
+- Que no entregamos "cursos", sino que "instalamos capacidades y procesos" para que el cambio sea sostenible.
+- La integracion de tecnologia agil (como IA y Colossyan) sumada a la medicion cientifica.
+
+6. Cierre y Llamado a la Accion (Para el Champion y su Jefatura):
+Concluye empoderando al usuario. Sugierele que este diagnostico es el primer paso para transformar a RRHH en un socio estrategico del negocio. Invitalo a el y a su equipo directivo a agendar una "Reunion de Diagnostico de Impacto" con nuestros directores para trazar un roadmap para el siguiente ano.
+
+---
+DATOS DEL USUARIO A ANALIZAR:
+${userDataLines.join('\n')}
+
+Detalle exacto de practicas checkeadas y no checkeadas:
+${practicesByLevel}`;
 }
+function sanitizeAIResponse(rawText) {
+  if (!rawText) return '';
+  let cleaned = rawText.trim();
 
-function sanitizeAIHtml(rawHtml) {
-  if (!rawHtml) return '';
-  return rawHtml
-    .replace(/^\s*```html\s*/i, '')
-    .replace(/^\s*```\s*/i, '')
-    .replace(/\s*```\s*$/i, '')
-    .trim();
+  // Remover bloques de código markdown
+  cleaned = cleaned.replace(/^\s*```html\s*/i, '');
+  cleaned = cleaned.replace(/^\s*```\s*/i, '');
+  cleaned = cleaned.replace(/\s*```\s*$/i, '');
+
+  // Si la respuesta ya contiene tags HTML, usarla directamente
+  if (/<[a-z][\s\S]*>/i.test(cleaned)) {
+    return cleaned;
+  }
+
+  // Si es texto plano/Markdown, convertir a HTML
+  return markdownToHtml(cleaned);
 }
 
 async function calculateResults() {
@@ -621,21 +700,30 @@ async function calculateResults() {
   const total = allChecked.length;
   const levels = { 1:0, 2:0, 3:0, 4:0, 5:0 };
   allChecked.forEach(item => { if(item.dataset.level) levels[item.dataset.level]++; });
-
   const snapshot = getChecklistSnapshotForPrompt();
   const prompt = buildExecutiveReportPrompt(profile, snapshot);
-  const aiReportHtml = sanitizeAIHtml(await fetchAIAnalysis(prompt));
 
-  const finalReportBlock = aiReportHtml ? `<div class="ai-report-container">${aiReportHtml}</div>` : `<div class="ai-report-container"><h3>Reporte temporalmente no disponible</h3></div>`;
+  console.log("--- PROMPT ENVIADO ---");
+  console.log(prompt.substring(0, 500) + "...");
+
+  const rawResponse = await fetchAIAnalysis(prompt);
+  const aiReportHtml = sanitizeAIResponse(rawResponse);
+
+  console.log("--- HTML PROCESADO ---");
+  console.log(aiReportHtml ? aiReportHtml.substring(0, 500) + "..." : "VACÍO");
+
+  const finalReportBlock = aiReportHtml
+    ? `<div class="ai-report-container">${aiReportHtml}</div>`
+    : `<div class="ai-report-container"><h3>Reporte temporalmente no disponible</h3><p>No pudimos conectar con el servicio de IA. Por favor intenta nuevamente en unos minutos o contacta directamente a MAS Consultores para tu diagnóstico personalizado.</p></div>`;
 
   document.getElementById('resultContent').innerHTML = `
-    <h2 style="color: var(--navy); font-size: 28px;">Reporte Ejecutivo ROI</h2>
+    <h2 style="color: var(--navy); font-size: 28px; margin-bottom: 24px;">Reporte Ejecutivo ROI</h2>
     <div class="gauge-container">
       <svg class="gauge-svg" viewBox="0 0 200 120">
         <path class="gauge-bg" d="M 20 100 A 80 80 0 0 1 180 100"/>
         <path class="gauge-fill" d="M 20 100 A 80 80 0 0 1 180 100" stroke="var(--brand-morado)" stroke-dasharray="251" stroke-dashoffset="${251 - (total / 20) * 251}"/>
         <text class="gauge-text" x="100" y="90">${total}</text>
-        <text class="gauge-label" x="100" y="110">PUNTOS</text>
+        <text class="gauge-label" x="100" y="110">de 20 PUNTOS</text>
       </svg>
     </div>
     <div class="phase-breakdown">
@@ -648,9 +736,8 @@ async function calculateResults() {
     ${finalReportBlock}
   `;
 }
-
 function getChecklistSnapshotForPrompt() {
-  const levelNames = { 1: 'Reacción', 2: 'Aprendizaje', 3: 'Aplicación', 4: 'Impacto', 5: 'ROI' };
+  const levelNames = { 1: 'Reaccion', 2: 'Aprendizaje', 3: 'Aplicacion', 4: 'Impacto', 5: 'ROI' };
   const selected = { 1: [], 2: [], 3: [], 4: [], 5: [] };
   const unselected = { 1: [], 2: [], 3: [], 4: [], 5: [] };
   document.querySelectorAll('.check-item.checked').forEach(item => {
@@ -665,7 +752,6 @@ function getChecklistSnapshotForPrompt() {
   });
   return { levelNames, selected, unselected };
 }
-
 async function downloadResultsPdf() {
   const targetNode = document.querySelector('#step6 .step-card');
   const canvas = await html2canvas(targetNode, { scale: 2 });
@@ -677,20 +763,16 @@ async function downloadResultsPdf() {
   const imgHeight = (canvas.height * pageWidth) / canvas.width;
   let remainingHeight = imgHeight;
   let offsetY = 0;
-
   pdf.addImage(imgData, 'PNG', 0, offsetY, pageWidth, imgHeight);
   remainingHeight -= pageHeight;
-
   while (remainingHeight > 0) {
     offsetY -= pageHeight;
     pdf.addPage();
     pdf.addImage(imgData, 'PNG', 0, offsetY, pageWidth, imgHeight);
     remainingHeight -= pageHeight;
   }
-
   pdf.save('Business-Case-ROI.pdf');
 }
-
 function launchConfetti() {
   for(let i=0;i<50;i++){
     const el=document.createElement('div');
@@ -702,11 +784,9 @@ function launchConfetti() {
     setTimeout(()=>el.remove(),4000);
   }
 }
-
 function resetQuiz() {
   location.reload();
 }
-
 function escapeHTML(str){const d=document.createElement('div');d.textContent=str;return d.innerHTML;}
 </script>
 </body>
