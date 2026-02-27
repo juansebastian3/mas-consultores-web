@@ -429,11 +429,16 @@
 async function fetchAIAnalysis(promptText) {
   const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/5ppnnj3ux0p1apjig6ls1e2qwp3vt3uu";
 
+  // Pre-escapar el prompt para que sea seguro dentro del JSON que Make construye para Gemini
+  // JSON.stringify agrega escapes a comillas (" → \") y saltos de línea (\n → \\n)
+  // .slice(1,-1) remueve las comillas externas que agrega stringify
+  const safePrompt = JSON.stringify(promptText).slice(1, -1);
+
   try {
     const response = await fetch(MAKE_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: promptText })
+      body: JSON.stringify({ prompt: safePrompt })
     });
 
     if (!response.ok) {
