@@ -114,6 +114,9 @@
   .hero-content h1 { font-size:clamp(36px,4.5vw,56px); font-weight:800; margin-bottom:20px; color:var(--navy3); line-height: 1.1; letter-spacing: -1px; }
   .hero-content p.hero-lead { color:var(--text); font-size:18px; margin-bottom:16px; max-width:92%; line-height:1.7; font-weight:500; }
   .hero-content p.hero-sub { color:var(--muted); font-size:16px; margin-bottom:38px; max-width:90%; line-height:1.6; }
+  .hero-cta-wrap { display:flex; flex-direction:column; align-items:flex-start; gap:8px; }
+  .roi-cta-note { display:flex; align-items:center; gap:6px; margin-left:clamp(140px,23vw,286px); color:var(--brand-morado); font-size:12px; font-weight:500; line-height:1.25; }
+  .roi-cta-arrow { font-size:18px; line-height:1; transform:rotate(12deg); }
 
   /* PAS SECTION */
   .pas-section { background: white; padding: 80px 0; border-top: 1px solid var(--border-light); }
@@ -309,6 +312,8 @@
     .hero-grid { gap:40px; }
     .hero-animated-wrapper { grid-row: 1; }
     .hero-content { padding-left: 0 !important; text-align: center; }
+    .hero-cta-wrap { align-items:center; }
+    .roi-cta-note { margin-left:0; justify-content:center; }
     .mas-logo img { height:46px; }
     .mas-animated-logo { max-width:400px; }
   }
@@ -398,9 +403,12 @@
        Llevamos <strong>30 años transformado el aprendizaje corporativo</strong>. Instalamos procesos ágiles, medimos el ROI y dejamos capacidades instaladas que impactan tu organización de manera sostenible.
         
 
-      <div class="nav-cta animate-up d-500" style="gap: 16px; flex-wrap: wrap;">
-        <a class="btn-solid" href="#contacto" style="padding:16px 32px; font-size:15px; background:var(--brand-rojo);">Hablemos de tu impacto</a>
-        <a class="btn-outline" href="diagnostico-roi.html" style="padding:16px 32px; font-size:15px;">Realizar Test Diagnóstico ROI</a>
+      <div class="hero-cta-wrap animate-up d-500">
+        <div class="nav-cta" style="gap: 16px; flex-wrap: wrap;">
+          <a class="btn-solid" href="#contacto" style="padding:16px 32px; font-size:15px; background:var(--brand-rojo);">Hablemos de tu impacto</a>
+          <a class="btn-outline" href="diagnostico-roi.html" style="padding:16px 32px; font-size:15px;">Realizar Test Diagnóstico ROI</a>
+        </div>
+        <p class="roi-cta-note"><span class="roi-cta-arrow" aria-hidden="true">↗</span>Toma solo 4 minutos completarlo.</p>
       </div>
     </div>
   </div>
