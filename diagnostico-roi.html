@@ -602,6 +602,8 @@ function goToStep(n) {
   document.getElementById('progressText').textContent = 'Paso ' + n + ' de ' + totalSteps;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+let loadingInterval; // Variable global para detener la rotación de frases
+
 async function submitLead() {
   const nombre = document.getElementById('leadNombre');
   const empresa = document.getElementById('leadEmpresa');
@@ -615,26 +617,73 @@ async function submitLead() {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { email.classList.add('error'); document.getElementById('errorEmail').style.display = 'block'; valid = false; }
   else { email.classList.remove('error'); document.getElementById('errorEmail').style.display = 'none'; }
   if (!valid) return;
+  
   profile.nombre = nombre.value.trim();
   profile.empresa = empresa.value.trim();
   profile.email = email.value.trim();
+  
   document.getElementById('btn-final-contacto').style.display = 'none';
   document.getElementById('btn-final-pdf').style.display = 'none';
   document.getElementById('btn-final-reset').style.display = 'none';
+
+  // --- INICIO DE LA PANTALLA DE CARGA CON "SABÍAS QUE..." ---
+  const facts = [
+    "<strong>Sabías que...</strong> llevamos más de 30 años transformando el aprendizaje corporativo a lo largo de 15 países.",
+    "<strong>Sabías que...</strong> somos el único partner oficial del ROI Institute en la región certificado para medir el Retorno de Inversión (Nivel 5) de tus capacitaciones.",
+    "<strong>Sabías que...</strong> somos Partner Exclusivo de LinkedIn Talent Solutions en Perú y uno de los dos únicos en Chile, permitiendo facturación 100% local sin costo extra.",
+    "<strong>Sabías que...</strong> integramos Inteligencia Artificial (Avatares) para escalar la formación corporativa y reducir los tiempos de producción.",
+    "<strong>Sabías que...</strong> nuestro fundador, Rodrigo Lara Fernández, es autor del libro best seller 'Capacitaciones'.",
+    "<strong>Sabías que...</strong> a fines del año 2025, re-lanzamos la oficina de MAS Consultores en Perú luego de 15 años'.",
+    "<strong>Sabías que...</strong> el 70% de la capacitación corporativa nunca se transfiere al puesto de trabajo. Nosotros diseñamos procesos para revertir esta estadística.",
+    "<strong>Sabías que...</strong> integramos 4 pilares (Consultoría, Formación, Plataformas y Medición) para garantizar que tu talento mueva los indicadores del negocio.",
+    "<strong>Sabías que...</strong> eb | Metrics es una empresa relacionado, la cual aplica ciencia de datos y test auto-desarrollados para predecir el éxito en la selección de tus equipos."
+    "<strong>Sabías que...</strong> líderes de la industria como Copec han confiado en nuestras metodologías de evaluación de competencias por más de 10 años consecutivos."
+  ];
+
   document.getElementById('resultContent').innerHTML = `<div style="padding: 60px 20px; text-align: center;">
-    <div style="margin-bottom:20px;">
+    <div style="margin-bottom:24px;">
       <div style="width:48px;height:48px;border:4px solid var(--brand-morado);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto;"></div>
       <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
     </div>
-    <h3>Redactando tu Business Case con IA...</h3>
-    <p style="color:var(--muted);margin-top:8px;font-size:14px;">Esto puede tomar 15-30 segundos</p>
+    <h3 style="margin-bottom: 16px;">Redactando tu Business Case con IA...</h3>
+    
+    <div style="background: var(--bg-light); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 16px 24px; max-width: 500px; margin: 0 auto; min-height: 80px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
+        <p id="factText" style="color:var(--navy); font-size:14px; margin:0; line-height: 1.5; transition: opacity 0.5s ease;">${facts[0]}</p>
+    </div>
+    
+    <p style="color:var(--muted);margin-top:20px;font-size:13px; font-weight: 600;">Esto puede tomar de 15 a 30 segundos ⏳</p>
   </div>`;
+
   goToStep(6);
+
+  // Lógica para rotar las frases cada 4.5 segundos
+  let factIndex = 0;
+  clearInterval(loadingInterval); // Limpiar por si acaso
+  loadingInterval = setInterval(() => {
+    factIndex = (factIndex + 1) % facts.length;
+    const factEl = document.getElementById('factText');
+    if (factEl) {
+      factEl.style.opacity = 0; // Desvanece
+      setTimeout(() => {
+        factEl.innerHTML = facts[factIndex];
+        factEl.style.opacity = 1; // Aparece nueva frase
+      }, 500);
+    } else {
+      clearInterval(loadingInterval); // Si ya no existe el elemento, detiene el intervalo
+    }
+  }, 4500);
+  // --- FIN DE LA PANTALLA DE CARGA ---
+
   await calculateResults();
+  
+  // Al terminar la carga, limpiamos el intervalo
+  clearInterval(loadingInterval);
+  
   launchConfetti();
   document.getElementById('btn-final-contacto').style.display = 'flex';
   document.getElementById('btn-final-pdf').style.display = 'flex';
   document.getElementById('btn-final-reset').style.display = 'flex';
+
 }
 function buildExecutiveReportPrompt(profileData, checklistSnapshot) {
   const userDataLines = [
