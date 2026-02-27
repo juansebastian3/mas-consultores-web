@@ -330,7 +330,7 @@
       <li><a href="#blog">Blog</a></li>
     </ul>
     <div class="nav-cta">
-      <a class="btn-outline" href="diagnostico-roi.html">Diagnóstico ROI</a>
+      <a class="btn-outline" href="diagnostico-roi.html">Test Diagnóstico ROI</a>
       <a class="btn-solid" href="#contacto">Hablemos</a>
     </div>
   </div>
@@ -400,7 +400,7 @@
 
       <div class="nav-cta animate-up d-500" style="gap: 16px; flex-wrap: wrap;">
         <a class="btn-solid" href="#contacto" style="padding:16px 32px; font-size:15px; background:var(--brand-rojo);">Hablemos de tu impacto</a>
-        <a class="btn-outline" href="diagnostico-roi.html" style="padding:16px 32px; font-size:15px;">Diagnóstico ROI</a>
+        <a class="btn-outline" href="diagnostico-roi.html" style="padding:16px 32px; font-size:15px;">Realizar Test Diagnóstico ROI</a>
       </div>
     </div>
   </div>
@@ -725,7 +725,7 @@
 
       <div class="divider-or">o descarga nuestra plantilla exclusiva</div>
 
-      <div class="trust-item"><span aria-hidden="true" style="color:var(--brand-morado);">📄</span> <strong>Diagnóstico ROI Gratuito:</strong> Auditoría de Madurez de Aprendizaje Corporativo</div>
+      <div class="trust-item"><span aria-hidden="true" style="color:var(--brand-morado);">📄</span> <strong>Test Diagnóstico ROI Gratuito:</strong> formulario digital para completar al momento</div>
       <div class="trust-item"><span aria-hidden="true" style="color:var(--green-wa);">✓</span> Identifica fugas de dinero en capacitación</div>
     </div>
     
@@ -780,9 +780,8 @@
 
           </div>
           <div class="form-group">
-            <label class="form-label" for="f_desafio">Principal desafío *</label>
-            <textarea class="form-textarea" id="f_desafio" placeholder="Ej: necesitamos medir el retorno de nuestra formación y mejorar la adopción..." required></textarea>
-            <div class="error-text">Por favor describe tu desafío</div>
+            <label class="form-label" for="f_desafio">Ayúdanos a abordar mejor la reunión: cuéntanos un poco más en qué te encuentras hoy (opcional)</label>
+            <textarea class="form-textarea" id="f_desafio" placeholder="Por ejemplo: necesitamos mejorar la transferencia de lo aprendido al puesto y medir mejor el impacto en resultados."></textarea>
           </div>
           <div class="step-nav">
             <button type="button" class="btn-back" onclick="goStep(1)">← Volver</button>
@@ -790,6 +789,19 @@
           </div>
         </div>
         <div class="form-step" id="step3">
+          <div class="form-group">
+            <label class="form-label">¿Cómo supiste de nosotros? *</label>
+            <div class="form-chips" id="chips_origen">
+              <button type="button" class="chip-option" onclick="selectChip(this,'origen')">LinkedIn</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'origen')">Google / Buscador</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'origen')">Referido</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'origen')">Evento o Webinar</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'origen')">Instagram</button>
+              <button type="button" class="chip-option" onclick="selectChip(this,'origen')">Otro</button>
+            </div>
+            <input class="form-input" id="f_origen_otro" type="text" placeholder="Cuéntanos desde dónde nos conociste" style="margin-top:10px; display:none;">
+            <div class="error-text" id="origen_error">Selecciona una alternativa para continuar</div>
+          </div>
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="f_email">Email Corporativo *</label>
@@ -813,7 +825,7 @@
           <div style="font-size:50px; margin-bottom:10px;" aria-hidden="true">✅</div>
           <h3 style="color:var(--navy); margin-bottom:10px;">¡Solicitud recibida!</h3>
           <p style="color:var(--muted); font-size:14px; margin-bottom:10px;">Te responderemos en menos de <strong>un día hábil</strong>.</p>
-          <p style="color:var(--muted); font-size:14px;">Mientras te contacta un ejecutivo, te recomendamos completar el <a href="diagnostico-roi.html" style="color:var(--red); font-weight:700;">Diagnóstico ROI</a>.</p>
+          <p style="color:var(--muted); font-size:14px;">Mientras te contacta un ejecutivo, puedes completar ahora el <a href="diagnostico-roi.html" style="color:var(--red); font-weight:700;">Test Diagnóstico ROI</a> (formulario digital gratuito, sin pago ni agendamiento).</p>
         </div>
 
       </div>
@@ -937,6 +949,19 @@ function selectChip(el,group){
 
   el.classList.add('selected');
   chips[group]=el.textContent;
+  if(group==='origen'){
+    const origenOtro=document.getElementById('f_origen_otro');
+    const origenError=document.getElementById('origen_error');
+    if(origenError)origenError.style.display='none';
+    if(!origenOtro) return;
+    if(el.textContent==='Otro'){
+      origenOtro.style.display='block';
+      origenOtro.focus();
+    }else{
+      origenOtro.style.display='none';
+      origenOtro.value='';
+    }
+  }
 }
 function validateAndGo(cur,next){
   let valid=true;
@@ -960,6 +985,23 @@ function goStep(n){
 }
 function submitForm(){
   const email=document.getElementById('f_email');
+  const origenSeleccionado=chips['origen'];
+  const origenOtro=document.getElementById('f_origen_otro');
+  const origenError=document.getElementById('origen_error');
+
+  if(!origenSeleccionado){
+    if(origenError)origenError.style.display='block';
+    return;
+  }
+
+  if(origenSeleccionado==='Otro' && origenOtro && !origenOtro.value.trim()){
+    origenOtro.classList.add('error');
+    origenOtro.focus();
+    return;
+  }
+
+  if(origenOtro)origenOtro.classList.remove('error');
+
   if(!email.checkValidity()){
     email.classList.add('error');
     email.nextElementSibling.style.display='block';
@@ -972,6 +1014,7 @@ function submitForm(){
     tamaño:chips['tamaño']||'N/A',
     servicio:chips['servicio']||'N/A',
     desafio:document.getElementById('f_desafio').value,
+    origen:origenSeleccionado==='Otro' && origenOtro ? origenOtro.value.trim() : (origenSeleccionado||'N/A'),
     email:email.value,
     telefono:document.getElementById('f_telefono').value,
   };
