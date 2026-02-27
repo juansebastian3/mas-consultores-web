@@ -637,49 +637,43 @@ function buildExecutiveReportPrompt(profileData, checklistSnapshot) {
     const unchecked = checklistSnapshot.unselected[level] || [];
     return `${levelName}\n- Practicas checkeadas: ${checked.join(' | ') || 'Ninguna'}\n- Practicas no checkeadas: ${unchecked.join(' | ') || 'Ninguna'}`;
   }).join('\n\n');
-  return `Actua como un Director de Consultoria Experto en la Metodologia ROI de Phillips y Estratega de Talento Organizacional.
+  return `Eres un analista de madurez en medicion de capacitacion basado en la Metodologia ROI de Phillips. Representas a MAS Consultores, unico partner del ROI Institute en Latinoamerica.
 
-Voy a entregarte los resultados de un "Diagnostico de Madurez ROI" completado por un usuario. Tu objetivo es redactar un informe ejecutivo, agil y dinamico, estrategico y persuasivo analizando sus respuestas.
+FORMATO: Responde SOLO en HTML. Usa <h3> para titulos, <p> para parrafos, <ul><li> para listas, <strong> para negrita. NO Markdown. NO uses # ni ** ni ---. Solo etiquetas HTML.
 
-FORMATO DE RESPUESTA OBLIGATORIO:
-Responde UNICAMENTE en formato HTML valido. Usa etiquetas <h3> para titulos de seccion, <p> para parrafos, <ul> y <li> para listas, <strong> para texto en negrita, y <hr> para separadores. NO uses Markdown. NO uses caracteres como # o ** o ---. Solo HTML puro.
+REGLAS DE ESTILO CRITICAS:
+- Se BREVE y DIRECTO. Maximo 2-3 oraciones por parrafo.
+- NO uses frases de halago ni felicitaciones como "quiero felicitarte" o "excelente primer paso".
+- NO uses cierres largos ni emotivos. El cierre debe ser 1 parrafo corto maximo.
+- Tono profesional, ejecutivo, orientado a datos. Como un informe de consultoria real, no un pitch de ventas.
+- Tutea al usuario por su nombre.
+- Usa lenguaje financiero: fuga de capital, gasto sin trazabilidad, retorno, costo de oportunidad.
 
-OBJETIVO CRITICO DEL INFORME:
-Este informe no solo lo leera el usuario que completo el test; sera utilizado por el/ella como "Champion" (promotor interno) para mostrarselo a sus pares, a la Gerencia General (CEO) o a la Gerencia de Finanzas (CFO). Por lo tanto, el documento debe funcionar como un "Business Case" que justifique la urgencia de cambiar su modelo de capacitacion y demuestre que MAS Consultores es el unico aliado seguro para hacerlo.
+ESTRUCTURA (respeta este orden exacto, no agregues secciones extra):
 
-Contexto de tu empresa:
-Representas a "MAS Consultores", el unico partner oficial del ROI Institute en Latinoamerica, con mas de 30 anos de experiencia instalando capacidades y ecosistemas de aprendizaje (Consultoria, Formacion, Plataformas LMS y Medicion ROI Nivel 5).
+<h3>Contexto</h3>
+1-2 oraciones situando la empresa: tamano, industria, presupuesto. Sin adornos.
 
-Instrucciones estructurales para redactar el informe:
+<h3>Diagnostico: Que hacen bien</h3>
+Lista corta de las practicas que SI tienen implementadas, agrupadas por nivel.
 
-1. Tono y Audiencia Dual:
-Dirigete al usuario por su nombre ("tu"), pero utiliza un lenguaje financiero, de negocios y de gestion de riesgos tan contundente que cualquier Director que lea el informe entienda la urgencia. Habla de "fuga de capital", "gasto ciego en talento", "retorno de inversion", "alineacion estrategica" y "ventaja competitiva".
+<h3>Brechas criticas</h3>
+Lista de lo que NO estan haciendo en Niveles 3, 4 y 5. Ser directo sobre el riesgo financiero de cada brecha. Sin rodeos.
 
-2. El Business Case (El riesgo y la perdida de valor en no actuar):
-Comienza contextualizando el tamano de su empresa y su presupuesto. Explica por que seguir capacitando sin llegar a los Niveles 4 (Impacto) y 5 (ROI Financiero) es un riesgo estructural. Dale al Champion argumentos irrebatibles: "Cada millon invertido sin trazabilidad al puesto de trabajo es presupuesto perdido". Hazle ver a la gerencia que el modelo actual es ineficiente.
+<h3>Hoja de ruta</h3>
+3-4 pasos concretos que deben lograr (QUE hacer, nunca COMO hacerlo). Ejemplo: "Definir KPIs de negocio antes de disenar programas", "Implementar aislamiento de efectos post-capacitacion". No explicar la metodologia.
 
-3. Resumen del Diagnostico (Brechas y Puntos Ciegos):
-Toma sus respuestas y destaca lo que SI hacen bien (ej. Reaccion y Aprendizaje), pero expon con crudeza las brechas en Transferencia (Nivel 3) y ROI (Niveles 4 y 5).
+<h3>Por que MAS Consultores</h3>
+Maximo 4 bullets: unico partner ROI Institute en LATAM, 30 anos de experiencia, instalamos procesos (no cursos), tecnologia + medicion cientifica. Sin parrafos largos.
 
-4. Guia Estrategica (El "Que", pero NUNCA el "Como"):
-Entrega una hoja de ruta abstracta de 3 o 4 pasos (ej. "Aislar los efectos de la capacitacion", "Vincular el diseno instruccional a los KPIs operativos").
-IMPORTANTE: Explica muy bien QUE deben lograr, pero omite deliberadamente la explicacion de COMO se hace tacticamente. Genera la sensacion de que es un proceso metodologico de alta ingenieria para el cual necesitan expertos.
-
-5. Credenciales y Autoridad (Por que MAS Consultores):
-Esta seccion es vital para convencer a la gerencia. Argumenta por que este ecosistema NO debe construirse improvisando con recursos internos o proveedores genericos. Posiciona explicitamente a MAS Consultores como la unica opcion logica destacando:
-- Que somos el UNICO partner oficial del ROI Institute y Jack Phillips en Latinoamerica.
-- Nuestros 30 anos de experiencia demostrable.
-- Que no entregamos "cursos", sino que "instalamos capacidades y procesos" para que el cambio sea sostenible.
-- La integracion de tecnologia agil (como IA y Colossyan) sumada a la medicion cientifica.
-
-6. Cierre y Llamado a la Accion (Para el Champion y su Jefatura):
-Concluye empoderando al usuario. Sugierele que este diagnostico es el primer paso para transformar a RRHH en un socio estrategico del negocio. Invitalo a el y a su equipo directivo a agendar una "Reunion de Diagnostico de Impacto" con nuestros directores para trazar un roadmap para el siguiente ano.
+<h3>Siguiente paso</h3>
+UNA oracion invitando a agendar una reunion de diagnostico con el equipo directivo. Nada mas.
 
 ---
-DATOS DEL USUARIO A ANALIZAR:
+DATOS:
 ${userDataLines.join('\n')}
 
-Detalle exacto de practicas checkeadas y no checkeadas:
+Practicas por nivel:
 ${practicesByLevel}`;
 }
 function sanitizeAIResponse(rawText) {
