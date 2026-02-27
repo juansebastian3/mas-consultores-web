@@ -658,9 +658,11 @@ FORMATO: Responde SOLO en HTML. Usa <h3> para titulos, <p> para parrafos, <ul><l
 REGLAS DE ESTILO CRITICAS:
 - BREVE y DIRECTO. Maximo 2-3 oraciones por parrafo.
 - PROHIBIDO: frases de halago, felicitaciones, "quiero felicitarte", "excelente primer paso", "es un placer".
-- PROHIBIDO: cierres largos, emotivos o motivacionales. Nada de "estamos listos para apoyarte" ni "este es el primer paso hacia la transformacion".
-- PROHIBIDO: repetir o listar textualmente las practicas del checklist. El usuario ya las vio. En vez de listarlas, INTERPRETA y ANALIZA su significado estrategico.
-- Tono: como un informe de McKinsey o Deloitte. Frio, analitico, basado en datos.
+- PROHIBIDO: cierres largos, emotivos o motivacionales.
+- PROHIBIDO: repetir o listar textualmente las practicas del checklist. El usuario ya las vio. INTERPRETA y ANALIZA su significado estrategico.
+- PROHIBIDO: secciones promocionales sobre MAS Consultores. NO incluyas seccion "Por que MAS" ni nada similar. El informe debe ser valioso por si mismo, no un pitch de ventas.
+- Tono: como un informe de McKinsey o Deloitte. Analitico, basado en datos, con urgencia implicita pero sin desesperacion.
+- La urgencia debe venir de los DATOS y las CONSECUENCIAS, no de frases alarmistas. El lector debe llegar solo a la conclusion de que necesita actuar.
 - Tutea al usuario por su nombre.
 - Usa lenguaje financiero concreto: fuga de capital, gasto ciego, costo de oportunidad, capital sin trazabilidad.
 
@@ -669,23 +671,23 @@ ESTRUCTURA (respeta este orden exacto, no agregues secciones extra):
 <h3>Radiografia de ${profileData.empresa || 'tu organizacion'}</h3>
 2-3 oraciones analizando el contexto: que significa operar en su industria con ese tamano y presupuesto. Incluir un dato o benchmark relevante de la industria sobre inversion en capacitacion (puedes inferirlo). No repetir datos crudos.
 
+<h3>Benchmark: tu posicion vs. la industria</h3>
+Compara su puntaje y madurez contra lo que es tipico en su rubro e industria. Usa una tabla HTML simple con 3 columnas: Nivel | Tu empresa | Promedio ${profileData.rubro || 'industria'} (estima promedios realistas para su rubro basandote en datos del ROI Institute). Agrega 1-2 oraciones interpretando donde estan por encima o por debajo del promedio de su sector. Se especifico: "En ${profileData.rubro || 'tu industria'}, el 70% de las empresas de tu tamano ya mide transferencia al puesto (Nivel 3)". Esto debe hacer que el usuario se compare y sienta la brecha.
+
 <h3>Donde esta el valor (y donde se fuga)</h3>
-NO listes las practicas del checklist. En cambio, haz un ANALISIS ESTRATEGICO: que patron revelan sus respuestas? Que madurez tienen realmente? Usa analogias de negocio. Ejemplo: si solo miden reaccion y aprendizaje pero no impacto, di algo como "Es como medir las ventas de un producto sin saber si genera margen". Destaca 2-3 insights clave con impacto financiero estimado cuando sea posible.
+ANALISIS ESTRATEGICO, no lista de practicas. Que patron revelan sus respuestas? Usa analogias de negocio potentes. Ejemplo: si solo miden reaccion y aprendizaje pero no impacto, di algo como "Es como medir las ventas de un producto sin saber si genera margen". Destaca 2-3 insights clave. Cada insight debe terminar con una consecuencia concreta y cuantificable cuando sea posible. La urgencia viene de mostrar lo que PIERDEN cada mes que pasa sin cambiar.
 
 <h3>El costo oculto de no medir</h3>
-Cuantifica o estima el riesgo. Si tienen presupuesto de $X en capacitacion y no miden ROI, que porcentaje tipicamente se pierde segun estudios? Cita datos del ROI Institute o de Jack Phillips sobre el costo de no medir (puedes parafrasear). Hazlo tangible y concreto para un CFO.
+Cuantifica el riesgo con numeros concretos. Si tienen presupuesto de $X en capacitacion y no miden ROI, estima cuanto se pierde anualmente segun datos del ROI Institute. Hazlo tangible para un CFO. Incluye una linea tipo: "Cada trimestre sin trazabilidad al Nivel 4 equivale a aproximadamente $Y en gasto sin retorno demostrable". El usuario debe poder usar este numero en una presentacion a gerencia.
 
 <h3>Hoja de ruta: 4 movimientos estrategicos</h3>
-4 pasos concretos que deben lograr (QUE hacer, nunca COMO hacerlo). Cada paso en 1 oracion. Genera la sensacion de que requiere expertise especializado. No expliques la metodologia.
-
-<h3>Por que MAS Consultores</h3>
-Maximo 4 bullets muy cortos: unico partner ROI Institute en LATAM, +30 anos, instalamos capacidades (no cursos), tecnologia + medicion cientifica.
+4 pasos concretos que deben lograr (QUE hacer, nunca COMO hacerlo). Cada paso en 1-2 oraciones. Genera la sensacion de que requiere expertise especializado. No expliques la metodologia, pero si deja claro el impacto de cada paso. Ejemplo: "Vincular cada programa a un KPI de negocio antes de ejecutarlo. Sin esto, cualquier resultado positivo es anecdotico."
 
 <h3>Lectura recomendada</h3>
-Recomienda el libro <strong>Capacitaciones</strong> de <strong>Rodrigo Lara Fernandez</strong>, fundador de MAS Consultores. En 1-2 oraciones, posicionalo como lectura esencial para quien quiera entender como transformar la capacitacion en una inversion medible. Mencionalo como recurso practico, no academico.
+Recomienda el libro <strong>Capacitaciones</strong> de <strong>Rodrigo Lara Fernandez</strong>, fundador de MAS Consultores. En 1-2 oraciones, posicionalo como una guia practica (no academica) para quien quiera entender como convertir la capacitacion en inversion medible.
 
 <h3>Siguiente paso</h3>
-UNA sola oracion invitando a agendar una Reunion de Diagnostico de Impacto con el equipo directivo. Sin adornos, sin emociones. Solo la invitacion directa.
+UNA sola oracion invitando a agendar una Reunion de Diagnostico de Impacto con MAS Consultores para profundizar en estos hallazgos. Directa, sin adornos.
 
 ---
 DATOS:
