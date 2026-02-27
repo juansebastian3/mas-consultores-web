@@ -261,8 +261,14 @@
   .form-success { text-align:center; padding:24px 0; }
 
   /* FLOATING BUTTONS & CHATBOT */
-  #wa-float { position:fixed; bottom:104px; right:28px; z-index:9999; background:var(--green-wa); color:#fff; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; text-decoration:none; box-shadow:0 6px 20px rgba(37,211,102,0.35); transition:transform 0.2s; }
+  #social-float { position:fixed; right:28px; bottom:172px; z-index:9999; display:flex; flex-direction:column; gap:10px; animation:slideFloatDown 0.55s ease-out both; }
+  @keyframes slideFloatDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+  .social-float-link { width:44px; height:44px; border-radius:50%; background:#fff; color:var(--navy); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-sm); transition:all 0.2s; }
+  .social-float-link:hover { color:var(--red); border-color:var(--red); transform:translateY(2px); }
+  .social-float-link svg { width:20px; height:20px; }
+  #wa-float { position:fixed; bottom:104px; right:28px; z-index:9999; background:var(--green-wa); color:#fff; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; box-shadow:0 6px 20px rgba(37,211,102,0.35); transition:transform 0.2s; }
   #wa-float:hover { transform:scale(1.08); }
+  #wa-float svg { width:28px; height:28px; fill:currentColor; }
   #chatbot-btn { position:fixed; bottom:28px; right:28px; z-index:9999; width:58px; height:58px; border-radius:50%; background:linear-gradient(135deg,var(--navy),var(--navy2)); border:2px solid var(--red); color:#fff; font-size:24px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(26,46,74,0.4); transition:transform 0.3s; animation:pulse-bot 2.5s ease-in-out infinite; padding:0; }
   #chatbot-btn:hover { transform:scale(1.08); }
   @keyframes pulse-bot { 0%,100%{box-shadow:0 6px 24px rgba(26,46,74,0.4)} 50%{box-shadow:0 8px 32px rgba(232,75,42,0.45)} }
@@ -815,9 +821,9 @@
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label" for="f_email">Email Corporativo *</label>
+              <label class="form-label" for="f_email">Correo corporativo *</label>
               <input class="form-input" id="f_email" type="email" placeholder="tu@empresa.cl" required>
-              <div class="error-text">Email inválido</div>
+              <div class="error-text">Ingresa un correo corporativo válido</div>
             </div>
             <div class="form-group">
               <label class="form-label" for="f_telefono">Teléfono</label>
@@ -875,6 +881,8 @@
           <li style="color:rgba(255,255,255,0.5); font-size:14px;">Providencia, Santiago</li>
           <li style="color:rgba(255,255,255,0.5); font-size:14px;">+56 22 584 00 90</li>
           <li style="color:rgba(255,255,255,0.5); font-size:14px;">info@masconsultores.cl</li>
+          <li><a href="https://www.instagram.com/masconsultoreschile/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/mas-consultores/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
         </ul>
       </div>
     </div>
@@ -884,7 +892,15 @@
   </div>
 </footer>
 
-<a id="wa-float" href="https://wa.me/56997416972" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">💬</a>
+<div id="social-float" aria-label="Redes sociales de MAS">
+  <a class="social-float-link" href="https://www.instagram.com/masconsultoreschile/" target="_blank" rel="noopener noreferrer" aria-label="Instagram MAS Consultores">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5a4.25 4.25 0 0 0-4.25-4.25h-8.5Zm9.75 2.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/></svg>
+  </a>
+  <a class="social-float-link" href="https://www.linkedin.com/company/mas-consultores/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn MAS Consultores">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44ZM5.4 9.8h3.08V19H5.4V9.8Zm5.06 0h2.95v1.25h.04c.41-.78 1.41-1.6 2.9-1.6 3.1 0 3.67 2.04 3.67 4.69V19h-3.08v-4.3c0-1.03-.02-2.35-1.43-2.35-1.43 0-1.65 1.12-1.65 2.28V19h-3.08V9.8Z"/></svg>
+  </a>
+</div>
+<a id="wa-float" href="https://wa.me/56997416972" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.1 17.5c-.3-.2-1.8-.9-2.1-1s-.5-.2-.8.2c-.2.3-.9 1-1.1 1.2s-.4.2-.7.1c-.3-.2-1.4-.5-2.7-1.7-1-1-1.7-2.2-1.9-2.5-.2-.3 0-.5.1-.7.2-.2.3-.4.5-.6.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.2 3.2c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.8.6.8.3 1.5.2 2.1.1.6-.1 1.8-.8 2-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.2-.6-.3z"/><path d="M16.1 3.2c-7 0-12.6 5.6-12.6 12.6 0 2.2.6 4.4 1.7 6.2L3.2 28l6.2-1.9c1.8 1 3.9 1.6 6 1.6h.1c7 0 12.6-5.6 12.6-12.6S23.1 3.2 16.1 3.2zm0 22.3h-.1c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-3.7 1.1 1.2-3.6-.2-.4c-1-1.6-1.6-3.4-1.6-5.4 0-5.7 4.6-10.3 10.3-10.3S26.5 10 26.5 15.7c0 5.7-4.7 9.8-10.4 9.8z"/></svg></a>
 <button id="chatbot-btn" onclick="toggleChat()" aria-label="Abrir asistente virtual">🤖<span class="bot-badge">IA</span></button>
 
 <div id="chatbot-window">
@@ -994,6 +1010,15 @@ function goStep(n){
   ['p1','p2','p3'].forEach((id,i)=>document.getElementById(id).classList.toggle('done',i<n));
 
 }
+const PERSONAL_EMAIL_DOMAINS=['gmail.com','hotmail.com','outlook.com','live.com','msn.com','yahoo.com','icloud.com','me.com','aol.com','proton.me','protonmail.com','gmx.com','mail.com','yandex.com'];
+
+function isCorporateEmail(value){
+  const email=value.trim().toLowerCase();
+  const parts=email.split('@');
+  if(parts.length!==2||!parts[0]||!parts[1]) return false;
+  return !PERSONAL_EMAIL_DOMAINS.includes(parts[1]);
+}
+
 function submitForm(){
   const email=document.getElementById('f_email');
   const origenSeleccionado=chips['origen'];
@@ -1013,12 +1038,14 @@ function submitForm(){
 
   if(origenOtro)origenOtro.classList.remove('error');
 
-  if(!email.checkValidity()){
+  if(!email.checkValidity() || !isCorporateEmail(email.value)){
     email.classList.add('error');
     email.nextElementSibling.style.display='block';
     return;
 
   }
+  email.classList.remove('error');
+  email.nextElementSibling.style.display='none';
   const data={
     nombre:document.getElementById('f_nombre').value,
     empresa:document.getElementById('f_empresa').value,
