@@ -77,7 +77,6 @@
   .error-msg{color:var(--brand-rojo);font-size:12px;margin-top:4px;display:none;font-weight:600}
   .result-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:50px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px}
   .result-message{font-size:16px;line-height:1.8;margin-bottom:28px;padding:24px;border-radius:var(--radius-md);text-align:left}
-
   .ai-report-container { background: #fdfdfe; border: 2px solid var(--brand-morado); border-radius: var(--radius-lg); padding: 36px; text-align: left; margin-bottom: 30px; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
   .ai-report-container::before { content:''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--brand-morado); }
   .ai-report-container h3 { color: var(--navy); font-size: 20px; margin-top: 28px; margin-bottom: 12px; font-weight: 800; }
@@ -439,33 +438,26 @@
   </div>
 </div>
 <script>
-// --- CONFIGURACIÓN DE IA ---
+// --- CONFIGURACIÓN DE IA (n8n webhook) ---
 async function fetchAIAnalysis(promptText) {
-  const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/5ppnnj3ux0p1apjig6ls1e2qwp3vt3uu";
-
-  // Pre-escapar el prompt para que sea seguro dentro del JSON que Make construye para Gemini
-  // JSON.stringify agrega escapes a comillas (" → \") y saltos de línea (\n → \\n)
-  // .slice(1,-1) remueve las comillas externas que agrega stringify
+  const N8N_WEBHOOK_URL = "https://n8n.sirdar.cl/webhook/3926edbf-c411-4d0d-a301-e07dee0909e1";
+  // Pre-escapar el prompt para que sea seguro dentro del JSON
   const safePrompt = JSON.stringify(promptText).slice(1, -1);
-
   try {
-    const response = await fetch(MAKE_WEBHOOK_URL, {
+    const response = await fetch(N8N_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ prompt: safePrompt })
     });
-
     if (!response.ok) {
-      console.error("Error de Make.com - Status:", response.status);
+      console.error("Error de n8n - Status:", response.status);
       return null;
     }
-
     const textData = await response.text();
-    console.log("--- RESPUESTA CRUDA DE MAKE ---");
+    console.log("--- RESPUESTA CRUDA DE N8N ---");
     console.log(textData);
     console.log("--- FIN RESPUESTA ---");
-
-    // Intentar parsear como JSON por si Make envuelve la respuesta
+    // Intentar parsear como JSON por si n8n envuelve la respuesta
     try {
       const jsonData = JSON.parse(textData);
       // Si es JSON, buscar el contenido del reporte en distintos campos comunes
@@ -493,58 +485,42 @@ async function fetchAIAnalysis(promptText) {
       // No es JSON, es texto plano - perfecto
       return textData;
     }
-
   } catch (e) {
     console.error("Error de conexión:", e);
     return null;
   }
 }
-
 // --- Convertir Markdown a HTML ---
 function markdownToHtml(md) {
   if (!md) return '';
   let html = md;
-
-  // Escapar HTML existente que no sea parte de tags válidos
-  // (no escapamos porque Gemini puede enviar HTML directo)
-
   // Headers: ### -> h3, ## -> h2, # -> h1
   html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
   html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
   html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
   html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
-
   // Bold: **text** -> <strong>text</strong>
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-
-  // Italic: *text* -> <em>text</em>  (pero no dentro de listas)
+  // Italic: *text* -> <em>text</em>
   html = html.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
-
   // Blockquotes: > text -> <blockquote>
   html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
-
   // Horizontal rules
   html = html.replace(/^---$/gm, '<hr>');
-
   // Unordered lists: - item or * item
   html = html.replace(/^[\-\*] (.+)$/gm, '<li>$1</li>');
   // Wrap consecutive <li> in <ul>
   html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
-
   // Ordered lists: 1. item
   html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
-  // Don't double-wrap if already in <ul>
-
   // Paragraphs: double newlines
   html = html.replace(/\n\n+/g, '</p><p>');
-  // Single newlines within paragraphs -> <br> (but not after block elements)
+  // Single newlines within paragraphs -> <br>
   html = html.replace(/(?<!<\/h[1-4]>)(?<!<\/li>)(?<!<\/ul>)(?<!<\/ol>)(?<!<\/blockquote>)(?<!<\/p>)(?<!<hr>)\n(?!<)/g, '<br>');
-
   // Wrap in paragraph if not starting with a block element
   if (!html.startsWith('<h') && !html.startsWith('<ul') && !html.startsWith('<ol') && !html.startsWith('<blockquote')) {
     html = '<p>' + html + '</p>';
   }
-
   // Clean up empty paragraphs
   html = html.replace(/<p>\s*<\/p>/g, '');
   // Fix paragraphs wrapping block elements
@@ -556,10 +532,8 @@ function markdownToHtml(md) {
   html = html.replace(/(<hr>)\s*<\/p>/g, '$1');
   html = html.replace(/<p>\s*(<blockquote>)/g, '$1');
   html = html.replace(/(<\/blockquote>)\s*<\/p>/g, '$1');
-
   return html;
 }
-
 const profile = {};
 let currentStep = 1;
 const totalSteps = 6;
@@ -602,8 +576,7 @@ function goToStep(n) {
   document.getElementById('progressText').textContent = 'Paso ' + n + ' de ' + totalSteps;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-let loadingInterval; // Variable global para detener la rotación de frases
-
+let loadingInterval;
 function isCorporateEmail(emailValue) {
   const genericDomains = new Set([
     'gmail.com','googlemail.com','hotmail.com','outlook.com','live.com','msn.com','yahoo.com','yahoo.es','icloud.com','me.com','mac.com',
@@ -616,7 +589,6 @@ function isCorporateEmail(emailValue) {
   if (!domain || genericDomains.has(domain)) return false;
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail);
 }
-
 async function submitLead() {
   const nombre = document.getElementById('leadNombre');
   const empresa = document.getElementById('leadEmpresa');
@@ -630,15 +602,14 @@ async function submitLead() {
   if (!isCorporateEmail(email.value)) { email.classList.add('error'); document.getElementById('errorEmail').style.display = 'block'; valid = false; }
   else { email.classList.remove('error'); document.getElementById('errorEmail').style.display = 'none'; }
   if (!valid) return;
-  
+
   profile.nombre = nombre.value.trim();
   profile.empresa = empresa.value.trim();
   profile.email = email.value.trim();
-  
+
   document.getElementById('btn-final-contacto').style.display = 'none';
   document.getElementById('btn-final-pdf').style.display = 'none';
   document.getElementById('btn-final-reset').style.display = 'none';
-
   // --- INICIO DE LA PANTALLA DE CARGA CON "SABÍAS QUE..." ---
   const facts = [
     "<strong>Sabías que...</strong> llevamos más de 30 años transformando el aprendizaje corporativo a lo largo de 15 países.",
@@ -652,51 +623,45 @@ async function submitLead() {
     "<strong>Sabías que...</strong> eb | Metrics es una empresa relacionado, la cual aplica ciencia de datos y test auto-desarrollados para predecir el éxito en la selección de tus equipos.",
     "<strong>Sabías que...</strong> líderes de la industria como Copec han confiado en nuestras metodologías de evaluación de competencias por más de 10 años consecutivos."
   ];
-
   document.getElementById('resultContent').innerHTML = `<div style="padding: 60px 20px; text-align: center;">
     <div style="margin-bottom:24px;">
       <div style="width:48px;height:48px;border:4px solid var(--brand-morado);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto;"></div>
       <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
     </div>
     <h3 style="margin-bottom: 16px;">Redactando tu Business Case con IA...</h3>
-    
+
     <div style="background: var(--bg-light); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 16px 24px; max-width: 500px; margin: 0 auto; min-height: 80px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
         <p id="factText" style="color:var(--navy); font-size:14px; margin:0; line-height: 1.5; transition: opacity 0.5s ease;">${facts[0]}</p>
     </div>
-    
+
     <p style="color:var(--muted);margin-top:20px;font-size:13px; font-weight: 600;">Esto puede tomar de 15 a 30 segundos ⏳</p>
   </div>`;
-
   goToStep(6);
-
   // Lógica para rotar las frases cada 4.5 segundos
   let factIndex = 0;
-  clearInterval(loadingInterval); // Limpiar por si acaso
+  clearInterval(loadingInterval);
   loadingInterval = setInterval(() => {
     factIndex = (factIndex + 1) % facts.length;
     const factEl = document.getElementById('factText');
     if (factEl) {
-      factEl.style.opacity = 0; // Desvanece
+      factEl.style.opacity = 0;
       setTimeout(() => {
         factEl.innerHTML = facts[factIndex];
-        factEl.style.opacity = 1; // Aparece nueva frase
+        factEl.style.opacity = 1;
       }, 500);
     } else {
-      clearInterval(loadingInterval); // Si ya no existe el elemento, detiene el intervalo
+      clearInterval(loadingInterval);
     }
   }, 4500);
   // --- FIN DE LA PANTALLA DE CARGA ---
-
   await calculateResults();
-  
-  // Al terminar la carga, limpiamos el intervalo
+
   clearInterval(loadingInterval);
-  
+
   launchConfetti();
   document.getElementById('btn-final-contacto').style.display = 'flex';
   document.getElementById('btn-final-pdf').style.display = 'flex';
   document.getElementById('btn-final-reset').style.display = 'flex';
-
 }
 function buildExecutiveReportPrompt(profileData, checklistSnapshot) {
 const userDataLines = [
@@ -707,18 +672,14 @@ const userDataLines = [
   `Industria: ${profileData.rubro || 'No informada'}`,
   `Presupuesto: ${profileData.presupuesto || 'No informado'}`
 ];
-
 const practicesByLevel = Object.keys(checklistSnapshot.levelNames).map(level => {
   const levelName = checklistSnapshot.levelNames[level];
   const checked = checklistSnapshot.selected[level] || [];
   const unchecked = checklistSnapshot.unselected[level] || [];
   return `${levelName}\n- Prácticas checkeadas: ${checked.join(' | ') || 'Ninguna'}\n- Prácticas no checkeadas: ${unchecked.join(' | ') || 'Ninguna'}`;
 }).join('\n\n');
-
 return `Eres un analista senior de medición de impacto organizacional, especializado en la Metodología ROI de Phillips (Niveles 1-5). Representas a MAS Consultores, único partner del ROI Institute en Latinoamérica.
-
 FORMATO: Responde SOLO en HTML. Usa <h3> para títulos, <p> para párrafos, <ul><li> para listas, <strong> para negrita. NO Markdown. NO uses # ni ** ni ---. Solo etiquetas HTML.
-
 REGLAS DE ESTILO CRÍTICAS:
 - BREVE y DIRECTO. Máximo 2-3 oraciones por párrafo.
 - PROHIBIDO: frases de halago, felicitaciones, "quiero felicitarte", "excelente primer paso", "es un placer".
@@ -727,62 +688,47 @@ REGLAS DE ESTILO CRÍTICAS:
 - Tono: como un informe de McKinsey o Deloitte. Analítico, basado en datos, con urgencia implícita pero sin desesperación.
 - Tutea al usuario por su nombre.
 - Usa lenguaje financiero concreto: fuga de capital, gasto ciego, costo de oportunidad, capital sin trazabilidad.
-
 INSTRUCCIONES DE VENTA CONSULTIVA (SUTIL):
 En la sección "Hoja de ruta", debes recomendar 4 pasos estratégicos basados estrictamente en las "Prácticas no checkeadas" del usuario. Presenta estas soluciones como consejos metodológicos de alto nivel, conectándolas sutilmente con las áreas de MAS Consultores, pero SIN venderlas directamente:
 1. Si faltan prácticas en Nivel 1 y 2: El dolor es que no hay un estándar escalable. Sugiere transitar de capacitaciones aisladas a un "ecosistema de aprendizaje blended" (sincrónico y asincrónico), diseñar "Academias o Escuelas Corporativas" y usar formatos de alto impacto (cápsulas digitales, e-learning).
 2. Si faltan prácticas en Nivel 3: El dolor es la nula transferencia al puesto. Sugiere alinear el "Liderazgo" y la "Gestión del Desempeño" para que las jefaturas acompañen el desarrollo, y la creación de "Laboratorios" prácticos de continuidad post-formación para asegurar la aplicación.
 3. Si faltan prácticas en Nivel 4 y 5: El dolor es no poder justificar la inversión. Sugiere integrar herramientas de "People Analytics" y evaluación de impacto para pasar de miradas descriptivas a predictivas, logrando conectar el talento directamente con los KPIs del negocio.
 4. Si la empresa tiene más de 200 colaboradores o no consolidan datos: Menciona la necesidad de centralizar con ecosistemas digitales (LMS, Plataformas de Talento o Desempeño). Usa la premisa: "Recuerda que la tecnología NO instala los procesos, solo los facilita", por lo que deben customizar la plataforma a su propia cultura.
-
 ESTRUCTURA EXACTA (no agregues secciones extra):
-
 <h3>Radiografía de ${profileData.empresa || 'tu organización'}</h3>
 2-3 oraciones analizando el contexto: qué significa operar en su industria con ese tamaño y presupuesto.
-
 <h3>Benchmark: tu posición vs. la industria</h3>
 Compara su puntaje y madurez contra lo que es típico en su rubro. Usa una tabla HTML simple con 3 columnas: Nivel | Tu empresa | Promedio ${profileData.rubro || 'industria'}. Agrega 1-2 oraciones interpretando la brecha.
-
 <h3>Dónde está el valor (y dónde se fuga)</h3>
 ANÁLISIS ESTRATÉGICO, no lista de prácticas. ¿Qué patrón revelan sus respuestas? Usa analogías de negocio potentes. Destaca 2 insights clave.
-
 <h3>El costo oculto de no medir</h3>
 Cuantifica el riesgo con números concretos basándote en su presupuesto (si lo indicó) o promedios. Hazlo tangible para un CFO.
-
 <h3>Hoja de ruta: 4 movimientos estratégicos</h3>
 Usa las instrucciones de VENTA CONSULTIVA (SUTIL) de arriba para redactar 4 pasos concretos que resuelvan los vacíos de sus respuestas.
-
 <h3>Lectura recomendada</h3>
 Recomienda el libro <strong>Capacitaciones</strong> de <strong>Rodrigo Lara Fernández</strong>. En 1-2 oraciones, posiciónalo como una guía práctica para entender cómo convertir la capacitación en inversión medible.
-
 <h3>Siguiente paso</h3>
 UNA sola oración invitando a agendar una Reunión de Diagnóstico de Impacto con MAS Consultores para profundizar en estos hallazgos. Directa, sin adornos.
-
 ---
 DATOS:
 ${userDataLines.join('\n')}
-
 Prácticas por nivel:
 ${practicesByLevel}`;
 }
 function sanitizeAIResponse(rawText) {
   if (!rawText) return '';
   let cleaned = rawText.trim();
-
   // Remover bloques de código markdown
   cleaned = cleaned.replace(/^\s*```html\s*/i, '');
   cleaned = cleaned.replace(/^\s*```\s*/i, '');
   cleaned = cleaned.replace(/\s*```\s*$/i, '');
-
   // Si la respuesta ya contiene tags HTML, usarla directamente
   if (/<[a-z][\s\S]*>/i.test(cleaned)) {
     return cleaned;
   }
-
   // Si es texto plano/Markdown, convertir a HTML
   return markdownToHtml(cleaned);
 }
-
 async function calculateResults() {
   const allChecked = document.querySelectorAll('.check-item.checked');
   const total = allChecked.length;
@@ -790,20 +736,15 @@ async function calculateResults() {
   allChecked.forEach(item => { if(item.dataset.level) levels[item.dataset.level]++; });
   const snapshot = getChecklistSnapshotForPrompt();
   const prompt = buildExecutiveReportPrompt(profile, snapshot);
-
   console.log("--- PROMPT ENVIADO ---");
   console.log(prompt.substring(0, 500) + "...");
-
   const rawResponse = await fetchAIAnalysis(prompt);
   const aiReportHtml = sanitizeAIResponse(rawResponse);
-
   console.log("--- HTML PROCESADO ---");
   console.log(aiReportHtml ? aiReportHtml.substring(0, 500) + "..." : "VACÍO");
-
   const finalReportBlock = aiReportHtml
     ? `<div class="ai-report-container">${aiReportHtml}</div>`
     : `<div class="ai-report-container"><h3>Reporte temporalmente no disponible</h3><p>No pudimos conectar con el servicio de IA. Por favor intenta nuevamente en unos minutos o contacta directamente a MAS Consultores para tu diagnóstico personalizado.</p></div>`;
-
   // Determinar nivel de madurez
   const pct = (total / 20) * 100;
   let maturityLabel, maturityColor, maturityBg;
@@ -811,10 +752,8 @@ async function calculateResults() {
   else if (pct <= 50) { maturityLabel = 'En Desarrollo'; maturityColor = '#edb321'; maturityBg = 'rgba(237,179,33,.15)'; }
   else if (pct <= 75) { maturityLabel = 'Avanzado'; maturityColor = '#009739'; maturityBg = 'rgba(0,151,57,.15)'; }
   else { maturityLabel = 'Estrategico'; maturityColor = '#23398d'; maturityBg = 'rgba(35,57,141,.15)'; }
-
   const levelColors = { 1:'#833d8e', 2:'#edb321', 3:'#009739', 4:'#d62216', 5:'#23398d' };
   const levelNames = { 1:'Reaccion', 2:'Aprendizaje', 3:'Aplicacion', 4:'Impacto', 5:'ROI' };
-
   document.getElementById('resultContent').innerHTML = `
     <div class="score-header">
       <h2>Business Case ROI — ${profile.empresa || 'Tu Empresa'}</h2>
@@ -877,7 +816,6 @@ async function downloadResultsPdf() {
   // Ocultar botones antes de capturar
   const btns = document.querySelectorAll('#btn-final-contacto, #btn-final-pdf, #btn-final-reset');
   btns.forEach(b => b.style.display = 'none');
-
   const targetNode = document.querySelector('#step6 .step-card');
   const canvas = await html2canvas(targetNode, { scale: 2, useCORS: true });
   const imgData = canvas.toDataURL('image/png');
@@ -886,14 +824,11 @@ async function downloadResultsPdf() {
   const pageWidth = 210;
   const pageHeight = 297;
   const imgHeight = (canvas.height * pageWidth) / canvas.width;
-
   // Cargar logo para watermark
   const logoData = await loadLogoAsDataUrl();
-
   let remainingHeight = imgHeight;
   let offsetY = 0;
   let pageNum = 0;
-
   function addWatermarkToPage() {
     if (logoData) {
       // Watermark centrada semitransparente
@@ -903,7 +838,6 @@ async function downloadResultsPdf() {
       const wmHeight = 36;
       pdf.addImage(logoData, 'PNG', (pageWidth - wmWidth) / 2, (pageHeight - wmHeight) / 2, wmWidth, wmHeight);
       pdf.restoreGraphicsState();
-
       // Logo pequeno abajo a la derecha
       pdf.saveGraphicsState();
       pdf.setGState(new pdf.GState({ opacity: 0.4 }));
@@ -915,11 +849,9 @@ async function downloadResultsPdf() {
     pdf.setTextColor(150);
     pdf.text('MAS Consultores | Unico Partner ROI Institute en Latinoamerica | www.masconsultores.cl', pageWidth / 2, pageHeight - 6, { align: 'center' });
   }
-
   pdf.addImage(imgData, 'PNG', 0, offsetY, pageWidth, imgHeight);
   addWatermarkToPage();
   remainingHeight -= pageHeight;
-
   while (remainingHeight > 0) {
     offsetY -= pageHeight;
     pdf.addPage();
@@ -927,13 +859,11 @@ async function downloadResultsPdf() {
     addWatermarkToPage();
     remainingHeight -= pageHeight;
   }
-
   // Restaurar botones
   btns.forEach(b => b.style.display = '');
   document.getElementById('btn-final-contacto').style.display = 'flex';
   document.getElementById('btn-final-pdf').style.display = 'flex';
   document.getElementById('btn-final-reset').style.display = 'flex';
-
   pdf.save('Business-Case-ROI-' + (profile.empresa || 'Empresa').replace(/\s+/g, '-') + '.pdf');
 }
 function launchConfetti() {
