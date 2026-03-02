@@ -686,63 +686,70 @@ async function submitLead() {
 
 }
 function buildExecutiveReportPrompt(profileData, checklistSnapshot) {
-  const userDataLines = [
-    `Nombre: ${profileData.nombre || 'No informado'}`,
-    `Empresa: ${profileData.empresa || 'No informada'}`,
-    `Cargo: ${profileData.cargo || 'No informado'}`,
-    `Tamaño: ${profileData.colaboradores || 'No informado'}`,
-    `Industria: ${profileData.rubro || 'No informada'}`,
-    `Presupuesto: ${profileData.presupuesto || 'No informado'}`
-  ];
-  const practicesByLevel = Object.keys(checklistSnapshot.levelNames).map(level => {
-    const levelName = checklistSnapshot.levelNames[level];
-    const checked = checklistSnapshot.selected[level] || [];
-    const unchecked = checklistSnapshot.unselected[level] || [];
-    return `${levelName}\n- Practicas checkeadas: ${checked.join(' | ') || 'Ninguna'}\n- Practicas no checkeadas: ${unchecked.join(' | ') || 'Ninguna'}`;
-  }).join('\n\n');
-  return `Eres un analista senior de medicion de impacto organizacional, especializado en la Metodologia ROI de Phillips (Niveles 1-5). Representas a MAS Consultores, unico partner del ROI Institute en Latinoamerica.
+const userDataLines = [
+  `Nombre: ${profileData.nombre || 'No informado'}`,
+  `Empresa: ${profileData.empresa || 'No informada'}`,
+  `Cargo: ${profileData.cargo || 'No informado'}`,
+  `Tamaño: ${profileData.colaboradores || 'No informado'}`,
+  `Industria: ${profileData.rubro || 'No informada'}`,
+  `Presupuesto: ${profileData.presupuesto || 'No informado'}`
+];
 
-FORMATO: Responde SOLO en HTML. Usa <h3> para titulos, <p> para parrafos, <ul><li> para listas, <strong> para negrita. NO Markdown. NO uses # ni ** ni ---. Solo etiquetas HTML.
+const practicesByLevel = Object.keys(checklistSnapshot.levelNames).map(level => {
+  const levelName = checklistSnapshot.levelNames[level];
+  const checked = checklistSnapshot.selected[level] || [];
+  const unchecked = checklistSnapshot.unselected[level] || [];
+  return `${levelName}\n- Prácticas checkeadas: ${checked.join(' | ') || 'Ninguna'}\n- Prácticas no checkeadas: ${unchecked.join(' | ') || 'Ninguna'}`;
+}).join('\n\n');
 
-REGLAS DE ESTILO CRITICAS:
-- BREVE y DIRECTO. Maximo 2-3 oraciones por parrafo.
+return `Eres un analista senior de medición de impacto organizacional, especializado en la Metodología ROI de Phillips (Niveles 1-5). Representas a MAS Consultores, único partner del ROI Institute en Latinoamérica.
+
+FORMATO: Responde SOLO en HTML. Usa <h3> para títulos, <p> para párrafos, <ul><li> para listas, <strong> para negrita. NO Markdown. NO uses # ni ** ni ---. Solo etiquetas HTML.
+
+REGLAS DE ESTILO CRÍTICAS:
+- BREVE y DIRECTO. Máximo 2-3 oraciones por párrafo.
 - PROHIBIDO: frases de halago, felicitaciones, "quiero felicitarte", "excelente primer paso", "es un placer".
 - PROHIBIDO: cierres largos, emotivos o motivacionales.
-- PROHIBIDO: repetir o listar textualmente las practicas del checklist. El usuario ya las vio. INTERPRETA y ANALIZA su significado estrategico.
-- PROHIBIDO: secciones promocionales sobre MAS Consultores. NO incluyas seccion "Por que MAS" ni nada similar. El informe debe ser valioso por si mismo, no un pitch de ventas.
-- Tono: como un informe de McKinsey o Deloitte. Analitico, basado en datos, con urgencia implicita pero sin desesperacion.
-- La urgencia debe venir de los DATOS y las CONSECUENCIAS, no de frases alarmistas. El lector debe llegar solo a la conclusion de que necesita actuar.
+- PROHIBIDO: repetir o listar textualmente las prácticas del checklist. El usuario ya las vio. INTERPRETA y ANALIZA su significado estratégico.
+- Tono: como un informe de McKinsey o Deloitte. Analítico, basado en datos, con urgencia implícita pero sin desesperación.
 - Tutea al usuario por su nombre.
 - Usa lenguaje financiero concreto: fuga de capital, gasto ciego, costo de oportunidad, capital sin trazabilidad.
 
-ESTRUCTURA (respeta este orden exacto, no agregues secciones extra):
+INSTRUCCIONES DE VENTA CONSULTIVA (SUTIL):
+En la sección "Hoja de ruta", debes recomendar 4 pasos estratégicos basados estrictamente en las "Prácticas no checkeadas" del usuario. Presenta estas soluciones como consejos metodológicos de alto nivel, conectándolas sutilmente con las áreas de MAS Consultores, pero SIN venderlas directamente:
+1. Si faltan prácticas en Nivel 1 y 2: El dolor es que no hay un estándar escalable. Sugiere transitar de capacitaciones aisladas a un "ecosistema de aprendizaje blended" (sincrónico y asincrónico), diseñar "Academias o Escuelas Corporativas" y usar formatos de alto impacto (cápsulas digitales, e-learning).
+2. Si faltan prácticas en Nivel 3: El dolor es la nula transferencia al puesto. Sugiere alinear el "Liderazgo" y la "Gestión del Desempeño" para que las jefaturas acompañen el desarrollo, y la creación de "Laboratorios" prácticos de continuidad post-formación para asegurar la aplicación.
+3. Si faltan prácticas en Nivel 4 y 5: El dolor es no poder justificar la inversión. Sugiere integrar herramientas de "People Analytics" y evaluación de impacto para pasar de miradas descriptivas a predictivas, logrando conectar el talento directamente con los KPIs del negocio.
+4. Si la empresa tiene más de 200 colaboradores o no consolidan datos: Menciona la necesidad de centralizar con ecosistemas digitales (LMS, Plataformas de Talento o Desempeño). Usa la premisa: "Recuerda que la tecnología NO instala los procesos, solo los facilita", por lo que deben customizar la plataforma a su propia cultura.
 
-<h3>Radiografia de ${profileData.empresa || 'tu organizacion'}</h3>
-2-3 oraciones analizando el contexto: que significa operar en su industria con ese tamano y presupuesto. Incluir un dato o benchmark relevante de la industria sobre inversion en capacitacion (puedes inferirlo). No repetir datos crudos.
+ESTRUCTURA EXACTA (no agregues secciones extra):
 
-<h3>Benchmark: tu posicion vs. la industria</h3>
-Compara su puntaje y madurez contra lo que es tipico en su rubro e industria. Usa una tabla HTML simple con 3 columnas: Nivel | Tu empresa | Promedio ${profileData.rubro || 'industria'} (estima promedios realistas para su rubro basandote en datos del ROI Institute). Agrega 1-2 oraciones interpretando donde estan por encima o por debajo del promedio de su sector. Se especifico: "En ${profileData.rubro || 'tu industria'}, el 70% de las empresas de tu tamano ya mide transferencia al puesto (Nivel 3)". Esto debe hacer que el usuario se compare y sienta la brecha.
+<h3>Radiografía de ${profileData.empresa || 'tu organización'}</h3>
+2-3 oraciones analizando el contexto: qué significa operar en su industria con ese tamaño y presupuesto.
 
-<h3>Donde esta el valor (y donde se fuga)</h3>
-ANALISIS ESTRATEGICO, no lista de practicas. Que patron revelan sus respuestas? Usa analogias de negocio potentes. Ejemplo: si solo miden reaccion y aprendizaje pero no impacto, di algo como "Es como medir las ventas de un producto sin saber si genera margen". Destaca 2-3 insights clave. Cada insight debe terminar con una consecuencia concreta y cuantificable cuando sea posible. La urgencia viene de mostrar lo que PIERDEN cada mes que pasa sin cambiar.
+<h3>Benchmark: tu posición vs. la industria</h3>
+Compara su puntaje y madurez contra lo que es típico en su rubro. Usa una tabla HTML simple con 3 columnas: Nivel | Tu empresa | Promedio ${profileData.rubro || 'industria'}. Agrega 1-2 oraciones interpretando la brecha.
+
+<h3>Dónde está el valor (y dónde se fuga)</h3>
+ANÁLISIS ESTRATÉGICO, no lista de prácticas. ¿Qué patrón revelan sus respuestas? Usa analogías de negocio potentes. Destaca 2 insights clave.
 
 <h3>El costo oculto de no medir</h3>
-Cuantifica el riesgo con numeros concretos. Si tienen presupuesto de $X en capacitacion y no miden ROI, estima cuanto se pierde anualmente segun datos del ROI Institute. Hazlo tangible para un CFO. Incluye una linea tipo: "Cada trimestre sin trazabilidad al Nivel 4 equivale a aproximadamente $Y en gasto sin retorno demostrable". El usuario debe poder usar este numero en una presentacion a gerencia.
+Cuantifica el riesgo con números concretos basándote en su presupuesto (si lo indicó) o promedios. Hazlo tangible para un CFO.
 
-<h3>Hoja de ruta: 4 movimientos estrategicos</h3>
-4 pasos concretos que deben lograr (QUE hacer, nunca COMO hacerlo). Cada paso en 1-2 oraciones. Genera la sensacion de que requiere expertise especializado. No expliques la metodologia, pero si deja claro el impacto de cada paso. Ejemplo: "Vincular cada programa a un KPI de negocio antes de ejecutarlo. Sin esto, cualquier resultado positivo es anecdotico."
+<h3>Hoja de ruta: 4 movimientos estratégicos</h3>
+Usa las instrucciones de VENTA CONSULTIVA (SUTIL) de arriba para redactar 4 pasos concretos que resuelvan los vacíos de sus respuestas.
 
 <h3>Lectura recomendada</h3>
-Recomienda el libro <strong>Capacitaciones</strong> de <strong>Rodrigo Lara Fernandez</strong>, fundador de MAS Consultores. En 1-2 oraciones, posicionalo como una guia practica (no academica) para quien quiera entender como convertir la capacitacion en inversion medible.
+Recomienda el libro <strong>Capacitaciones</strong> de <strong>Rodrigo Lara Fernández</strong>. En 1-2 oraciones, posiciónalo como una guía práctica para entender cómo convertir la capacitación en inversión medible.
 
 <h3>Siguiente paso</h3>
-UNA sola oracion invitando a agendar una Reunion de Diagnostico de Impacto con MAS Consultores para profundizar en estos hallazgos. Directa, sin adornos.
+UNA sola oración invitando a agendar una Reunión de Diagnóstico de Impacto con MAS Consultores para profundizar en estos hallazgos. Directa, sin adornos.
 
 ---
 DATOS:
 ${userDataLines.join('\n')}
 
-Practicas por nivel:
+Prácticas por nivel:
 ${practicesByLevel}`;
 }
 function sanitizeAIResponse(rawText) {
