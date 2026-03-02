@@ -414,7 +414,7 @@
         <div class="form-group">
           <label class="form-label" for="leadEmail">Email Corporativo *</label>
           <input class="form-input" id="leadEmail" type="email" placeholder="tu@empresa.cl" required>
-          <div class="error-msg" id="errorEmail">Ingresa un email corporativo válido</div>
+          <div class="error-msg" id="errorEmail">Ingresa un email corporativo válido (no se aceptan dominios genéricos como Gmail o Hotmail)</div>
         </div>
       </div>
       <div class="step-nav" style="flex-direction:column;gap:10px;">
@@ -604,6 +604,19 @@ function goToStep(n) {
 }
 let loadingInterval; // Variable global para detener la rotación de frases
 
+function isCorporateEmail(emailValue) {
+  const genericDomains = new Set([
+    'gmail.com','googlemail.com','hotmail.com','outlook.com','live.com','msn.com','yahoo.com','yahoo.es','icloud.com','me.com','mac.com',
+    'aol.com','proton.me','protonmail.com','zoho.com','gmx.com','gmx.es','mail.com','yandex.com'
+  ]);
+  const normalizedEmail = emailValue.trim().toLowerCase();
+  const atIndex = normalizedEmail.lastIndexOf('@');
+  if (atIndex === -1) return false;
+  const domain = normalizedEmail.slice(atIndex + 1);
+  if (!domain || genericDomains.has(domain)) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail);
+}
+
 async function submitLead() {
   const nombre = document.getElementById('leadNombre');
   const empresa = document.getElementById('leadEmpresa');
@@ -614,7 +627,7 @@ async function submitLead() {
     if (!el.value.trim()) { el.classList.add('error'); document.getElementById(errId).style.display = 'block'; valid = false; }
     else { el.classList.remove('error'); document.getElementById(errId).style.display = 'none'; }
   });
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { email.classList.add('error'); document.getElementById('errorEmail').style.display = 'block'; valid = false; }
+  if (!isCorporateEmail(email.value)) { email.classList.add('error'); document.getElementById('errorEmail').style.display = 'block'; valid = false; }
   else { email.classList.remove('error'); document.getElementById('errorEmail').style.display = 'none'; }
   if (!valid) return;
   
