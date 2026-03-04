@@ -113,10 +113,10 @@ No elegimos entre innovación o evidencia. En MAS Consultores integramos ambas p
 Convierte tu inversión en capacitación en impacto demostrable
 
 **Título del Lead Magnet (decisión creativa):**
-**Scorecard de Transferencia y ROI de Capacitación (versión Gerencia RR.HH.)**
+**Scorecard de Transferencia y ROI de Capacitación (versión Gerente de Persona)**
 
 **Concepto exacto:**
-Una herramienta descargable + autodiagnóstico (10 minutos) para que gerentes de RR.HH. evalúen el nivel de transferencia al puesto y madurez de medición de sus programas, con benchmark y plan de acción de 30 días.
+Una herramienta descargable + autodiagnóstico (10 minutos) para que quienes se desempeñan como Gerente de Persona evalúen el nivel de transferencia al puesto y madurez de medición de sus programas, con benchmark y plan de acción de 30 días.
 
 **CTA TOFU:**
 Descargar Scorecard gratis
@@ -195,7 +195,7 @@ Agenda una Reunión de Diagnóstico de Impacto
   - **H3:** Plataformas para escalar aprendizaje con adopción real
   - **H3:** Medición y ROI para demostrar impacto
 - **H2:** Innovación aplicada: Avatars IA + metodología ROI Institute™
-- **H2:** Scorecard de Transferencia y ROI para Gerencias de RR.HH.
+- **H2:** Scorecard de Transferencia y ROI para Gerente de Persona
 - **H2:** Casos con impacto en indicadores de negocio
 - **H2:** Agenda tu Diagnóstico de Impacto
 
@@ -258,7 +258,7 @@ Agenda una Reunión de Diagnóstico de Impacto
 ## 6) Copy breve para anuncios LinkedIn (extra opcional)
 
 **Anuncio 1 (TOFU):**
-Tu empresa invierte en capacitación, pero ¿cuánto se transfiere realmente al puesto? Descarga el Scorecard de Transferencia y ROI para Gerencias de RR.HH.
+Tu empresa invierte en capacitación, pero ¿cuánto se transfiere realmente al puesto? Descarga el Scorecard de Transferencia y ROI para Gerente de Persona
 
 **Anuncio 2 (MOFU):**
 No instalamos cursos, instalamos capacidades. Conoce cómo conectar consultoría, formación, plataformas y medición en 90 días.
