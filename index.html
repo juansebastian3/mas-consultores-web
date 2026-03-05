@@ -283,6 +283,15 @@
   #wa-float svg { width:26px; height:26px; fill:currentColor; display:block; }
   #chatbot-btn { position:fixed; bottom:28px; right:28px; z-index:9999; width:var(--floating-btn-size); height:var(--floating-btn-size); border-radius:50%; background:linear-gradient(135deg,var(--navy),var(--navy2)); border:2px solid var(--red); color:#fff; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(26,46,74,0.4); transition:transform 0.3s; animation:pulse-bot 2.5s ease-in-out infinite; padding:0; }
   #chatbot-btn:hover { transform:scale(1.08); }
+  #mobile-fab { display:none; }
+  #mobile-fab-toggle { width:var(--floating-btn-size); height:var(--floating-btn-size); border-radius:50%; border:2px solid var(--red); background:linear-gradient(135deg,var(--navy),var(--navy2)); color:#fff; font-size:34px; line-height:1; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(26,46,74,0.4); cursor:pointer; }
+  #mobile-fab-toggle[aria-expanded="true"] { transform:rotate(45deg); }
+  .mobile-fab-menu { position:absolute; right:0; bottom:calc(var(--floating-btn-size) + 12px); display:flex; flex-direction:column; gap:10px; opacity:0; pointer-events:none; transform:translateY(10px); transition:all 0.25s ease; }
+  #mobile-fab.open .mobile-fab-menu { opacity:1; transform:translateY(0); pointer-events:auto; }
+  .mobile-fab-link { width:var(--floating-btn-size); height:var(--floating-btn-size); border-radius:50%; border:1px solid var(--border); background:#fff; color:var(--navy); text-decoration:none; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-sm); font-size:22px; position:relative; }
+  .mobile-fab-link svg { width:24px; height:24px; fill:currentColor; display:block; }
+  .mobile-fab-link--wa { background:var(--green-wa); color:#fff; border:none; }
+  .mobile-fab-link--bot { background:linear-gradient(135deg,var(--navy),var(--navy2)); color:#fff; border:2px solid var(--red); }
   @keyframes pulse-bot { 0%,100%{box-shadow:0 6px 24px rgba(26,46,74,0.4)} 50%{box-shadow:0 8px 32px rgba(232,75,42,0.45)} }
   .bot-badge { position:absolute; top:-3px; right:-3px; background:var(--red); color:#fff; font-size:9px; font-weight:800; padding:2px 6px; border-radius:10px; }
   #chatbot-window { position:fixed; bottom:104px; right:28px; z-index:9998; width:360px; max-height:520px; background:#fff; border-radius:var(--radius-xl); box-shadow:var(--shadow-xl); display:none; flex-direction:column; overflow:hidden; border:1px solid var(--border); }
@@ -372,6 +381,8 @@
     .hero-lead,.section-sub { font-size:16px; }
     .service-card,.case-body,.form-card,.test-card { padding:22px; }
     .roi-popup-pillrow { justify-content:center; }
+    #social-float,#wa-float,#chatbot-btn { display:none; }
+    #mobile-fab { position:fixed; right:18px; bottom:24px; z-index:9999; display:block; }
   }
   @media (prefers-reduced-motion: reduce){
     *, *::before, *::after { animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
@@ -992,6 +1003,23 @@
   </svg>
 </a>
 <button id="chatbot-btn" onclick="toggleChat()" aria-label="Abrir asistente virtual">🤖<span class="bot-badge">IA</span></button>
+<div id="mobile-fab" aria-label="Accesos rápidos de contacto">
+  <div class="mobile-fab-menu" id="mobileFabMenu">
+    <a class="mobile-fab-link" href="https://www.instagram.com/masconsultoreschile/" target="_blank" rel="noopener noreferrer" aria-label="Instagram MAS Consultores">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5a4.25 4.25 0 0 0-4.25-4.25h-8.5Zm9.75 2.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/></svg>
+    </a>
+    <a class="mobile-fab-link" href="https://www.linkedin.com/company/mas-consultores/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn MAS Consultores">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44ZM5.4 9.8h3.08V19H5.4V9.8Zm5.06 0h2.95v1.25h.04c.41-.78 1.41-1.6 2.9-1.6 3.1 0 3.67 2.04 3.67 4.69V19h-3.08v-4.3c0-1.03-.02-2.35-1.43-2.35-1.43 0-1.65 1.12-1.65 2.28V19h-3.08V9.8Z"/></svg>
+    </a>
+    <a class="mobile-fab-link mobile-fab-link--wa" href="https://wa.me/56997416972" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M13.601 2.326A7.854 7.854 0 0 0 8.018.001C3.684.001.151 3.532.151 7.865c0 1.386.362 2.737 1.05 3.928L0 16l4.305-1.128a7.901 7.901 0 0 0 3.714.947h.003c4.333 0 7.865-3.53 7.865-7.864a7.84 7.84 0 0 0-2.286-5.629zm-5.58 12.17h-.003a6.572 6.572 0 0 1-3.35-.92l-.24-.143-2.554.67.681-2.49-.157-.255a6.56 6.56 0 0 1-1.007-3.5c0-3.624 2.95-6.574 6.576-6.574a6.53 6.53 0 0 1 4.646 1.928 6.53 6.53 0 0 1 1.915 4.648c-.002 3.626-2.952 6.576-6.577 6.576zm3.606-4.944c-.197-.099-1.167-.576-1.348-.642-.18-.066-.312-.099-.444.099-.132.197-.51.642-.625.774-.115.132-.23.148-.428.05-.197-.1-.834-.307-1.588-.98-.586-.523-.981-1.17-1.096-1.367-.115-.198-.012-.305.087-.404.09-.09.197-.23.296-.346.099-.115.132-.197.198-.329.066-.132.033-.247-.017-.346-.05-.099-.444-1.07-.608-1.466-.16-.386-.323-.334-.444-.34l-.378-.007a.725.725 0 0 0-.526.247c-.181.198-.691.675-.691 1.647 0 .971.707 1.91.806 2.042.099.132 1.392 2.124 3.374 2.977.472.203.84.324 1.127.415.474.151.905.13 1.246.079.38-.057 1.167-.477 1.331-.938.164-.461.164-.857.115-.939-.05-.083-.181-.132-.379-.231z"/>
+      </svg>
+    </a>
+    <button class="mobile-fab-link mobile-fab-link--bot" id="mobileFabBot" type="button" aria-label="Abrir asistente virtual">🤖<span class="bot-badge">IA</span></button>
+  </div>
+  <button id="mobile-fab-toggle" type="button" aria-label="Abrir accesos de contacto" aria-expanded="false">+</button>
+</div>
 <div id="chatbot-window">
   <div class="chat-header">
     <div class="chat-avatar" aria-hidden="true">🤖</div>
@@ -1010,6 +1038,9 @@
 <script>
 const menuToggle=document.getElementById('menuToggle');
 const mobileMenu=document.getElementById('mobileMenu');
+const mobileFab=document.getElementById('mobile-fab');
+const mobileFabToggle=document.getElementById('mobile-fab-toggle');
+const mobileFabBot=document.getElementById('mobileFabBot');
 
 if(menuToggle&&mobileMenu){
   const closeMenu=()=>{
@@ -1027,6 +1058,32 @@ if(menuToggle&&mobileMenu){
   });
   mobileMenu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
   window.addEventListener('resize',()=>{ if(window.innerWidth>992) closeMenu(); });
+}
+
+
+if(mobileFab&&mobileFabToggle){
+  const closeFab=()=>{
+    mobileFab.classList.remove('open');
+    mobileFabToggle.setAttribute('aria-expanded','false');
+  };
+
+  mobileFabToggle.addEventListener('click',()=>{
+    const isOpen=mobileFab.classList.toggle('open');
+    mobileFabToggle.setAttribute('aria-expanded',String(isOpen));
+  });
+
+  mobileFab.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeFab));
+  document.addEventListener('click',(event)=>{
+    if(!mobileFab.contains(event.target)) closeFab();
+  });
+  window.addEventListener('resize',()=>{ if(window.innerWidth>768) closeFab(); });
+
+  if(mobileFabBot){
+    mobileFabBot.addEventListener('click',()=>{
+      closeFab();
+      toggleChat();
+    });
+  }
 }
 
 // WORD-BY-WORD HERO ANIMATION
