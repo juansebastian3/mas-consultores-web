@@ -1340,8 +1340,24 @@ const roiPopupCta=document.getElementById('roiPopupCta');
 const ROI_POPUP_DISMISS_KEY='roiPopupDismissedAt';
 const ROI_POPUP_COOLDOWN_MS=1000*60*60*24*3; // 3 días
 
+function getStoredDismissedAt(){
+  try{
+    return Number(window.localStorage.getItem(ROI_POPUP_DISMISS_KEY)||0);
+  }catch(_error){
+    return 0;
+  }
+}
+
+function persistPopupDismiss(){
+  try{
+    window.localStorage.setItem(ROI_POPUP_DISMISS_KEY,String(Date.now()));
+  }catch(_error){
+    // Ignora errores de almacenamiento (modo privado, cookies bloqueadas, etc.).
+  }
+}
+
 function canShowRoiPopup(){
-  const dismissedAt=Number(localStorage.getItem(ROI_POPUP_DISMISS_KEY)||0);
+  const dismissedAt=getStoredDismissedAt();
   return !dismissedAt || (Date.now()-dismissedAt)>ROI_POPUP_COOLDOWN_MS;
 }
 
@@ -1349,7 +1365,7 @@ if(roiPopupOverlay){
   const closeRoiPopup=(persistDismiss=true)=>{
     roiPopupOverlay.classList.remove('active');
     roiPopupOverlay.setAttribute('aria-hidden','true');
-    if(persistDismiss) localStorage.setItem(ROI_POPUP_DISMISS_KEY,String(Date.now()));
+    if(persistDismiss) persistPopupDismiss();
   };
 
   window.addEventListener('load',()=>{
