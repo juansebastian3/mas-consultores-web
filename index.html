@@ -201,11 +201,8 @@
   .service-card:hover .service-icon { background:var(--navy); color:#fff; }
   .service-card h3 { font-size:18px; margin-bottom:8px; }
   .service-card p { font-size:13px; line-height:1.55; color: var(--muted); }
-  .ecosystem-highlight-card { margin-top: 18px; background:#fff; border:1px solid var(--border-light); border-radius:18px; padding:20px 22px; box-shadow:var(--shadow-sm); position:relative; overflow:hidden; }
-  .ecosystem-highlight-card::before,
-  .ecosystem-highlight-card::after { content:''; position:absolute; top:16px; bottom:16px; width:4px; border-radius:4px; }
-  .ecosystem-highlight-card::before { left:0; background:linear-gradient(180deg, var(--brand-morado), var(--brand-amarillo)); }
-  .ecosystem-highlight-card::after { right:0; background:linear-gradient(180deg, var(--brand-verde), var(--brand-rojo)); }
+  .ecosystem-highlight-card { margin-top: 18px; background:linear-gradient(90deg, var(--brand-morado), var(--brand-amarillo), var(--brand-verde), var(--brand-rojo)); border-radius:18px; padding:2px; box-shadow:var(--shadow-sm); }
+  .ecosystem-highlight-inner { background:#fff; border-radius:16px; padding:20px 22px; }
   .ecosystem-title { text-align:center; font-size:28px; margin:2px 0 14px; color:var(--navy3); }
   .ecosystem-flow { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
   .flow-item { display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:var(--navy3); background:var(--bg-light); border-radius:999px; padding:6px 11px; }
@@ -618,15 +615,18 @@
       </div>
     </div>
     <div class="ecosystem-highlight-card reveal delay-4">
-      <h3 class="ecosystem-title">El Efecto Multiplicador del Ecosistema MAS</h3>
-      <div class="ecosystem-flow">
-        <span class="flow-item"><span class="flow-dot" style="background:var(--brand-morado);"></span>Arquitectura</span>
-        <span class="flow-arrow">→</span>
-        <span class="flow-item"><span class="flow-dot" style="background:var(--brand-amarillo);"></span>Contenido</span>
-        <span class="flow-arrow">→</span>
-        <span class="flow-item"><span class="flow-dot" style="background:var(--brand-verde);"></span>Escalar</span>
-        <span class="flow-arrow">→</span>
-        <span class="flow-item"><span class="flow-dot" style="background:var(--brand-rojo);"></span>Impacto</span>
+      <div class="ecosystem-highlight-inner">
+        <h3 class="ecosystem-title">El Efecto Multiplicador del Ecosistema MAS</h3>
+        <div class="ecosystem-flow">
+          <span class="flow-item"><span class="flow-dot" style="background:var(--brand-morado);"></span>Arquitectura</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-item"><span class="flow-dot" style="background:var(--brand-amarillo);"></span>Contenido</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-item"><span class="flow-dot" style="background:var(--brand-verde);"></span>Escalar</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-item"><span class="flow-dot" style="background:var(--brand-rojo);"></span>Impacto</span>
+        </div>
+        <p class="ecosystem-note"><strong>Un solo sistema:</strong> Consultoría diseña la arquitectura, Formación crea contenido, Plataformas escala y Medición valida resultados.</p>
       </div>
       <p class="ecosystem-note"><strong>Un solo sistema:</strong> Consultoría diseña la arquitectura, Formación crea contenido, Plataformas escala y Medición valida resultados.</p>
     </div>
