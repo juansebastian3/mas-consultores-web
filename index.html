@@ -201,6 +201,12 @@
   .service-card:hover .service-icon { background:var(--navy); color:#fff; }
   .service-card h3 { font-size:18px; margin-bottom:8px; }
   .service-card p { font-size:13px; line-height:1.55; color: var(--muted); }
+  .service-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .service-tag { display:inline-flex; align-items:center; padding:5px 11px; border-radius:999px; font-size:12px; font-weight:700; line-height:1; }
+  .card-consultoria .service-tag { background:rgba(131,61,142,0.12); color:#5d2c67; }
+  .card-formacion .service-tag { background:rgba(237,179,33,0.18); color:#7f5a00; }
+  .card-plataformas .service-tag { background:rgba(0,151,57,0.14); color:#0b6b2e; }
+  .card-medicion .service-tag { background:rgba(214,34,22,0.12); color:#8f1d14; }
   .ecosystem-highlight-card { margin-top: 18px; background:linear-gradient(90deg, var(--brand-morado), var(--brand-amarillo), var(--brand-verde), var(--brand-rojo)); border-radius:18px; padding:2px; box-shadow:var(--shadow-sm); }
   .ecosystem-highlight-inner { background:#fff; border-radius:16px; padding:20px 22px; }
   .ecosystem-title { text-align:center; font-size:28px; margin:2px 0 14px; color:var(--navy3); }
@@ -582,6 +588,13 @@
         </div>
         <h3 style="color: var(--brand-morado);">MAS Consultoría</h3>
         <p><strong>Alineación estratégica:</strong> ruta de talento conectada a metas del negocio. Gestión del cambio y cultura.</p>
+        <div class="service-tags" aria-label="Soluciones de consultoría">
+          <span class="service-tag">Desempeño</span>
+          <span class="service-tag">Talento</span>
+          <span class="service-tag">Liderazgo</span>
+          <span class="service-tag">Cambio</span>
+          <span class="service-tag">Cultura</span>
+        </div>
       </div>
       <div class="service-card card-formacion reveal delay-1">
         <div class="service-icon" aria-hidden="true" style="background: transparent; width: 68px; height: 68px;">
@@ -592,6 +605,13 @@
         </div>
         <h3 style="color: var(--brand-amarillo);">MAS Formación</h3>
         <p><strong>Técnica y Relacional:</strong> liderazgo, feedback, gestión del conocimiento, y experiencias prácticas de alta transferencia.</p>
+        <div class="service-tags" aria-label="Soluciones de formación">
+          <span class="service-tag">E-learning</span>
+          <span class="service-tag">Talleres</span>
+          <span class="service-tag">Avatares+IA</span>
+          <span class="service-tag">Cápsulas</span>
+          <span class="service-tag">Coaching</span>
+        </div>
       </div>
       <div class="service-card card-plataformas reveal delay-2">
         <div class="service-icon" aria-hidden="true" style="background: transparent; width: 68px; height: 68px;">
@@ -602,6 +622,13 @@
         </div>
         <h3 style="color: var(--brand-verde);">MAS Plataformas</h3>
         <p><strong>Plataformas vivas:</strong> Gestión de la Capacitación, LMS, desempeño y reconocmiento, con adopción real de usuarios.</p>
+        <div class="service-tags" aria-label="Soluciones de plataformas">
+          <span class="service-tag">LMS</span>
+          <span class="service-tag">Desempeño</span>
+          <span class="service-tag">Clima</span>
+          <span class="service-tag">Skills</span>
+          <span class="service-tag">Sucesión</span>
+        </div>
       </div>
       <div class="service-card card-medicion reveal delay-3">
         <div class="service-icon" aria-hidden="true" style="background: transparent; width: 68px; height: 68px;">
@@ -612,6 +639,12 @@
         </div>
         <h3 style="color: var(--brand-rojo);">MAS Medición</h3>
         <p><strong>ROI comprobable:</strong> evidencias de impacto y retorno financiero en Nivel 5.</p>
+        <div class="service-tags" aria-label="Soluciones de medición">
+          <span class="service-tag">ROI</span>
+          <span class="service-tag">Analytics</span>
+          <span class="service-tag">Dashboards</span>
+          <span class="service-tag">Certificación</span>
+        </div>
       </div>
     </div>
     <div class="ecosystem-highlight-card reveal delay-4">
