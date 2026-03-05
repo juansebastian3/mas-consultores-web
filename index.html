@@ -294,6 +294,33 @@
   .chat-input-row { display:flex; gap:8px; padding:14px 16px; border-top:1px solid var(--border-light); background:#fff; }
   .chat-input { flex:1; border:1px solid var(--border); border-radius:50px; padding:9px 16px; font-size:13px; outline:none; background:var(--bg-light); font-family:inherit; }
   .chat-send { background:var(--red); color:#fff; border:none; border-radius:50px; padding:9px 16px; cursor:pointer; font-size:13px; font-weight:700; font-family:inherit; }
+  /* POPUP DIAGNÓSTICO ROI */
+  .roi-popup-overlay { position:fixed; inset:0; background:rgba(9,18,34,0.62); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; z-index:2200; padding:20px; opacity:0; pointer-events:none; transition:opacity 0.28s ease; }
+  .roi-popup-overlay.active { opacity:1; pointer-events:auto; }
+  .roi-popup { width:min(620px,100%); background:linear-gradient(135deg,#ffffff 0%,#f8fbff 100%); border-radius:var(--radius-lg); box-shadow:var(--shadow-xl); padding:32px; border:1px solid rgba(36,61,97,0.12); position:relative; transform:translateY(14px) scale(0.98); opacity:0; transition:transform 0.28s ease, opacity 0.28s ease; }
+  .roi-popup-overlay.active .roi-popup { transform:translateY(0) scale(1); opacity:1; }
+  .roi-popup-close { position:absolute; top:14px; right:14px; border:none; background:transparent; color:var(--muted); font-size:22px; cursor:pointer; line-height:1; padding:4px; }
+  .roi-popup-eyebrow { color:var(--red); font-size:12px; font-weight:800; letter-spacing:1.8px; text-transform:uppercase; margin-bottom:8px; display:block; }
+  .roi-popup h3 { font-size:clamp(24px,3.4vw,33px); margin-bottom:12px; max-width:100%; text-align:center; line-height:1.2; text-wrap:balance; }
+  .roi-popup p { color:var(--muted); font-size:15px; line-height:1.7; margin-bottom:12px; }
+  .roi-popup-intro { text-align:center; max-width:54ch; margin:0 auto 14px; }
+  .roi-popup-pillrow { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 16px; }
+  .roi-popup-pill { background:var(--red-glow); color:var(--navy); border:1px solid rgba(117,35,139,0.12); border-radius:999px; font-size:12px; padding:6px 12px; font-weight:700; }
+  .roi-popup-list { margin:14px 0 18px 18px; color:var(--text); font-size:14px; }
+  .roi-popup-list li { margin-bottom:8px; }
+  .roi-popup-score-preview { background:#eef7ff; border:1px solid #d6e8ff; border-radius:14px; padding:14px; margin-bottom:16px; }
+  .roi-popup-score-top { display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin-bottom:8px; }
+  .roi-popup-score-top strong { font-size:14px; color:var(--navy2); }
+  .roi-popup-score-value { font-size:20px; font-weight:800; color:var(--red); line-height:1; }
+  .roi-popup-score-meter { height:10px; width:100%; background:#d9e8fb; border-radius:999px; overflow:hidden; }
+  .roi-popup-score-fill { display:block; height:100%; width:60%; background:linear-gradient(90deg,#f4ba2c 0%, #7a36a2 100%); border-radius:999px; }
+  .roi-popup-score-caption { color:#4d5f79; font-size:12px; margin-top:8px; }
+  .roi-popup-actions { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  .btn-popup-primary,.btn-popup-secondary { text-decoration:none; border-radius:50px; padding:10px 18px; font-size:13px; font-weight:700; }
+  .btn-popup-primary { background:var(--red); color:#fff; box-shadow:0 6px 16px rgba(117,35,139,0.26); }
+  .btn-popup-primary:hover { transform:translateY(-1px); }
+  .btn-popup-secondary { border:1px solid var(--border); color:var(--navy); background:#fff; cursor:pointer; }
+  .roi-popup-footnote { color:#7a8798; font-size:12px; margin-top:10px; }
   /* FOOTER */
   footer { background:var(--footer-bg); color:#fff; padding:80px 0 30px; }
   .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:50px; margin-bottom:60px; }
@@ -319,10 +346,46 @@
     .roi-cta-note { margin-left:0; justify-content:center; }
     .mas-logo img { height:46px; }
     .mas-animated-logo { max-width:400px; }
+    .roi-popup { padding:24px 20px; }
+    .roi-popup h3 { max-width:none; }
+    .roi-popup-score-top { align-items:center; }
   }
 </style>
 </head>
 <body>
+<div class="roi-popup-overlay" id="roiPopupOverlay" aria-hidden="true">
+  <div class="roi-popup" role="dialog" aria-modal="true" aria-labelledby="roiPopupTitle" aria-describedby="roiPopupDesc">
+    <button class="roi-popup-close" type="button" id="roiPopupClose" aria-label="Cerrar ventana">×</button>
+    <span class="roi-popup-eyebrow">Diagnóstico ROI · 100% gratuito</span>
+    <h3 id="roiPopupTitle">Averigua en qué nivel de ROI se encuentra tu organización</h3>
+    <p id="roiPopupDesc" class="roi-popup-intro">Una evaluación breve para llevarte una lectura clara de tu punto de partida y detectar oportunidades concretas de mejora.</p>
+    <div class="roi-popup-pillrow" aria-hidden="true">
+      <span class="roi-popup-pill">Toma pocos minutos</span>
+      <span class="roi-popup-pill">Sin costo</span>
+      <span class="roi-popup-pill">Valor práctico inmediato</span>
+    </div>
+    <ul class="roi-popup-list">
+      <li>Conoce tu nivel actual de madurez en ROI.</li>
+      <li>Recibe una síntesis accionable de lo que podrías optimizar.</li>
+      <li>Define próximos pasos con impacto para tu organización.</li>
+    </ul>
+    <div class="roi-popup-score-preview" aria-label="Ejemplo de resultado del diagnóstico">
+      <div class="roi-popup-score-top">
+        <strong>Ejemplo de resultado esperado</strong>
+        <span class="roi-popup-score-value">12/20</span>
+      </div>
+      <div class="roi-popup-score-meter" role="img" aria-label="Nivel de madurez de ejemplo: 12 de 20">
+        <span class="roi-popup-score-fill"></span>
+      </div>
+      <p class="roi-popup-score-caption">Verás una métrica de madurez como esta, con recomendaciones para subir de nivel.</p>
+    </div>
+    <div class="roi-popup-actions">
+      <a class="btn-popup-primary" href="diagnostico-roi.html" id="roiPopupCta">Comenzar diagnóstico</a>
+      <button class="btn-popup-secondary" type="button" id="roiPopupLater">Prefiero explorar primero</button>
+    </div>
+    <p class="roi-popup-footnote">Si ahora no es buen momento, puedes cerrarlo y retomarlo cuando quieras.</p>
+  </div>
+</div>
 <nav id="navbar" class="animate-nav">
   <div class="nav-inner">
     <a class="mas-logo" href="#inicio">
@@ -1146,6 +1209,40 @@ function processAnswer(val){
     const next=flow[flowIdx];
     setTimeout(()=>addBotMsg(next.msg,next.type,next.options),500);
   }
+}
+
+// POPUP DIAGNÓSTICO ROI
+const roiPopupOverlay=document.getElementById('roiPopupOverlay');
+const roiPopupClose=document.getElementById('roiPopupClose');
+const roiPopupLater=document.getElementById('roiPopupLater');
+const roiPopupCta=document.getElementById('roiPopupCta');
+const ROI_POPUP_DISMISS_KEY='roiPopupDismissedAt';
+const ROI_POPUP_COOLDOWN_MS=1000*60*60*24*3; // 3 días
+
+function canShowRoiPopup(){
+  const dismissedAt=Number(localStorage.getItem(ROI_POPUP_DISMISS_KEY)||0);
+  return !dismissedAt || (Date.now()-dismissedAt)>ROI_POPUP_COOLDOWN_MS;
+}
+
+if(roiPopupOverlay){
+  const closeRoiPopup=(persistDismiss=true)=>{
+    roiPopupOverlay.classList.remove('active');
+    roiPopupOverlay.setAttribute('aria-hidden','true');
+    if(persistDismiss) localStorage.setItem(ROI_POPUP_DISMISS_KEY,String(Date.now()));
+  };
+
+  window.addEventListener('load',()=>{
+    if(!canShowRoiPopup()) return;
+    setTimeout(()=>{
+      roiPopupOverlay.classList.add('active');
+      roiPopupOverlay.setAttribute('aria-hidden','false');
+    },2200);
+  });
+
+  [roiPopupClose,roiPopupLater].forEach(btn=>btn&&btn.addEventListener('click',()=>closeRoiPopup(true)));
+  roiPopupOverlay.addEventListener('click',(event)=>{ if(event.target===roiPopupOverlay) closeRoiPopup(true); });
+  document.addEventListener('keydown',(event)=>{ if(event.key==='Escape' && roiPopupOverlay.classList.contains('active')) closeRoiPopup(true); });
+  if(roiPopupCta) roiPopupCta.addEventListener('click',()=>closeRoiPopup(false));
 }
 </script>
 </body>
