@@ -192,14 +192,23 @@
   .book-info h4 { font-size:16px; margin-bottom:4px; }
   .book-info span { font-size:12px; color:var(--red); font-weight:700; background:var(--red-glow); padding:4px 10px; border-radius:50px; }
   /* SERVICES / PILARES */
-  .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:20px; margin-top:40px; }
-  .service-card { background:#fff; border-radius:var(--radius-lg); padding:34px; border:1px solid var(--border-light); transition:all 0.35s; box-shadow:var(--shadow-sm); position:relative; overflow:hidden; }
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:28px; }
+  .service-card { background:#fff; border-radius:16px; padding:22px; border:1px solid var(--border-light); transition:all 0.35s; box-shadow:var(--shadow-sm); position:relative; overflow:hidden; min-height: 190px; }
   .service-card::before { content:''; position:absolute; top:0; left:0; width:4px; height:0; background:var(--red); transition:height 0.35s; }
   .service-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); }
   .service-card:hover::before { height:100%; }
-  .service-icon { width:52px; height:52px; background:var(--bg-light); color:var(--navy); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:20px; transition:all 0.3s; }
+  .service-icon { width:46px; height:46px; background:var(--bg-light); color:var(--navy); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:14px; transition:all 0.3s; }
   .service-card:hover .service-icon { background:var(--navy); color:#fff; }
-  .service-card h3 { font-size:19px; margin-bottom:10px; }
+  .service-card h3 { font-size:18px; margin-bottom:8px; }
+  .service-card p { font-size:13px; line-height:1.55; color: var(--muted); }
+  .ecosystem-highlight-card { margin-top: 18px; background:linear-gradient(90deg, var(--brand-morado), var(--brand-amarillo), var(--brand-verde), var(--brand-rojo)); border-radius:18px; padding:2px; box-shadow:var(--shadow-sm); }
+  .ecosystem-highlight-inner { background:#fff; border-radius:16px; padding:20px 22px; }
+  .ecosystem-title { text-align:center; font-size:28px; margin:2px 0 14px; color:var(--navy3); }
+  .ecosystem-flow { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .flow-item { display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:var(--navy3); background:var(--bg-light); border-radius:999px; padding:6px 11px; }
+  .flow-dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+  .flow-arrow { color:rgba(15,31,51,0.35); font-weight:700; }
+  .ecosystem-note { margin:0 auto; text-align:center; font-size:13px; color:var(--muted); max-width: 740px; }
 
   .card-consultoria::before { background: var(--brand-morado); }
   .card-formacion::before { background: var(--brand-amarillo); }
@@ -380,6 +389,7 @@
     .section-title { font-size:clamp(28px,8vw,36px); }
     .hero-lead,.section-sub { font-size:16px; }
     .service-card,.case-body,.form-card,.test-card { padding:22px; }
+    .ecosystem-flow { justify-content:center; }
     .roi-popup-pillrow { justify-content:center; }
     #social-float,#wa-float,#chatbot-btn { display:none; }
     #mobile-fab { position:fixed; right:18px; bottom:24px; z-index:9999; display:block; }
@@ -561,8 +571,8 @@
 <section class="section-pad" id="soluciones" style="background:var(--bg-light); border-bottom:1px solid var(--border-light);">
   <div class="container">
     <div class="section-label reveal">Instalamos procesos y dejamos capacidades instaladas</div>
-    <h2 class="section-title reveal delay-1">Ecosistema de MAS</h2>
-    <p class="section-sub reveal delay-2" style="max-width:800px; margin-bottom:50px;">Nuestros servicios alinea el desarrollo de capacidades a las necesidades estratégicas de tu organización, te acompañamos integralmente en las diversas acciones de gestión del talento para generar impacto real en el negocio</p>
+    <h2 class="section-title reveal delay-1">Ecosistema MAS</h2>
+    <p class="section-sub reveal delay-2" style="max-width:680px; margin-bottom:18px;">Un sistema compacto para diseñar, activar y medir aprendizaje con foco en negocio.</p>
     <div class="services-grid">
 
       <div class="service-card card-consultoria reveal">
@@ -573,7 +583,7 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-morado);">MAS Consultoría</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>Alineación Estratégica.</strong> Diseñamos arquitecturas de aprendizaje directamente vinculadas a los OKRs de tu negocio. No hacemos "levantamiento de necesidades", trazamos rutas de impacto.</p>
+        <p><strong>Alineación estratégica:</strong> ruta de talento conectada a metas del negocio.</p>
       </div>
       <div class="service-card card-formacion reveal delay-1">
         <div class="service-icon" aria-hidden="true" style="background: transparent; width: 68px; height: 68px;">
@@ -583,7 +593,7 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-amarillo);">MAS Formación</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>Liderazgo y Aprendizaje Ágil.</strong> Potenciamos a tus equipos con <strong>talleres de liderazgo y feedback</strong> de alto impacto, integrando además tecnología <strong>Colossyan (IA)</strong> para crear contenidos escalables.</p>
+        <p><strong>Habilidades clave:</strong> liderazgo, feedback y experiencias prácticas de alta transferencia.</p>
       </div>
       <div class="service-card card-plataformas reveal delay-2">
         <div class="service-icon" aria-hidden="true" style="background: transparent; width: 68px; height: 68px;">
@@ -593,7 +603,7 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-verde);">MAS Plataformas</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>El fin del cementerio virtual.</strong> Implementamos ecosistemas LMS dinámicos asegurando la adopción digital y el engagement diario de tus colaboradores en procesos vivos de aprendizaje.</p>
+        <p><strong>Plataformas vivas:</strong> LMS y academias digitales con adopción real de usuarios.</p>
       </div>
       <div class="service-card card-medicion reveal delay-3">
         <div class="service-icon" aria-hidden="true" style="background: transparent; width: 68px; height: 68px;">
@@ -603,16 +613,22 @@
           </svg>
         </div>
         <h3 style="color: var(--brand-rojo);">MAS Medición</h3>
-        <p style="color:var(--muted); font-size:14px;"><strong>El fin del misterio del ROI.</strong> Demostramos el retorno financiero de tu inversión en talento aplicando la metodología de medición Nivel 5 global certificada por el ROI Institute.</p>
+        <p><strong>ROI comprobable:</strong> evidencias de impacto y retorno financiero en Nivel 5.</p>
       </div>
     </div>
-    <div class="ecosystem-banner reveal delay-4" style="background: linear-gradient(90deg, var(--brand-morado), var(--brand-amarillo), var(--brand-verde), var(--brand-rojo)); padding: 3px; border-radius: var(--radius-lg); margin-top: 50px; box-shadow: var(--shadow-md);">
-      <div style="background: white; padding: 40px; border-radius: calc(var(--radius-lg) - 3px); text-align: center;">
-        <span aria-hidden="true" style="font-size: 30px; display: block; margin-bottom: 10px;">🔄</span>
-        <h3 style="font-size: 24px; color: var(--navy3); margin-bottom: 15px;">El Efecto Multiplicador del Ecosistema MAS</h3>
-        <p style="color: var(--text); font-size: 16px; margin: 0; max-width: 850px; margin: auto; line-height: 1.8;">
-          Nuestras áreas generan increíbles sinergias entre si. <strong>Consultoría</strong> traza la ruta estratégica, <strong>Formación</strong> desarrolla las habilidades críticas en la cultura, <strong>Plataformas</strong> habilita el aprendizaje continuo a escala, y <strong>Medición</strong> comprueba el ROI financiero. <br><strong style="color: var(--navy); font-size: 17px; margin-top: 10px; display: inline-block;">Juntas, garantizan que tu inversión en talento impacte directamente en tu organización.</strong>
-        </p>
+    <div class="ecosystem-highlight-card reveal delay-4">
+      <div class="ecosystem-highlight-inner">
+        <h3 class="ecosystem-title">El Efecto Multiplicador del Ecosistema MAS</h3>
+        <div class="ecosystem-flow">
+          <span class="flow-item"><span class="flow-dot" style="background:var(--brand-morado);"></span>Arquitectura</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-item"><span class="flow-dot" style="background:var(--brand-amarillo);"></span>Contenido</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-item"><span class="flow-dot" style="background:var(--brand-verde);"></span>Escalar</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-item"><span class="flow-dot" style="background:var(--brand-rojo);"></span>Impacto</span>
+        </div>
+        <p class="ecosystem-note"><strong>Un solo sistema:</strong> Consultoría diseña la arquitectura, Formación crea contenido, Plataformas escala y Medición valida resultados.</p>
       </div>
     </div>
   </div>
