@@ -1401,23 +1401,34 @@ function persistPopupDismiss(){
 
 function canShowRoiPopup(){
   const dismissedAt=getStoredDismissedAt();
-  return !dismissedAt || (Date.now()-dismissedAt)>ROI_POPUP_COOLDOWN_MS;
+  const now=Date.now();
+  if(!Number.isFinite(dismissedAt) || dismissedAt<=0) return true;
+  // Si el reloj del equipo cambió y quedó una fecha futura en storage, no bloquear el popup.
+  if(dismissedAt>now) return true;
+  return (now-dismissedAt)>ROI_POPUP_COOLDOWN_MS;
 }
 
 if(roiPopupOverlay){
+  let popupOpened=false;
+
   const closeRoiPopup=(persistDismiss=true)=>{
     roiPopupOverlay.classList.remove('active');
     roiPopupOverlay.setAttribute('aria-hidden','true');
     if(persistDismiss) persistPopupDismiss();
   };
 
-  window.addEventListener('load',()=>{
-    if(!canShowRoiPopup()) return;
+  const openRoiPopup=()=>{
+    if(popupOpened || !canShowRoiPopup()) return;
+    popupOpened=true;
     setTimeout(()=>{
       roiPopupOverlay.classList.add('active');
       roiPopupOverlay.setAttribute('aria-hidden','false');
     },2200);
-  });
+  };
+
+  if(document.readyState==='complete') openRoiPopup();
+  else window.addEventListener('load',openRoiPopup,{once:true});
+  document.addEventListener('DOMContentLoaded',openRoiPopup,{once:true});
 
   [roiPopupClose,roiPopupLater].forEach(btn=>btn&&btn.addEventListener('click',()=>closeRoiPopup(true)));
   roiPopupOverlay.addEventListener('click',(event)=>{ if(event.target===roiPopupOverlay) closeRoiPopup(true); });
